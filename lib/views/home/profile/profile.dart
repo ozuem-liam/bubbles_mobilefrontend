@@ -57,7 +57,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
               CircleAvatar(
                 radius: 17.r,
                 backgroundColor: AppColors.gray4,
-                backgroundImage: const AssetImage(augustusPic),
+               // backgroundImage: const AssetImage(augustusPic),
               ),
             ],
           ),

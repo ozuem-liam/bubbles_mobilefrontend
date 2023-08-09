@@ -27,18 +27,18 @@ class StepperScreen extends ConsumerWidget {
         physics: const BouncingScrollPhysics(),
         children: [
           SizedBox(height: 50.h),
-          const ImageWidget(
-            asset: installerIcon,
-            height: 40,
-            width: 200,
-          ),
-          SizedBox(height: 20.h),
-          ImageWidget(
-            asset: welcomeImage,
-            height: 200.h,
-            width: MediaQuery.sizeOf(context).width,
-            fit: BoxFit.fill,
-          ),
+          // const ImageWidget(
+          //   asset: installerIcon,
+          //   height: 40,
+          //   width: 200,
+          // ),
+          // SizedBox(height: 20.h),
+          // ImageWidget(
+          //   asset: welcomeImage,
+          //   height: 200.h,
+          //   width: MediaQuery.sizeOf(context).width,
+          //   fit: BoxFit.fill,
+          // ),
           SizedBox(height: 30.h),
           Text(
             'Go Solar, Save Big! 💰 Effortlessly!',

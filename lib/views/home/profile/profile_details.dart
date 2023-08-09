@@ -61,10 +61,10 @@ class _UserProfileDetailsState extends ConsumerState<UserProfileDetails> {
               child: SizedBox(
                 height: 100.w,
                 width: 100.w,
-                child: const ImageWidget(
-                  asset: augustusPic,
-                  fit: BoxFit.contain,
-                ),  
+                // child: const ImageWidget(
+                //   asset: augustusPic,
+                //   fit: BoxFit.contain,
+                // ),  
               ),
             ),
             SizedBox(

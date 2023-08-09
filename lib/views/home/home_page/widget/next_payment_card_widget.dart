@@ -34,7 +34,7 @@ class NextPaymentCardWidget extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Center(child: SvgImage(asset: noCreditIcon)),
+                   // const Center(child: SvgImage(asset: noCreditIcon)),
                     SizedBox(
                       height: 10.h,
                     ),

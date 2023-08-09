@@ -48,7 +48,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             CircleAvatar(
               radius: 17.r,
               backgroundColor: AppColors.gray4,
-              backgroundImage: const AssetImage(augustusPic),
+             // backgroundImage: const AssetImage(augustusPic),
             ),
           ],
         ),
@@ -67,74 +67,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         SizedBox(
           height: 30.h,
         ),
-        Column(
-          children: [
-            Container(
-              height: 170.h,
-              width: MediaQuery.sizeOf(context).width,
-              decoration: BoxDecoration(
-                  color: AppColors.black,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10.r),
-                      topRight: Radius.circular(10.r))),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Stack(
-                  children: [
-                    const Positioned(
-                        top: 20, left: 80, child: ImageWidget(asset: loopIcon)),
-                    Positioned(
-                      top: 30,
-                      left: 30,
-                      bottom: 0,
-                      child: Text(
-                        "Save million\$ in \ngenerator costs \nannually.",
-                        style: Theme.of(context)
-                            .primaryTextTheme
-                            .headlineMedium!
-                            .copyWith(
-                                fontSize: 24.sp,
-                                height: 1.6,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.white),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              height: 50.h,
-              width: MediaQuery.sizeOf(context).width,
-              decoration: BoxDecoration(
-                  color: AppColors.secondary,
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(10.r),
-                      bottomRight: Radius.circular(10.r))),
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: generalHorizontalPadding.w, vertical: 8.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Request quote now",
-                      style: Theme.of(context)
-                          .primaryTextTheme
-                          .headlineMedium!
-                          .copyWith(
-                              fontWeight: FontWeight.w700, fontSize: 14.sp),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_outlined,
-                      size: 18.w,
-                    )
-                  ],
-                ),
-              ),
-            )
-          ],
-        )
+        
       ],
     );
   }
