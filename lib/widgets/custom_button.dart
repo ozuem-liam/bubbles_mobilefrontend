@@ -7,8 +7,9 @@ class ActionCustomButton extends StatelessWidget {
   final Function onclick;
   final Color? btnColor;
   final Color? titleColor;
-  final bool? borderColor;
+  final Color? borderColor;
   final Color? loadingColor;
+  final bool? isOutline;
   final bool isLoading;
   final double? shadow;
 
@@ -20,6 +21,7 @@ class ActionCustomButton extends StatelessWidget {
       this.titleColor,
       this.borderColor,
       this.loadingColor,
+      this.isOutline,
       this.shadow,
       this.isLoading = false})
       : super(key: key);
@@ -32,9 +34,13 @@ class ActionCustomButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 50.h,
         child: Card(
-          elevation: shadow?? 0,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(7.r)),
+          elevation: shadow ?? 0,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(7.r),
+              side: isOutline == true
+                  ? BorderSide(
+                      width: 1.w, color: borderColor ?? AppColors.primary)
+                  : BorderSide.none),
           color: btnColor ?? AppColors.primary,
           child: Center(
             child: isLoading
@@ -51,10 +57,9 @@ class ActionCustomButton extends StatelessWidget {
                         .primaryTextTheme
                         .headlineMedium
                         ?.copyWith(
-                            color: titleColor ?? AppColors.black,
+                            color: titleColor ?? AppColors.white,
                             fontWeight: FontWeight.bold,
-
-                            fontSize: 12.sp),
+                            fontSize: 13.sp),
                   ),
           ),
         ),

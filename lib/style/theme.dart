@@ -142,33 +142,33 @@ class ThemeProvider extends ChangeNotifier {
       ),
     ),
     primaryTextTheme: TextTheme(
-      headlineSmall: GoogleFonts.libreFranklin().copyWith(
+      headlineSmall: GoogleFonts.barlow().copyWith(
           //fontFamily: 'Poppins',
           color: AppColors.white,
           fontWeight: FontWeight.w400,
           fontSize: 12,
           height: 1.2),
-      headlineMedium: GoogleFonts.libreFranklin().copyWith(
+      headlineMedium: GoogleFonts.barlow().copyWith(
           //fontFamily: 'Poppins',
           color: AppColors.white,
           fontWeight: FontWeight.w400,
           fontSize: 14,
           height: 1.2),
-      displaySmall: GoogleFonts.libreFranklin().copyWith(
+      displaySmall: GoogleFonts.barlow().copyWith(
         //fontFamily: 'Poppins',
         color: AppColors.white,
         fontSize: 21,
         height: 1.2,
         fontWeight: FontWeight.w400,
       ),
-      displayMedium: GoogleFonts.libreFranklin().copyWith(
+      displayMedium: GoogleFonts.barlow().copyWith(
         //fontFamily: 'Poppins',
         color: AppColors.white,
         fontSize: 28,
         height: 1.2,
         fontWeight: FontWeight.w400,
       ),
-      labelLarge: GoogleFonts.libreFranklin().copyWith(
+      labelLarge: GoogleFonts.barlow().copyWith(
         //fontFamily: 'Poppins',
         color: AppColors.white,
         fontSize: 16,
@@ -313,35 +313,35 @@ class ThemeProvider extends ChangeNotifier {
         ),
       ),
       primaryTextTheme: TextTheme(
-        headlineSmall: GoogleFonts.libreFranklin().copyWith(
+        headlineSmall: GoogleFonts.barlow().copyWith(
           //fontFamily: 'Poppins',
           color: AppColors.textBlack,
           fontWeight: FontWeight.w400,
           height: 1.2,
           fontSize: 12,
         ),
-        headlineMedium: GoogleFonts.libreFranklin().copyWith(
+        headlineMedium: GoogleFonts.barlow().copyWith(
           //fontFamily: 'Poppins',
           color: AppColors.textBlack,
           fontWeight: FontWeight.w400,
           height: 1.2,
           fontSize: 14,
         ),
-        displaySmall: GoogleFonts.libreFranklin().copyWith(
+        displaySmall: GoogleFonts.barlow().copyWith(
           //fontFamily: 'Poppins',
           color: AppColors.textBlack,
           height: 1.2,
           fontSize: 21,
           fontWeight: FontWeight.w400,
         ),
-        displayMedium: GoogleFonts.libreFranklin().copyWith(
+        displayMedium: GoogleFonts.barlow().copyWith(
           //fontFamily: 'Poppins',
           color: AppColors.textBlack,
           height: 1.2,
           fontSize: 28,
           fontWeight: FontWeight.w400,
         ),
-        labelLarge: GoogleFonts.libreFranklin().copyWith(
+        labelLarge: GoogleFonts.barlow().copyWith(
           //fontFamily: 'Poppins',
           color: AppColors.white,
           height: 1.2,

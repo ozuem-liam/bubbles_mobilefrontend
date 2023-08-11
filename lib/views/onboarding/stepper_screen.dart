@@ -1,7 +1,7 @@
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/app_info.dart';
 import 'package:bubbles/utils/constvalues.dart';
-import 'package:bubbles/utils/images.dart';
+import 'package:bubbles/utils/svgs.dart';
 import 'package:bubbles/views/authentication/login.dart';
 import 'package:bubbles/views/authentication/registration_page.dart';
 import 'package:bubbles/widgets/custom_button.dart';
@@ -27,65 +27,54 @@ class StepperScreen extends ConsumerWidget {
         physics: const BouncingScrollPhysics(),
         children: [
           SizedBox(height: 50.h),
-          // const ImageWidget(
-          //   asset: installerIcon,
-          //   height: 40,
-          //   width: 200,
-          // ),
-          // SizedBox(height: 20.h),
-          // ImageWidget(
-          //   asset: welcomeImage,
-          //   height: 200.h,
-          //   width: MediaQuery.sizeOf(context).width,
-          //   fit: BoxFit.fill,
-          // ),
-          SizedBox(height: 30.h),
+          Align(
+            alignment: Alignment.topLeft,
+            child: SvgImage(
+              asset: bubblelogo,
+              height: 56.w,
+              width: 80.w,
+            ),
+          ),
+          SizedBox(height: 20.h),
           Text(
-            'Go Solar, Save Big! 💰 Effortlessly!',
+            'Laundry service made easy',
             textAlign: TextAlign.start,
             style: Theme.of(context)
                 .primaryTextTheme
                 .headlineMedium!
-                .copyWith(fontWeight: FontWeight.w700, fontSize: 30.sp),
+                .copyWith(fontWeight: FontWeight.w700, fontSize: 24.sp),
           ),
           SizedBox(height: 10.h),
           Text(
-            'Discover solar options and request installation at the click of a button.',
+            'Are you a customer or a vendor? Give or receive laundry services easily',
             textAlign: TextAlign.start,
             style: Theme.of(context)
                 .primaryTextTheme
                 .headlineMedium!
-                .copyWith(fontWeight: FontWeight.w300, fontSize: 12.sp),
+                .copyWith(fontWeight: FontWeight.w300, fontSize: 14.sp),
           ),
-          SizedBox(height: 50.h),
+          SizedBox(height: 10.h),
+          const SvgImage(
+            asset: bubbleContainerImage,
+          ),
+          SizedBox(height: 10.h),
           ActionCustomButton(
-              title: "Signup",
+              title: "Create account",
               isLoading: false,
               onclick: () {
                 Get.to(() => RegistrationPage());
               }),
           SizedBox(height: 10.h),
           ActionCustomButton(
-              btnColor: AppColors.secondary,
+              isOutline: true,
+              btnColor: Colors.transparent,
+              titleColor: AppColors.primary,
               title: "Login",
               isLoading: false,
               onclick: () {
                 Get.to(() => LoginPage());
               }),
           SizedBox(height: 30.h),
-          Center(
-            child: Text(
-              appVersion,
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .primaryTextTheme
-                  .headlineMedium!
-                  .copyWith(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 10.sp,
-                      color: AppColors.gray),
-            ),
-          ),
         ],
       ),
     );

@@ -1,10 +1,12 @@
 import 'package:bubbles/utils/images.dart';
+import 'package:bubbles/utils/svgs.dart';
 import 'package:bubbles/utils/user_db.dart';
 import 'package:bubbles/views/home/navigation_page.dart';
 import 'package:bubbles/views/onboarding/stepper_screen.dart';
 import 'package:bubbles/widgets/image_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 // ignore: depend_on_referenced_packages
 import 'package:get/get.dart';
 
@@ -51,9 +53,13 @@ class _SplashViewState extends ConsumerState<SplashView>
   Widget build(BuildContext context) {
     //bool _visible = true;
 
-    return const Scaffold(
+    return Scaffold(
         body: Center(
-      child: ImageWidget(asset: logoIcon),
+      child: SvgImage(
+        asset: bubblelogo,
+        height: 100.w,
+        width: 100.w,
+      ),
     ));
   }
 }
