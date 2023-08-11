@@ -10,7 +10,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bubbles/providers/theme_provider.dart';
 import 'package:bubbles/utils/temporary_storage.dart';
-import 'package:bubbles/views/onboarding/splash.dart';
+import 'package:bubbles/onboarding/splash.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

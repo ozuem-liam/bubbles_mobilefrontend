@@ -14,7 +14,7 @@ class HelpIcon extends ConsumerWidget {
           alignment: Alignment.topRight,
           child: InkWell(
             onTap: () {},
-            child: SizedBox()
+            child: const SizedBox()
           )),
     );
   }

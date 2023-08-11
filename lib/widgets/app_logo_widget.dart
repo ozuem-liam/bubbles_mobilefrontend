@@ -8,7 +8,7 @@ class AppLogoWidget extends ConsumerWidget {
   final Alignment? alignment;
   final double? height;
   final double? width;
-  const AppLogoWidget(this.alignment, this.height, this.width, {super.key});
+  const AppLogoWidget({this.alignment, this.height, this.width, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

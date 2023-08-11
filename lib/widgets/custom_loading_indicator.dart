@@ -1,6 +1,5 @@
 
 import 'package:bubbles/utils/constvalues.dart';
-import 'package:bubbles/utils/images.dart';
 import 'package:bubbles/utils/svgs.dart';
 import 'package:bubbles/widgets/image_widgets.dart';
 import 'package:flutter/material.dart';
