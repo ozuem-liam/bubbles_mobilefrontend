@@ -1,4 +1,3 @@
-
 import 'package:bubbles/features/customer/providers/customer_auth_providers.dart';
 import 'package:bubbles/features/customer/viewModels/customer_auth_vm.dart';
 import 'package:bubbles/features/customer/views/authentication/widgets/custom_top_widget.dart';
@@ -28,8 +27,8 @@ class ResetPasswordPage extends ConsumerWidget {
       body: Stack(
         children: [
           const CustomTopWidget(
-              title: "Reset password",
-              subtitle: "Enter and confirm new password",
+              title: "New password",
+              subtitle: "Don’t worry, we’ll help you reset it.",
               isBack: true),
           Padding(
             padding: EdgeInsets.only(top: customTopBarPadding.h),
@@ -105,23 +104,31 @@ class ResetPasswordPage extends ConsumerWidget {
                 isLoading: false,
                 onclick: () async {
                   FocusScope.of(context).unfocus();
-                  final validate = userAuthViewModel.validateAndSave(formKey);
-                  if (validate) {
-                    userAuthViewModel.resetPassword(
-                        password: passwordController.text.trim(),
-                        confirmPassword: confirmPasswordController.text.trim(),
-                        nextAction: () {
-                          Get.to(() => ConfirmationPage(
-                                title:
-                                    "Congratulations! \nYou’ve reset your Password",
-                                description:
-                                    "We’ll ask for your password each time you open the bubbles app for security reasons",
-                                onTap: () {
-                                  Get.to(() => LoginPage());
-                                },
-                              ));
-                        });
-                  }
+                  Get.to(() => ConfirmationPage(
+                        title: "Congratulations! \nYou’ve reset your Password",
+                        description:
+                            "We’ll ask for your password each time you open the bubbles app for security reasons",
+                        onTap: () {
+                          Get.to(() => LoginPage());
+                        },
+                      ));
+                  // final validate = userAuthViewModel.validateAndSave(formKey);
+                  // if (validate) {
+                  //   userAuthViewModel.resetPassword(
+                  //       password: passwordController.text.trim(),
+                  //       confirmPassword: confirmPasswordController.text.trim(),
+                  //       nextAction: () {
+                  //         Get.to(() => ConfirmationPage(
+                  //               title:
+                  //                   "Congratulations! \nYou’ve reset your Password",
+                  //               description:
+                  //                   "We’ll ask for your password each time you open the bubbles app for security reasons",
+                  //               onTap: () {
+                  //                 Get.to(() => LoginPage());
+                  //               },
+                  //             ));
+                  //       });
+                  // }
                 }),
             SizedBox(
               height: 20.h,

@@ -24,5 +24,5 @@ const customPaintSizeValue = 500.0;
 const customPaintTop = 0.9;
 const customPaintBottom = 0.5;
 
-const customTopBarPadding = 150.0;
+const customTopBarPadding = 100.0;
 

@@ -1,4 +1,3 @@
-
 import 'package:bubbles/providers/providers.dart';
 import 'package:bubbles/services/overlay_service.dart';
 import 'package:bubbles/widgets/loading_overlay_widget.dart';
@@ -32,7 +31,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeDataMode = ref.watch(themeDataProvider);
-        ref.listen(loadingState.select((value) => value), (
+    ref.listen(loadingState.select((value) => value), (
       previous,
       current,
     ) {
@@ -45,18 +44,28 @@ class MyApp extends ConsumerWidget {
     return ScreenUtilInit(
         designSize: const Size(360, 700),
         builder: (widget, child) => LoadingOverlayWidget(
-          child: GetMaterialApp(
-                debugShowCheckedModeBanner: false,
-                title: 'bubbles',
-                darkTheme: themeDataMode.isdarkTheme!
-                    ? themeDataMode.darkTheme
-                    : themeDataMode.lightTheme,
-                themeMode: ThemeMode.system,
-                theme: themeDataMode.isdarkTheme!
-                    ? themeDataMode.darkTheme
-                    : themeDataMode.lightTheme,
-                home: const SplashView(),
+              child: AnnotatedRegion<SystemUiOverlayStyle>(
+                value: SystemUiOverlayStyle(
+                    statusBarBrightness: themeDataMode.isdarkTheme!
+                        ? Brightness.dark
+                        : Brightness.light,
+                    statusBarIconBrightness: themeDataMode.isdarkTheme!
+                        ? Brightness.light
+                        : Brightness.dark,
+                    statusBarColor: Colors.transparent),
+                child: GetMaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  title: 'bubbles',
+                  darkTheme: themeDataMode.isdarkTheme!
+                      ? themeDataMode.darkTheme
+                      : themeDataMode.lightTheme,
+                  themeMode: ThemeMode.system,
+                  theme: themeDataMode.isdarkTheme!
+                      ? themeDataMode.darkTheme
+                      : themeDataMode.lightTheme,
+                  home: const SplashView(),
+                ),
               ),
-        ));
+            ));
   }
 }

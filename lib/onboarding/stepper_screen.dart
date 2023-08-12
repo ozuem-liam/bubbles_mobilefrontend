@@ -4,6 +4,7 @@ import 'package:bubbles/utils/svgs.dart';
 import 'package:bubbles/features/customer/views/authentication/login.dart';
 import 'package:bubbles/onboarding/select_user_type.dart';
 import 'package:bubbles/widgets/app_logo_widget.dart';
+import 'package:bubbles/widgets/custom_appbar.dart';
 import 'package:bubbles/widgets/custom_button.dart';
 import 'package:bubbles/widgets/image_widgets.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,7 @@ class StepperScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: AppColors.white,
-      // appBar: customAppBar(title: ''),
+      appBar:customAppBar(),
       body: ListView(
         shrinkWrap: true,
         padding:
@@ -27,7 +27,7 @@ class StepperScreen extends ConsumerWidget {
         physics: const BouncingScrollPhysics(),
         children: [
           SizedBox(height: 50.h),
-         const AppLogoWidget(),
+          const AppLogoWidget(),
           SizedBox(height: 20.h),
           Text(
             'Laundry service made easy',

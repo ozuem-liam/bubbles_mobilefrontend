@@ -98,8 +98,8 @@ class SelectUserType extends ConsumerWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return Padding(
-                    padding: const EdgeInsets.only(
-                      right: 30,
+                    padding:  EdgeInsets.only(
+                      right: 30.w,
                     ),
                     child: InkWell(
                       onTap: () {

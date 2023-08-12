@@ -1,6 +1,7 @@
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/temporary_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ThemeProvider extends ChangeNotifier {
@@ -111,7 +112,11 @@ class ThemeProvider extends ChangeNotifier {
     // fontFamily: 'Sofia Pro',
     appBarTheme: const AppBarTheme(
       elevation: 0,
-      //systemOverlayStyle: SystemStyles.lightdarkNav,
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.light,
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ),
       color: Colors.transparent,
       iconTheme: IconThemeData(color: AppColors.white),
     ),
@@ -282,7 +287,11 @@ class ThemeProvider extends ChangeNotifier {
       //fontFamily: 'Sofia Pro',
       appBarTheme: const AppBarTheme(
         elevation: 0,
-        //  systemOverlayStyle: SystemStyles.darkWhiteNav,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.dark,
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+        ),
         color: Colors.transparent,
         iconTheme: IconThemeData(color: Colors.black),
       ),

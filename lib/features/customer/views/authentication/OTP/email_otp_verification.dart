@@ -1,6 +1,7 @@
 import 'package:bubbles/features/customer/providers/customer_auth_providers.dart';
 import 'package:bubbles/utils/temporary_storage.dart';
 import 'package:bubbles/features/customer/views/authentication/widgets/custom_top_widget.dart';
+import 'package:bubbles/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,9 +20,11 @@ class EmailOTPVerification extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      appBar: customAppBar(),
       body: Stack(
         children: [
           const CustomTopWidget(
+              //bgColor: AppColors.black,
               title: "Verify email",
               subtitle: "Check email to see the verification code",
               isBack: true),
@@ -58,7 +61,22 @@ class EmailOTPVerification extends ConsumerWidget {
             SizedBox(
               height: 20.h,
             ),
-            Center(
+           
+            ActionCustomButton(
+                title: "Verify",
+                onclick: () async {
+                  FocusScope.of(context).unfocus();
+                  onTap();
+                  // final validate = authViewModel.validateAndSave(formKey);
+                  // if (validate) {
+                  //   authViewModel.verifyResetOTP(
+                  //       token: otpController.text.trim(), nextAction: onTap);
+                  // }
+                }),
+            SizedBox(
+              height: 20.h,
+            ),
+             Center(
               child: WordsButton(
                   firstTextSize: 12.sp,
                   secondTextSize: 12.sp,
@@ -68,29 +86,15 @@ class EmailOTPVerification extends ConsumerWidget {
                   textHeight: 2,
                   onTap: () async {
                     authViewModel.initiateResetPasswords(
-                      email: LocalStorageManager.getString(key: "email"),
-                      nextAction: (){}
-                    );
+                        email: LocalStorageManager.getString(key: "email"),
+                        nextAction: () {});
                   },
-                  firstText: "Didn’t get the Code?",
+                  firstText: "Did not receive Code?",
                   secondText: "Resend"),
             ),
             SizedBox(
               height: 40.h,
             ),
-            ActionCustomButton(
-                title: "Verify",
-                onclick: () async {
-                  FocusScope.of(context).unfocus();
-                  final validate = authViewModel.validateAndSave(formKey);
-                  if (validate) {
-                    authViewModel.verifyResetOTP(
-                        token: otpController.text.trim(), nextAction: onTap);
-                  }
-                }),
-            SizedBox(
-              height: 20.h,
-            )
           ],
         ),
       ),

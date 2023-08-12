@@ -27,9 +27,9 @@ class CustomTopWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: height ?? 180.h,
+      height: height ?? 120.h,
       width: MediaQuery.sizeOf(context).width,
-      decoration: BoxDecoration(color: bgColor ?? AppColors.black),
+      decoration: BoxDecoration(color: bgColor ?? Theme.of(context).scaffoldBackgroundColor),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: generalHorizontalPadding.w),
         child: Column(
@@ -44,13 +44,25 @@ class CustomTopWidget extends ConsumerWidget {
                       onTap: () {
                         Get.back();
                       },
-                      child: Icon(
-                        Icons.arrow_back_rounded,
-                        color: iconColor ?? AppColors.white,
+                      child: Card(
+                        color: Theme.of(context).canvasColor.withOpacity(0.1),
+                        shape: RoundedRectangleBorder(
+                         // side: BorderSide(width: 0.5.w),
+                          borderRadius: BorderRadius.circular(10.r)
+                        ),
+                        child: Padding(
+                          padding:  EdgeInsets.all(10.0.w),
+                          child:  Icon(
+                            Icons.arrow_back_ios,
+                            color: Theme.of(context).iconTheme.color!.withOpacity(0.7),
+                            size: 17.sp,
+                           // color: iconColor ?? AppColors.white,
+                          ),
+                        ),
                       ))),
             ),
             SizedBox(
-              height: 10.h,
+              height: 20.h,
             ),
             Text(
               title,
@@ -58,12 +70,12 @@ class CustomTopWidget extends ConsumerWidget {
                   .primaryTextTheme
                   .headlineMedium!
                   .copyWith(
-                      color: textColor ?? AppColors.white,
+                     // color: textColor ?? AppColors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 28.sp),
             ),
             SizedBox(
-              height: 5.h,
+              height: 10.h,
             ),
             Text(
               subtitle,
@@ -71,7 +83,7 @@ class CustomTopWidget extends ConsumerWidget {
                   .primaryTextTheme
                   .headlineMedium!
                   .copyWith(
-                      color: textColor ?? AppColors.white,
+                     // color: textColor ?? AppColors.white,
                       fontWeight: FontWeight.w400,
                       fontSize: 12.sp),
             )

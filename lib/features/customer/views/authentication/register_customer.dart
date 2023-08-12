@@ -1,6 +1,8 @@
-
 import 'package:bubbles/features/customer/providers/customer_auth_providers.dart';
+import 'package:bubbles/features/customer/views/authentication/OTP/email_otp_verification.dart';
+import 'package:bubbles/features/customer/views/authentication/password/reset_password.dart';
 import 'package:bubbles/widgets/buttons.dart';
+import 'package:bubbles/widgets/confirmation_screen.dart';
 import 'package:bubbles/widgets/custom_button.dart';
 import 'package:bubbles/widgets/customfield.dart';
 import 'package:flutter/services.dart';
@@ -11,22 +13,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bubbles/features/customer/views/authentication/login.dart';
 import 'package:get/get.dart';
 
-
 class ResgisterCustomer extends ConsumerWidget {
-   ResgisterCustomer({super.key});
-final formKey = GlobalKey<FormState>();
+  ResgisterCustomer({super.key});
+  final formKey = GlobalKey<FormState>();
   final fullNameController = TextEditingController();
   final passwordController = TextEditingController();
   final userNameController = TextEditingController();
 
   final referralController = TextEditingController();
   final phoneController = TextEditingController();
-    final emailController = TextEditingController();
- // final phoneController = TextEditingController();
+  final emailController = TextEditingController();
+  // final phoneController = TextEditingController();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var viewModel = ref.watch(customerAuthViewModelProvider);
-     return Form(
+    return Form(
       key: formKey,
       child: Column(
         children: [
@@ -137,7 +138,19 @@ final formKey = GlobalKey<FormState>();
               btnColor: AppColors.primary,
               title: "Signup",
               isLoading: false,
-              onclick: () async {}),
+              onclick: () async {
+                Get.to(() => EmailOTPVerification(onTap: () {
+                      Get.to(() => ConfirmationPage(
+                            title: "Verification successful",
+                            description:
+                                "Your email has been successfully verified",
+                            onTap: () {
+                              Get.to(() => LoginPage());
+                            },
+                          ));
+                      //Get.to(() => ResetPasswordPage());
+                    }));
+              }),
           SizedBox(
             height: 15.h,
           ),
@@ -157,7 +170,5 @@ final formKey = GlobalKey<FormState>();
         ],
       ),
     );
- 
- 
   }
 }
