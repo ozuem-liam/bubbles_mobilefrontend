@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-var setupShopProvider = StateProvider.autoDispose<int>((ref) => 0);
+var setupShopProvider = StateProvider<int>((ref) => 0);
 
 class SetupShotPage extends ConsumerWidget {
   const SetupShotPage({super.key});

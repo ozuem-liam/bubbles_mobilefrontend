@@ -150,8 +150,8 @@ class ThemeProvider extends ChangeNotifier {
       headlineSmall: GoogleFonts.barlow().copyWith(
           //fontFamily: 'Poppins',
           color: AppColors.white,
-          fontWeight: FontWeight.w400,
-          fontSize: 12,
+          fontWeight: FontWeight.w300,
+          fontSize: 10,
           height: 1.2),
       headlineMedium: GoogleFonts.barlow().copyWith(
           //fontFamily: 'Poppins',
@@ -164,7 +164,7 @@ class ThemeProvider extends ChangeNotifier {
         color: AppColors.white,
         fontSize: 21,
         height: 1.2,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w300,
       ),
       displayMedium: GoogleFonts.barlow().copyWith(
         //fontFamily: 'Poppins',
@@ -327,10 +327,10 @@ class ThemeProvider extends ChangeNotifier {
       primaryTextTheme: TextTheme(
         headlineSmall: GoogleFonts.barlow().copyWith(
           //fontFamily: 'Poppins',
-          color: AppColors.textBlack,
-          fontWeight: FontWeight.w400,
+          color: AppColors.termsTextColor,
+          fontWeight: FontWeight.w300,
           height: 1.2,
-          fontSize: 12,
+          fontSize: 10,
         ),
         headlineMedium: GoogleFonts.barlow().copyWith(
           //fontFamily: 'Poppins',
@@ -341,10 +341,10 @@ class ThemeProvider extends ChangeNotifier {
         ),
         displaySmall: GoogleFonts.barlow().copyWith(
           //fontFamily: 'Poppins',
-          color: AppColors.textBlack,
+          color: AppColors.termsTextColor,
           height: 1.2,
           fontSize: 21,
-          fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w300,
         ),
         displayMedium: GoogleFonts.barlow().copyWith(
           //fontFamily: 'Poppins',

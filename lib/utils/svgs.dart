@@ -12,3 +12,8 @@ const bubbleContainerImage = 'assets/svgs/bubble_container.svg';
 const customerIcon = 'assets/svgs/customer.svg';
 
 const vendorIcon = 'assets/svgs/vendor.svg';
+
+
+const washIcon = 'assets/svgs/wash.svg';
+const selfWashIcon = 'assets/svgs/self_wash.svg';
+const ironIcon = 'assets/svgs/iron.svg';
