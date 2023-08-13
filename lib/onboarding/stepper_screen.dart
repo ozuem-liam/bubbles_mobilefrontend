@@ -1,7 +1,7 @@
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/utils/svgs.dart';
-import 'package:bubbles/features/customer/views/authentication/login.dart';
+import 'package:bubbles/onboarding/login.dart';
 import 'package:bubbles/onboarding/select_user_type.dart';
 import 'package:bubbles/widgets/app_logo_widget.dart';
 import 'package:bubbles/widgets/custom_appbar.dart';
@@ -19,7 +19,7 @@ class StepperScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar:customAppBar(),
+      appBar: customAppBar(),
       body: ListView(
         shrinkWrap: true,
         padding:

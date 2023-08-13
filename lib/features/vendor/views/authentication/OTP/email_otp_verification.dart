@@ -63,7 +63,7 @@ class VendorEmailOTPVerification extends ConsumerWidget {
             ),
            
             ActionCustomButton(
-                title: "Verify",
+                title: "Verify email",
                 onclick: () async {
                   FocusScope.of(context).unfocus();
                   onTap();
@@ -80,9 +80,9 @@ class VendorEmailOTPVerification extends ConsumerWidget {
               child: WordsButton(
                   firstTextSize: 12.sp,
                   secondTextSize: 12.sp,
-                  secondTextColor: AppColors.black,
+                  secondTextColor: AppColors.secondary,
                   fontWeight2: FontWeight.bold,
-                  underline: TextDecoration.underline,
+                 // underline: TextDecoration.underline,
                   textHeight: 2,
                   onTap: () async {
                     authViewModel.initiateResetPasswords(

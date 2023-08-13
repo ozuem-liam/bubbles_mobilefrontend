@@ -10,10 +10,12 @@ class ConfirmationPage extends ConsumerWidget {
   final String? title;
   final String? description;
   final VoidCallback onTap;
+  final String? btnTitle;
   const ConfirmationPage(
       {required this.title,
       required this.description,
       required this.onTap,
+      this.btnTitle,
       super.key});
 
   @override
@@ -57,10 +59,8 @@ class ConfirmationPage extends ConsumerWidget {
             Text(
               title ?? "",
               textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .primaryTextTheme
-                  .headlineMedium
-                  ?.copyWith(
+              style:
+                  Theme.of(context).primaryTextTheme.headlineMedium?.copyWith(
                       //color: AppColors.primary,
                       fontWeight: FontWeight.bold,
                       fontSize: 16.sp),
@@ -93,7 +93,8 @@ class ConfirmationPage extends ConsumerWidget {
         padding: EdgeInsets.symmetric(horizontal: buttonPadding.w),
         child: Column(
           children: [
-            ActionCustomButton(title: "CONTINUE", onclick: () => onTap()),
+            ActionCustomButton(
+                title: btnTitle ?? "CONTINUE", onclick: () => onTap()),
             SizedBox(
               height: 20.h,
             ),

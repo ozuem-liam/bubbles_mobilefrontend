@@ -73,6 +73,7 @@ dependencies:
   url_launcher: ^6.0.18
   webview_flutter: ^4.0.1
   google_fonts: ^5.1.0
+  dotted_border: ^2.0.0+3
 
 dev_dependencies:
   flutter_test:

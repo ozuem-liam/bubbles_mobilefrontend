@@ -9,7 +9,7 @@ import 'package:bubbles/style/appColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:bubbles/features/customer/views/authentication/login.dart';
+import 'package:bubbles/onboarding/login.dart';
 import 'package:get/get.dart';
 
 class ResgisterCustomer extends ConsumerWidget {

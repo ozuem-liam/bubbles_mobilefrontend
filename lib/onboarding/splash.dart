@@ -33,7 +33,7 @@ class _SplashViewState extends ConsumerState<SplashView>
         curve: const Interval(0.0, 1.0, curve: Curves.easeOut))
       ..addStatusListener((AnimationStatus status) {
         if (status == AnimationStatus.completed) {
-          Get.to(() =>
+          Get.off(() =>
               user == null ? const StepperScreen() : const HomeNavigation());
         }
       }));

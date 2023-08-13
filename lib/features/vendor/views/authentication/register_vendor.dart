@@ -1,7 +1,7 @@
 import 'package:bubbles/features/customer/providers/customer_auth_providers.dart';
 import 'package:bubbles/features/customer/views/authentication/OTP/email_otp_verification.dart';
 import 'package:bubbles/features/vendor/views/authentication/OTP/email_otp_verification.dart';
-import 'package:bubbles/features/vendor/views/authentication/login_vendor.dart';
+import 'package:bubbles/features/vendor/views/setup_shop/setup_shop.dart';
 import 'package:bubbles/widgets/buttons.dart';
 import 'package:bubbles/widgets/confirmation_screen.dart';
 import 'package:bubbles/widgets/custom_button.dart';
@@ -11,7 +11,7 @@ import 'package:bubbles/style/appColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:bubbles/features/customer/views/authentication/login.dart';
+import 'package:bubbles/onboarding/login.dart';
 import 'package:get/get.dart';
 
 class ResgisterVendor extends ConsumerWidget {
@@ -145,8 +145,9 @@ class ResgisterVendor extends ConsumerWidget {
                             title: "Verification successful",
                             description:
                                 "Your email has been successfully verified",
+                                btnTitle: "Setup shop",
                             onTap: () {
-                              Get.to(() => VendorLoginPage());
+                              Get.to(() => const SetupShotPage());
                             },
                           ));
                       //Get.to(() => ResetPasswordPage());
@@ -163,7 +164,7 @@ class ResgisterVendor extends ConsumerWidget {
                 fontWeight2: FontWeight.bold,
                 textHeight: 2,
                 onTap: () {
-                  Get.to(() => VendorLoginPage());
+                  Get.to(() => LoginPage());
                 },
                 firstText: "Have an existing account?",
                 secondText: "Login"),
