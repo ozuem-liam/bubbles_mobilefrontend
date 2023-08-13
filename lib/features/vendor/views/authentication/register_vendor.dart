@@ -1,5 +1,7 @@
 import 'package:bubbles/features/customer/providers/customer_auth_providers.dart';
 import 'package:bubbles/features/customer/views/authentication/OTP/email_otp_verification.dart';
+import 'package:bubbles/features/vendor/views/authentication/OTP/email_otp_verification.dart';
+import 'package:bubbles/features/vendor/views/authentication/login_vendor.dart';
 import 'package:bubbles/widgets/buttons.dart';
 import 'package:bubbles/widgets/confirmation_screen.dart';
 import 'package:bubbles/widgets/custom_button.dart';
@@ -12,8 +14,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bubbles/features/customer/views/authentication/login.dart';
 import 'package:get/get.dart';
 
-class ResgisterCustomer extends ConsumerWidget {
-  ResgisterCustomer({super.key});
+class ResgisterVendor extends ConsumerWidget {
+  ResgisterVendor({super.key});
   final formKey = GlobalKey<FormState>();
   final fullNameController = TextEditingController();
   final passwordController = TextEditingController();
@@ -138,13 +140,13 @@ class ResgisterCustomer extends ConsumerWidget {
               title: "Signup",
               isLoading: false,
               onclick: () async {
-                Get.to(() => EmailOTPVerification(onTap: () {
+                Get.to(() => VendorEmailOTPVerification(onTap: () {
                       Get.to(() => ConfirmationPage(
                             title: "Verification successful",
                             description:
                                 "Your email has been successfully verified",
                             onTap: () {
-                              Get.to(() => LoginPage());
+                              Get.to(() => VendorLoginPage());
                             },
                           ));
                       //Get.to(() => ResetPasswordPage());
@@ -161,7 +163,7 @@ class ResgisterCustomer extends ConsumerWidget {
                 fontWeight2: FontWeight.bold,
                 textHeight: 2,
                 onTap: () {
-                  Get.to(() => LoginPage());
+                  Get.to(() => VendorLoginPage());
                 },
                 firstText: "Have an existing account?",
                 secondText: "Login"),

@@ -1,5 +1,4 @@
-// import 'package:bubbles/providers/auth_providrs/auth_providers.dart';
-import 'package:bubbles/features/customer/providers/customer_auth_providers.dart';
+import 'package:bubbles/features/vendor/providers/vendor_auth_providers.dart';
 import 'package:bubbles/utils/notify_me.dart';
 import 'package:bubbles/utils/svgs.dart';
 import 'package:bubbles/utils/temporary_storage.dart';
@@ -16,11 +15,11 @@ import 'package:dio/dio.dart' as dio;
 // ignore: depend_on_referenced_packages
 import 'package:http_parser/http_parser.dart';
 
-class CustomerAuthViewModel extends BaseViewModel {
+class VendorAuthViewModel extends BaseViewModel {
   @override
   final Ref ref;
 
-  CustomerAuthViewModel(this.ref) : super(ref) {
+  VendorAuthViewModel(this.ref) : super(ref) {
     // getDeviceId();
   }
   final emailController = TextEditingController();
@@ -87,7 +86,7 @@ class CustomerAuthViewModel extends BaseViewModel {
   Future login({required String email, required String password}) async {
     setBusy(true);
     final res = await ref
-        .read(customerAuthServiceProvider)
+        .read(vendorAuthServiceProvider)
         .loginCustomer(email, password);
 
     if (res.code == 200) {
@@ -111,7 +110,7 @@ class CustomerAuthViewModel extends BaseViewModel {
     LocalStorageManager.setString(key: 'email', value: email);
     setBusy(true);
     final res = await ref
-        .read(customerAuthServiceProvider)
+        .read(vendorAuthServiceProvider)
         .initiateResetPassword(email);
 
     if (res['code'] == 200) {
@@ -127,7 +126,7 @@ class CustomerAuthViewModel extends BaseViewModel {
       {required dynamic token, required Function nextAction}) async {
     setBusy(true);
     final res = await ref
-        .read(customerAuthServiceProvider)
+        .read(vendorAuthServiceProvider)
         .verifyResetOTP(token: token);
 
     if (res['code'] == 200) {
@@ -145,7 +144,7 @@ class CustomerAuthViewModel extends BaseViewModel {
       required Function nextAction}) async {
     setBusy(true);
     final res = await ref
-        .read(customerAuthServiceProvider)
+        .read(vendorAuthServiceProvider)
         .resetPassword(password: password, confirmPassword: confirmPassword);
     if (res['code'] == 200) {
       NotifyMe.showAlert(res['message']!);
@@ -158,7 +157,7 @@ class CustomerAuthViewModel extends BaseViewModel {
 
   updateProfileImage({required BuildContext context}) async {
     final res = await ref
-        .read(customerAuthServiceProvider)
+        .read(vendorAuthServiceProvider)
         .updateProfileImage(imageUrl: imageurlController.text);
 
     if (res['code'] == 200) {
@@ -175,7 +174,7 @@ class CustomerAuthViewModel extends BaseViewModel {
   changePassword(
       {required String password, required String confirmPassword}) async {
     setBusy(true);
-    final res = await ref.read(customerAuthServiceProvider).changePassword(
+    final res = await ref.read(vendorAuthServiceProvider).changePassword(
         password: password,
         confirmPassword: confirmPassword,
         userId: "${UserDB.getUser()?.id}",
@@ -193,7 +192,7 @@ class CustomerAuthViewModel extends BaseViewModel {
   // Get user profile details
   getbubblesDashboardDetails() async {
     final res =
-        await ref.read(customerAuthServiceProvider).getCustomerDashboard();
+        await ref.read(vendorAuthServiceProvider).getCustomerDashboard();
 
     if (res.code == 200 || res.code == 201) {
     } else {
@@ -208,7 +207,7 @@ class CustomerAuthViewModel extends BaseViewModel {
 
     notifyListeners();
     final res =
-        await ref.read(customerAuthServiceProvider).getCustomerNotifications();
+        await ref.read(vendorAuthServiceProvider).getCustomerNotifications();
 
     if (res.code == 200) {
       isLoadingNotifications = false;
@@ -247,7 +246,7 @@ class CustomerAuthViewModel extends BaseViewModel {
         notifyListeners();
       } else {
         String fileName = pickedImage.path.split('/').last;
-        final res = await ref.read(customerAuthServiceProvider).uploadFiles(
+        final res = await ref.read(vendorAuthServiceProvider).uploadFiles(
             file: await dio.MultipartFile.fromFile(pickedImage.path,
                 filename: fileName, contentType: MediaType('image', 'jpg')));
 
