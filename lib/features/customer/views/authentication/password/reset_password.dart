@@ -1,6 +1,7 @@
 import 'package:bubbles/features/customer/providers/customer_auth_providers.dart';
 import 'package:bubbles/features/customer/viewModels/customer_auth_vm.dart';
 import 'package:bubbles/features/customer/views/authentication/widgets/custom_top_widget.dart';
+import 'package:bubbles/widgets/custom_appbar.dart';
 import 'package:flutter/services.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/widgets/confirmation_screen.dart';
@@ -24,6 +25,7 @@ class ResetPasswordPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var authViewModel = ref.watch(customerAuthViewModelProvider);
     return Scaffold(
+      appBar: customAppBar(),
       body: Stack(
         children: [
           const CustomTopWidget(

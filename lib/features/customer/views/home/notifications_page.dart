@@ -1,6 +1,7 @@
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/style/appCustomPaints.dart';
 import 'package:bubbles/utils/constvalues.dart';
+import 'package:bubbles/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,9 +51,9 @@ class _NotificationPageState extends ConsumerState<NotificationPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: generalHorizontalPadding),
                   child: customAppBar(
-                    context: context,
-                    title: 'Notifications',
-                    isTitled: true,
+                    // context: context,
+                    // title: 'Notifications',
+                    // isTitled: true,
                   ),
                 ),
                 SizedBox(

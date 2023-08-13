@@ -36,6 +36,8 @@ class CustomerAuthViewModel extends BaseViewModel {
   final phoneController = TextEditingController();
   final imageurlController = TextEditingController();
 
+
+
   String deviceId = '';
   final imagePicker = ImagePicker();
 
@@ -77,10 +79,16 @@ class CustomerAuthViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  // void chooseUserField({required String value}) {
+  //   userTypeController.text = value;
+  //   notifyListeners();
+  // }
+
   Future login({required String email, required String password}) async {
     setBusy(true);
-    final res =
-        await ref.read(customerAuthServiceProvider).loginCustomer(email, password);
+    final res = await ref
+        .read(customerAuthServiceProvider)
+        .loginCustomer(email, password);
 
     if (res.code == 200) {
       await UserDB.addProfile(res.data!);
@@ -102,8 +110,9 @@ class CustomerAuthViewModel extends BaseViewModel {
       {required String email, required Function nextAction}) async {
     LocalStorageManager.setString(key: 'email', value: email);
     setBusy(true);
-    final res =
-        await ref.read(customerAuthServiceProvider).initiateResetPassword(email);
+    final res = await ref
+        .read(customerAuthServiceProvider)
+        .initiateResetPassword(email);
 
     if (res['code'] == 200) {
       NotifyMe.showAlert(res['message']!);
@@ -117,8 +126,9 @@ class CustomerAuthViewModel extends BaseViewModel {
   Future verifyResetOTP(
       {required dynamic token, required Function nextAction}) async {
     setBusy(true);
-    final res =
-        await ref.read(customerAuthServiceProvider).verifyResetOTP(token: token);
+    final res = await ref
+        .read(customerAuthServiceProvider)
+        .verifyResetOTP(token: token);
 
     if (res['code'] == 200) {
       NotifyMe.showAlert(res['message']!);
@@ -182,7 +192,8 @@ class CustomerAuthViewModel extends BaseViewModel {
 
   // Get user profile details
   getbubblesDashboardDetails() async {
-    final res = await ref.read(customerAuthServiceProvider).getCustomerDashboard();
+    final res =
+        await ref.read(customerAuthServiceProvider).getCustomerDashboard();
 
     if (res.code == 200 || res.code == 201) {
     } else {

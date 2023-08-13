@@ -26,7 +26,7 @@ class StepperScreen extends ConsumerWidget {
             const EdgeInsets.symmetric(horizontal: generalHorizontalPadding),
         physics: const BouncingScrollPhysics(),
         children: [
-          SizedBox(height: 50.h),
+          SizedBox(height: 20.h),
           const AppLogoWidget(),
           SizedBox(height: 20.h),
           Text(

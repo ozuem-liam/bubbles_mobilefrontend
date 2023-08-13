@@ -295,6 +295,9 @@ class ThemeProvider extends ChangeNotifier {
         color: Colors.transparent,
         iconTheme: IconThemeData(color: Colors.black),
       ),
+      // popupMenuTheme: PopupMenuThemeData(
+
+      // ),
       textTheme: TextTheme(
         headlineSmall: const TextStyle().copyWith(
           fontFamily: 'Poppins',
