@@ -1,3 +1,4 @@
+import 'package:bubbles/features/vendor/providers/shop_service_providers.dart';
 import 'package:bubbles/features/vendor/views/setup_shop/business_setup.dart';
 import 'package:bubbles/features/vendor/views/setup_shop/laundry_items.dart';
 import 'package:bubbles/features/vendor/views/setup_shop/opening_hours.dart';
@@ -8,15 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-var setupShopProvider = StateProvider<int>((ref) => 0);
+
 
 class SetupShotPage extends ConsumerWidget {
   const SetupShotPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    int stateValue = ref.watch(setupShopProvider);
-    // var toggleValue = ref.read(setupShopProvider.notifier);
+    int stateValue = ref.watch(shopViewModelProvider).setUpIndex;
 
     Widget headerWidget({required BuildContext context}) {
       return Padding(

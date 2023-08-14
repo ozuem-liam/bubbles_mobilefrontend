@@ -27,7 +27,7 @@ class UserTypeWidget extends ConsumerWidget {
                   : AppColors.lightGrey.withOpacity(0.3)),
           borderRadius: BorderRadius.circular(10.r)),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 35.h, vertical: 20.w),
+        padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 20.w),
         child: Column(
           children: [
             SvgImage(

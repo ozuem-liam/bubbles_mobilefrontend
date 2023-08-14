@@ -1,6 +1,10 @@
+import 'package:bubbles/features/vendor/providers/shop_service_providers.dart';
+import 'package:bubbles/features/vendor/viewModels/shop_service_vm.dart';
 import 'package:bubbles/features/vendor/views/setup_shop/setup_shop.dart';
+import 'package:bubbles/features/vendor/views/setup_shop/widgets/multi_card_option_widget.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
+import 'package:bubbles/utils/logger.dart';
 import 'package:bubbles/utils/svgs.dart';
 import 'package:bubbles/widgets/custom_appbar.dart';
 import 'package:bubbles/widgets/custom_button.dart';
@@ -13,27 +17,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:dotted_border/dotted_border.dart';
 
-var shopServiceProvider = StateProvider<List<String>>((ref) => []);
-
 class BusinessSetupPage extends ConsumerWidget {
   const BusinessSetupPage({super.key});
 
-  List<Map<String, dynamic>> serviceType() {
-    return [
-      {"service": "Wash", "icon": washIcon},
-      {"service": "Iron", "icon": ironIcon},
-      {"service": "Dry clean", "icon": washIcon},
-      {"service": "Self wash", "icon": selfWashIcon}
-    ];
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List serviceTypes = serviceType();
-    List<String> serviceList = ref.watch(shopServiceProvider);
+    List<String> serviceList = ref.watch(shopViewModelProvider).serviceList;
 
-    var addService = ref.read(shopServiceProvider.notifier);
-    var toggleValue = ref.read(setupShopProvider.notifier);
+    var shopService = ref.read(shopViewModelProvider.notifier);
+
+    List serviceTypes = shopService.serviceType();
+
     return Scaffold(
       //appBar: customAppBar(),
       body: ListView(
@@ -175,58 +169,29 @@ class BusinessSetupPage extends ConsumerWidget {
           SizedBox(
             height: 20.h,
           ),
-          GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 10.w,
-                  childAspectRatio: 3,
-                  mainAxisSpacing: 10.w),
-              shrinkWrap: true,
-              itemCount: serviceTypes.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  //color: AppColors.secondary,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                      side: BorderSide(
-                          width: 0.6.w,
-                          color: serviceList
-                                  .contains(serviceTypes[index]['service'])
-                              ? AppColors.secondary
-                              : Theme.of(context).canvasColor)),
-                  child: InkWell(
-                    onTap: () {
-                      if (serviceList
-                          .contains(serviceTypes[index]['service'])) {
-                        addService.state.remove(serviceTypes[index]['service']);
-                      } else {
-                        addService.state.add(serviceTypes[index]['service']);
-                      }
-
-                      // addService.update((state) => state.add(serviceTypes[index]['service']));
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgImage(
-                          asset: serviceTypes[index]['icon'],
-                        ),
-                        SizedBox(
-                          width: 10.h,
-                        ),
-                        Text(
-                          serviceTypes[index]['service'],
-                          style: Theme.of(context)
-                              .primaryTextTheme
-                              .headlineSmall
-                              ?.copyWith(fontSize: 12.sp),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }),
+          Wrap(
+            direction: Axis.horizontal,
+            spacing: 10,
+            runSpacing: 9,
+            children: List.generate(serviceTypes.length, (index) {
+              String name = serviceTypes[index]['service'];
+              String icon = serviceTypes[index]['icon'];
+              return MultiCardOptionWidget(
+                isSelected: serviceList.contains(name),
+                onTap: () {
+                  if (serviceList.contains(name)) {
+                    AppLogger.logg("removed");
+                    shopService.removeService(name);
+                  } else {
+                    AppLogger.logg("added");
+                    shopService.addService(name);
+                  }
+                },
+                icon: icon,
+                title: name,
+              );
+            }),
+          ),
           SizedBox(
             height: 20.h,
           ),
@@ -235,7 +200,7 @@ class BusinessSetupPage extends ConsumerWidget {
               title: "Next",
               isLoading: false,
               onclick: () async {
-                toggleValue.state = 1;
+                shopService.changeSetup(val: 1);
               }),
         ],
       ),
