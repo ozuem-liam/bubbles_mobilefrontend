@@ -1,3 +1,4 @@
+import 'package:bubbles/enums/api_status.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,9 +7,9 @@ import 'package:bubbles/http/formatted_response.dart';
 import 'package:bubbles/http/network.dart' as networkutils;
 import 'dart:developer' as mylogs;
 
-abstract class ApiManager {
+class ApiManager {
   late Dio dio;
-   // Development Environment
+  // Development Environment
   //final baseURL = '';
 
   // Production Environment
@@ -52,7 +53,7 @@ abstract class ApiManager {
     params?.removeWhere((key, value) => value == null);
     //body?.removeWhere((key, value) => value == null);
     final fullRoute = '$baseURL$route';
-   // print(fullRoute);
+    // print(fullRoute);
     if (formdata) {
       body = FormData.fromMap(body as Map<String, dynamic>);
     }
@@ -73,7 +74,7 @@ abstract class ApiManager {
     params?.removeWhere((key, value) => value == null);
     //body?.removeWhere((key, value) => value == null);
     final fullRoute = '$baseURL$route';
-   // print(fullRoute);
+    // print(fullRoute);
 
     return makeRequest(dio.put(
       fullRoute,
@@ -158,14 +159,14 @@ abstract class ApiManager {
           success: false,
           statusCode: e.response!.statusCode,
         );
-      } else if (e.response!.statusCode == 404) {
+      } else if (e.response!.statusCode == StatusCode.badRequest.name) {
         return FormattedResponse(
           data: e.response?.data,
           responseCodeError: "Oops! Resource not found",
           success: false,
           statusCode: e.response!.statusCode,
         );
-      } else if (e.response!.statusCode == 500 ||
+      } else if (e.response!.statusCode == StatusCode.serverError.name ||
           e.response!.statusCode == 503) {
         return FormattedResponse(
           data: e.response?.data,
