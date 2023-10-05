@@ -7,7 +7,7 @@ class AppColors extends ChangeNotifier {
   static const themeOrange = Color(0xFFFF6928);
   static const themeBlue = Color(0xFF2894FF);
   static const primary = Color(0xFF00398F);
- // static const secondary = Color(0xFFF9F5F2);
+  // static const secondary = Color(0xFFF9F5F2);
   static const gray = Color.fromARGB(255, 170, 170, 170);
   static const green = Color.fromARGB(255, 23, 196, 101);
   static const gray4 = Color(0xFF495057);
@@ -24,6 +24,7 @@ class AppColors extends ChangeNotifier {
   static const red = Color.fromRGBO(244, 67, 54, 1);
   static const warning = Color(0xFFEAD918);
   static const purple = Color(0xFFA43FB9);
+  static const accentSucess = Color(0xff1E8567);
 
   static const appGradientColor = LinearGradient(colors: [
     AppColors.primary,
