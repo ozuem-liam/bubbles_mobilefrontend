@@ -39,6 +39,7 @@ class ResgisterVendor extends ConsumerWidget {
             children: [
               Expanded(
                 child: CustomField(
+                  pIcon: Icon(Icons.person, size: 13.w,),
                   headtext: "Name",
                   validate: true,
                   controller: fullNameController,
@@ -49,6 +50,7 @@ class ResgisterVendor extends ConsumerWidget {
               ),
               Expanded(
                 child: CustomField(
+                   pIcon: Icon(Icons.person, size: 13.w,),
                   headtext: "Surname",
                   validate: true,
                   controller: userNameController,
@@ -63,6 +65,7 @@ class ResgisterVendor extends ConsumerWidget {
             height: 20.h,
           ),
           CustomField(
+             pIcon: Icon(Icons.email, size: 13.w,),
             headtext: "Email",
             validate: true,
             controller: emailController,
@@ -74,6 +77,7 @@ class ResgisterVendor extends ConsumerWidget {
             height: 20.h,
           ),
           CustomField(
+             pIcon: Icon(Icons.phone, size: 13.w,),
             headtext: "Phone Number",
             hint: '+234-123456789',
             validate: true,
@@ -89,6 +93,7 @@ class ResgisterVendor extends ConsumerWidget {
             height: 20.h,
           ),
           CustomField(
+             pIcon: Icon(Icons.location_on, size: 13.w,),
             headtext: "Address",
             controller: referralController,
           ),
@@ -96,6 +101,7 @@ class ResgisterVendor extends ConsumerWidget {
             height: 20.h,
           ),
           CustomField(
+             pIcon: Icon(Icons.security, size: 13.w,),
             headtext: "Password",
             hint: '***********',
             validate: true,

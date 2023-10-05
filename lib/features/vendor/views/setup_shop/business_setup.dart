@@ -202,6 +202,9 @@ class BusinessSetupPage extends ConsumerWidget {
               onclick: () async {
                 shopService.changeSetup(val: 1);
               }),
+          SizedBox(
+            height: 20.h,
+          ),
         ],
       ),
     );

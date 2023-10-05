@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
-
 class SetupShotPage extends ConsumerWidget {
   const SetupShotPage({super.key});
 
@@ -29,7 +27,12 @@ class SetupShotPage extends ConsumerWidget {
               height: 10.h,
             ),
             Text(
-              "Setup shop",
+              switch (stateValue) {
+                0 => "Setup shop",
+                1 => 'Laundry items',
+                2 => 'Opening hours',
+                _ => '',
+              },
               textAlign: TextAlign.start,
               style:
                   Theme.of(context).primaryTextTheme.headlineMedium?.copyWith(
@@ -41,7 +44,12 @@ class SetupShotPage extends ConsumerWidget {
               height: 10.h,
             ),
             Text(
-              'Please fill out your business details.',
+              switch (stateValue) {
+                0 => 'Please fill out your business details.',
+                1 => 'Choose items you wash and set rates.',
+                2 => 'Please fill out your business opening hours.',
+                _ => '',
+              },
               textAlign: TextAlign.start,
               style: Theme.of(context)
                   .primaryTextTheme
@@ -60,7 +68,7 @@ class SetupShotPage extends ConsumerWidget {
                         height: 3.h,
                         width: MediaQuery.sizeOf(context).width / 4,
                         decoration: BoxDecoration(
-                            color: stateValue == index
+                            color: stateValue >= index
                                 ? AppColors.secondary
                                 : AppColors.secondary.withOpacity(0.3)),
                       ))),
@@ -78,9 +86,9 @@ class SetupShotPage extends ConsumerWidget {
           Padding(
             padding: EdgeInsets.only(top: 100.h),
             child: switch (stateValue) {
-              0 => BusinessSetupPage(),
-              1 => LaundryItemsPage(),
-              2 => OpeningHoursPage(),
+              0 => const BusinessSetupPage(),
+              1 => const LaundryItemsPage(),
+              2 => const OpeningHoursPage(),
               _ => Container(),
             },
           )
