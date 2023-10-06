@@ -69,7 +69,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         SizedBox(height: 10.sp),
 
         Container(
-          height: 100,
+          height: 120,
           width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.white,
@@ -80,7 +80,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 color: Colors.grey,
                 spreadRadius: -7,
                 blurRadius: 10,
-                offset: Offset(-10, 1), // changes position of shadow
+                offset: Offset(-10, 1),
               ),
             ],
           ),
@@ -88,6 +88,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             padding: const EdgeInsets.all(10),
             child: Column(
               children: [
+                const SizedBox(height: 10),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -126,7 +127,8 @@ class _HomePageState extends ConsumerState<HomePage> {
             fontWeight: FontWeight.bold,
             fontSize: 18.sp,
           ),
-        )
+        ),
+
         // const Row(
         //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
         //   children: [
