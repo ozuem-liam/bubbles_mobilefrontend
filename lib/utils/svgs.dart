@@ -33,3 +33,5 @@ const completedSetupIcon = 'assets/svgs/setup_complete.svg';
 const minusIcon = 'assets/svgs/minus.svg';
 
 const plusIcon = 'assets/svgs/plus.svg';
+
+const infoCircleIcon = 'assets/svgs/Info-circle.svg';

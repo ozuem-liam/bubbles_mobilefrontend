@@ -1,6 +1,6 @@
 import 'package:bubbles/features/vendor/providers/shop_service_providers.dart';
 import 'package:bubbles/features/vendor/views/setup_shop/business_setup.dart';
-import 'package:bubbles/features/vendor/views/setup_shop/laundry_items.dart';
+import 'package:bubbles/features/vendor/views/setup_shop/laundry/laundry_items.dart';
 import 'package:bubbles/features/vendor/views/setup_shop/opening_hours.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';

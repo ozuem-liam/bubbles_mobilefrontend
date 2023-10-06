@@ -52,47 +52,55 @@ class ShopItemWidget extends ConsumerWidget {
   final Function increase;
   final Function decrease;
   final String title;
+  final double? titleSize;
+  final EdgeInsets? padding;
   const ShopItemWidget(
       {required this.amount,
       required this.icon,
       required this.increase,
       required this.decrease,
       required this.title,
+      this.padding,
+      this.titleSize,
       super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 15),
+      margin: padding ?? const EdgeInsets.symmetric(horizontal: 15),
       color: AppColors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.r)),
       child: ListTile(
+        // contentPadding: EdgeInsets.zero,
         minLeadingWidth: 0,
         dense: true,
-        leading:  SvgImage(asset: icon),
-        title:  SingleTextLineWidget(text: title),
+        leading: SvgImage(asset: icon),
+        title: SingleTextLineWidget(
+          text: title,
+          size: titleSize ?? Theme.of(context).primaryTextTheme.headlineMedium!.fontSize,
+        ),
         trailing: SizedBox(
-          width: MediaQuery.sizeOf(context).width / 2.3,
+          width: MediaQuery.sizeOf(context).width / 2.7,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               InkWell(
-                onTap: (){
-                  increase();
-                },
-                child: const SvgImage(asset: minusIcon)),
+                  onTap: () {
+                    increase();
+                  },
+                  child: const SvgImage(asset: minusIcon)),
               SizedBox(
                 width: 15.h,
               ),
-               SingleTextLineWidget(text: amount),
+              SingleTextLineWidget(text: amount),
               SizedBox(
                 width: 15.h,
               ),
               InkWell(
-                onTap: (){
-                  decrease();
-                },
-                child: const SvgImage(asset: plusIcon))
+                  onTap: () {
+                    decrease();
+                  },
+                  child: const SvgImage(asset: plusIcon))
             ],
           ),
         ),
