@@ -12,6 +12,7 @@ class ActionCustomButton extends StatelessWidget {
   final bool? isOutline;
   final bool isLoading;
   final double? shadow;
+  final bool? disabeled;
 
   const ActionCustomButton(
       {Key? key,
@@ -21,15 +22,22 @@ class ActionCustomButton extends StatelessWidget {
       this.titleColor,
       this.borderColor,
       this.loadingColor,
+       this.disabeled = false,
       this.isOutline,
       this.shadow,
+
       this.isLoading = false})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onclick(),
+      onTap: disabeled!
+          ? null
+          : () {
+              FocusScope.of(context).unfocus();
+              onclick();
+            },
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 50.h,
@@ -41,7 +49,9 @@ class ActionCustomButton extends StatelessWidget {
                   ? BorderSide(
                       width: 1.w, color: borderColor ?? AppColors.primary)
                   : BorderSide.none),
-          color: btnColor ?? AppColors.primary,
+            color: disabeled!
+              ? btnColor?.withOpacity(0.2) ?? AppColors.primary.withOpacity(0.2)
+              : btnColor ?? AppColors.primary,
           child: Center(
             child: isLoading
                 ? SizedBox(
