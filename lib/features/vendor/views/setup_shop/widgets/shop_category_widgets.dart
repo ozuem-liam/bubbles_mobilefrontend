@@ -77,7 +77,8 @@ class ShopItemWidget extends ConsumerWidget {
         leading: SvgImage(asset: icon),
         title: SingleTextLineWidget(
           text: title,
-          size: titleSize ?? Theme.of(context).primaryTextTheme.headlineMedium!.fontSize,
+          size: titleSize ??
+              Theme.of(context).primaryTextTheme.headlineMedium!.fontSize,
         ),
         trailing: SizedBox(
           width: MediaQuery.sizeOf(context).width / 2.7,
@@ -86,19 +87,84 @@ class ShopItemWidget extends ConsumerWidget {
             children: [
               InkWell(
                   onTap: () {
-                    increase();
+                    decrease();
                   },
                   child: const SvgImage(asset: minusIcon)),
               SizedBox(
-                width: 15.h,
+                width: 12.h,
               ),
               SingleTextLineWidget(text: amount),
               SizedBox(
-                width: 15.h,
+                width: 12.h,
               ),
               InkWell(
                   onTap: () {
+                    increase();
+                  },
+                  child: const SvgImage(asset: plusIcon))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SelfWashItemWidget extends ConsumerWidget {
+  final String amount;
+  final String icon;
+  final Function increase;
+  final Function decrease;
+  final Widget machineType;
+  final double? titleSize;
+  final EdgeInsets? padding;
+  const SelfWashItemWidget(
+      {required this.amount,
+      required this.icon,
+      required this.increase,
+      required this.decrease,
+      required this.machineType,
+      this.padding,
+      this.titleSize,
+      super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Card(
+      margin: padding ??
+          const EdgeInsets.symmetric(
+            horizontal: 0,
+          ),
+      color: AppColors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+      child: ListTile(
+        contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+        minLeadingWidth: 0,
+        dense: true,
+        leading: ImageWidget(
+          asset: icon,
+        ),
+        title: machineType,
+        trailing: SizedBox(
+          width: MediaQuery.sizeOf(context).width / 2.7,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              InkWell(
+                  onTap: () {
                     decrease();
+                  },
+                  child: const SvgImage(asset: minusIcon)),
+              SizedBox(
+                width: 8.h,
+              ),
+              SingleTextLineWidget(text: amount, ),
+              SizedBox(
+                width: 8.h,
+              ),
+              InkWell(
+                  onTap: () {
+                    increase();
                   },
                   child: const SvgImage(asset: plusIcon))
             ],

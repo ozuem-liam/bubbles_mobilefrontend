@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SingleTextLineWidget extends ConsumerWidget {
   final String text;
@@ -14,7 +15,9 @@ class SingleTextLineWidget extends ConsumerWidget {
     return Text(
       text,
       style: Theme.of(context).primaryTextTheme.headlineMedium!.copyWith(
-          fontSize: size ?? 12.sp, fontWeight: weight ?? FontWeight.w400),
+          fontSize: size ?? 12.sp,
+          fontWeight: weight ?? FontWeight.w400,
+          fontFamily: GoogleFonts.libreFranklin().fontFamily),
     );
   }
 }
