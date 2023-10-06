@@ -1,5 +1,6 @@
+import 'package:bubbles/features/customer/views/home/home_page/domain/services.dart';
+import 'package:bubbles/features/customer/views/home/home_page/widget/service_widget.dart';
 import 'package:bubbles/providers/home_navigation_provider.dart';
-import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/utils/user_db.dart';
 import 'package:bubbles/viewModels/home_vm.dart';
@@ -11,6 +12,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+const List<ServicesData> service = [
+  ServicesData(name: 'Watch', descrip: "wash | Fold", icon: ""),
+  ServicesData(name: 'Dry clean', descrip: "wash | Iron", icon: ""),
+  ServicesData(name: 'Iron', descrip: "Iron | Fold", icon: ""),
+  ServicesData(name: 'Self watch', descrip: "Use machine", icon: ""),
+];
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -52,7 +60,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               height: 50,
               width: 50,
               decoration: BoxDecoration(
-                color: Colors.grey,
+                color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(10),
               ),
             )
@@ -120,7 +128,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 25),
         Text(
           "Services",
           style: styleTheme.copyWith(
@@ -128,7 +136,29 @@ class _HomePageState extends ConsumerState<HomePage> {
             fontSize: 18.sp,
           ),
         ),
-
+        const SizedBox(height: 25),
+        Wrap(
+          spacing: 15,
+          runSpacing: 15,
+          children: List.generate(service.length, (i) {
+            final data = service[i];
+            return ServiceWidget(
+              serviceParam: (
+                discrip: data.descrip,
+                image: data.icon,
+                title: data.name
+              ),
+            );
+          }),
+        ),
+        const SizedBox(height: 25),
+        Text(
+          "Shops near you",
+          style: styleTheme.copyWith(
+            fontWeight: FontWeight.bold,
+            fontSize: 18.sp,
+          ),
+        ),
         // const Row(
         //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
         //   children: [

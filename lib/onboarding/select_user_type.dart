@@ -57,9 +57,10 @@ class SelectUserType extends ConsumerWidget {
                           toggleValue.state = index;
                         },
                         child: UserTypeWidget(
-                            selected: index == stateValue,
-                            image: userTypes[index]['image'],
-                            userType: userTypes[index]['user']),
+                          selected: index == stateValue,
+                          image: userTypes[index]['image'],
+                          userType: userTypes[index]['user'],
+                        ),
                       ));
                 }),
           ),
