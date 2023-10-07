@@ -154,22 +154,27 @@ class CustomField extends ConsumerWidget {
                         fillColor: fillColor,
                         filled: true,
                         focusColor: fillColor,
+
                         enabledBorder: enabledBorder ??
                             OutlineInputBorder(
-                                borderSide:  BorderSide(
-                                    color: AppColors.termsTextColor.withOpacity(0.4), width: 1),
+                                borderSide: BorderSide(
+                                    color: AppColors.termsTextColor
+                                        .withOpacity(0.4),
+                                    width: 1),
                                 borderRadius: BorderRadius.circular(10)),
                         focusedBorder: focusedBorder ??
                             OutlineInputBorder(
-                                borderSide:  BorderSide(
-                                    color: AppColors.termsTextColor.withOpacity(0.4), width: 1),
+                                borderSide: BorderSide(
+                                    color: AppColors.termsTextColor
+                                        .withOpacity(0.4),
+                                    width: 1),
                                 borderRadius: BorderRadius.circular(10)),
                         errorBorder: OutlineInputBorder(
-                            borderSide:  const BorderSide(
+                            borderSide: const BorderSide(
                                 color: AppColors.primary, width: 1),
                             borderRadius: BorderRadius.circular(10)),
                         focusedErrorBorder: OutlineInputBorder(
-                            borderSide:  const BorderSide(
+                            borderSide: const BorderSide(
                                 color: AppColors.primary, width: 1),
                             borderRadius: BorderRadius.circular(10)),
                         border: border,
@@ -178,7 +183,7 @@ class CustomField extends ConsumerWidget {
                         labelText: headtext,
                         prefixIcon: pIcon,
                         suffixIcon: sIcon,
-                       // hintText: hint,
+                        // hintText: hint,
                         labelStyle: hintstyle ??
                             Theme.of(context)
                                 .primaryTextTheme

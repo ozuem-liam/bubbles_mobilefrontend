@@ -1,9 +1,10 @@
 import 'package:bubbles/style/appColors.dart';
+import 'package:bubbles/widgets/image_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ServiceWidget extends StatelessWidget {
-  final ({String image, String title, String discrip}) serviceParam;
+  final ({String image, String title, String discrip, int i}) serviceParam;
   const ServiceWidget({super.key, required this.serviceParam});
 
   @override
@@ -24,16 +25,23 @@ class ServiceWidget extends StatelessWidget {
           width: 170,
           child: Row(
             children: [
-              // CircleAvatar(),
               Container(
                 height: 80,
                 width: 80,
-                decoration: const BoxDecoration(
-                  color: Colors.red,
+                decoration: BoxDecoration(
+                  color: switch (serviceParam.i) {
+                    0 => const Color(0xffCCD7E9),
+                    1 => const Color(0xffCCE6E6),
+                    2 => const Color(0xffFFE0E6),
+                    3 => const Color(0xffFFEDE1),
+                    _ => Colors.white,
+                  },
                   shape: BoxShape.circle,
                 ),
+                child: Center(
+                  child: SvgImage(asset: serviceParam.image),
+                ),
               ),
-
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

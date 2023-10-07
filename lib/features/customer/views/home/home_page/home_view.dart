@@ -17,10 +17,18 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const List<ServicesData> service = [
-  ServicesData(name: 'Wash', descrip: "wash | Fold", icon: ""),
-  ServicesData(name: 'Dry clean', descrip: "wash | Iron", icon: ""),
-  ServicesData(name: 'Iron', descrip: "Iron | Fold", icon: ""),
-  ServicesData(name: 'Self watch', descrip: "Use machine", icon: ""),
+  ServicesData(
+      name: 'Wash', descrip: "wash | Fold", icon: "assets/svgs/washIcon.svg"),
+  ServicesData(
+      name: 'Dry clean',
+      descrip: "wash | Iron",
+      icon: "assets/svgs/dryclean.svg"),
+  ServicesData(
+      name: 'Iron', descrip: "Iron | Fold", icon: "assets/svgs/ironicons.svg"),
+  ServicesData(
+      name: 'Self watch',
+      descrip: "Use machine",
+      icon: "assets/svgs/selfIcon.svg"),
 ];
 
 class HomePage extends ConsumerStatefulWidget {
@@ -86,6 +94,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         SizedBox(height: 30.sp),
         CustomField(
           headtext: "search",
+          pIcon: const Icon(Icons.search),
           onTap: () {},
         ),
         SizedBox(height: 30.sp),
@@ -156,6 +165,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             final data = service[i];
             return ServiceWidget(
               serviceParam: (
+                i: i,
                 discrip: data.descrip,
                 image: data.icon,
                 title: data.name

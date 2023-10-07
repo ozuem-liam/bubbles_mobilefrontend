@@ -1,5 +1,4 @@
 import 'package:bubbles/style/appColors.dart';
-import 'package:bubbles/widgets/image_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,19 +14,17 @@ class ShopeNearYou extends StatelessWidget {
           width: 1.w,
           color: AppColors.lightGrey.withOpacity(0.3),
         ),
-        borderRadius: BorderRadius.circular(10.r),
+        borderRadius: BorderRadius.circular(15.r),
       ),
       child: SizedBox(
-        height: 200,
+        height: 280,
         width: double.infinity,
         child: Column(children: [
-          const Expanded(
-            child: ImageWidget(
-              asset: "assets/png/Wash.png",
-              height: double.infinity,
-              width: double.infinity,
-            ),
-          ),
+          Expanded(
+              child: Image.asset(
+            "assets/png/Wash.png",
+            fit: BoxFit.fill,
+          )),
           Container(
             height: 90,
             decoration: const BoxDecoration(color: Colors.white),
