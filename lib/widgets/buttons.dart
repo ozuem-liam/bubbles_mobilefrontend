@@ -1,4 +1,5 @@
 import 'package:bubbles/style/appColors.dart';
+import 'package:bubbles/widgets/single_text_line_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -351,6 +352,43 @@ class SwitchTextButton extends ConsumerWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class CheckBoxCustomWidget extends ConsumerWidget {
+  final String title;
+  final bool value;
+  final Function onTap;
+  const CheckBoxCustomWidget(
+      {required this.title,
+      required this.value,
+      required this.onTap,
+      super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Row(
+      children: [
+        Checkbox(
+          value: value,
+          onChanged: (val) {
+            onTap();
+          },
+          activeColor: AppColors.secondary,
+          checkColor: AppColors.white,
+          side: MaterialStateBorderSide.resolveWith((states) {
+            if (states.contains(MaterialState.selected)) {
+              return const BorderSide(color: AppColors.secondary, width: 2);
+            }
+            return null;
+          }),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(2.0),
+          ),
+        ),
+        SingleTextLineWidget(text: title),
+      ],
     );
   }
 }

@@ -14,6 +14,8 @@ class CustomTopWidget extends ConsumerWidget {
   final Color? textColor;
   final Color? iconColor;
   final double? height;
+  final Function? onTap;
+  final bool? isNavigation;
   const CustomTopWidget(
       {required this.title,
       required this.subtitle,
@@ -22,6 +24,8 @@ class CustomTopWidget extends ConsumerWidget {
       this.textColor,
       this.iconColor,
       this.height,
+      this.isNavigation = true,
+      this.onTap,
       super.key});
 
   @override
@@ -29,7 +33,8 @@ class CustomTopWidget extends ConsumerWidget {
     return Container(
       height: height ?? 120.h,
       width: MediaQuery.sizeOf(context).width,
-      decoration: BoxDecoration(color: bgColor ?? Theme.of(context).scaffoldBackgroundColor),
+      decoration: BoxDecoration(
+          color: bgColor ?? Theme.of(context).scaffoldBackgroundColor),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: generalHorizontalPadding.w),
         child: Column(
@@ -42,35 +47,40 @@ class CustomTopWidget extends ConsumerWidget {
                   visible: isBack == false ? false : true,
                   child: InkWell(
                       onTap: () {
-                        Get.back();
+                        
+                        if (isNavigation == true) {
+                          Get.back();
+                        } else {
+                          onTap!();
+                        }
                       },
                       child: Card(
                         color: Theme.of(context).canvasColor.withOpacity(0.1),
                         shape: RoundedRectangleBorder(
-                         // side: BorderSide(width: 0.5.w),
-                          borderRadius: BorderRadius.circular(10.r)
-                        ),
+                            // side: BorderSide(width: 0.5.w),
+                            borderRadius: BorderRadius.circular(10.r)),
                         child: Padding(
-                          padding:  EdgeInsets.all(10.0.w),
-                          child:  Icon(
+                          padding: EdgeInsets.all(10.0.w),
+                          child: Icon(
                             Icons.arrow_back_ios,
-                            color: Theme.of(context).iconTheme.color!.withOpacity(0.7),
+                            color: Theme.of(context)
+                                .iconTheme
+                                .color!
+                                .withOpacity(0.7),
                             size: 17.sp,
-                           // color: iconColor ?? AppColors.white,
+                            // color: iconColor ?? AppColors.white,
                           ),
                         ),
                       ))),
             ),
             SizedBox(
-              height: 20.h,
+              height: 10.h,
             ),
             Text(
               title,
-              style: Theme.of(context)
-                  .primaryTextTheme
-                  .headlineMedium!
-                  .copyWith(
-                     // color: textColor ?? AppColors.white,
+              style:
+                  Theme.of(context).primaryTextTheme.headlineMedium!.copyWith(
+                      // color: textColor ?? AppColors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 28.sp),
             ),
@@ -79,14 +89,15 @@ class CustomTopWidget extends ConsumerWidget {
             ),
             Text(
               subtitle,
-              style: Theme.of(context)
-                  .primaryTextTheme
-                  .headlineMedium!
-                  .copyWith(
-                     // color: textColor ?? AppColors.white,
+              style:
+                  Theme.of(context).primaryTextTheme.headlineMedium!.copyWith(
+                      // color: textColor ?? AppColors.white,
                       fontWeight: FontWeight.w400,
                       fontSize: 12.sp),
-            )
+            ),
+            SizedBox(
+              height: 16.h,
+            ),
           ],
         ),
       ),
@@ -101,6 +112,7 @@ class SecondCustomTopWidget extends ConsumerWidget {
   final Color? textColor;
   final Color? iconColor;
   final double? height;
+  final Function? onTap;
   const SecondCustomTopWidget(
       {required this.title,
       required this.isBack,
@@ -108,6 +120,7 @@ class SecondCustomTopWidget extends ConsumerWidget {
       this.textColor,
       this.iconColor,
       this.height,
+      this.onTap,
       super.key});
 
   @override
@@ -122,7 +135,7 @@ class SecondCustomTopWidget extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-             SizedBox(
+            SizedBox(
               height: 10.h,
             ),
             SizedBox(
@@ -131,7 +144,7 @@ class SecondCustomTopWidget extends ConsumerWidget {
                   visible: isBack == false ? false : true,
                   child: InkWell(
                       onTap: () {
-                        Get.back();
+                        onTap!() ?? Get.back();
                       },
                       child: Icon(
                         Icons.arrow_back_rounded,

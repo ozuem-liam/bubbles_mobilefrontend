@@ -49,7 +49,7 @@ class SetupCompletionPage extends ConsumerWidget {
           SvgImage(
             asset: completedSetupIcon,
             width: 200.w,
-            height: 250.w,
+            height: 300.w,
           ),
           SizedBox(
             height: 50.h,
@@ -60,7 +60,7 @@ class SetupCompletionPage extends ConsumerWidget {
             style: Theme.of(context)
                 .primaryTextTheme
                 .headlineMedium
-                ?.copyWith(fontSize: 12.sp, fontWeight: FontWeight.w400),
+                ?.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w400),
           ),
           SizedBox(
             height: 50.h,
