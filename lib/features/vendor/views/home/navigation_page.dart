@@ -7,14 +7,14 @@ import 'package:bubbles/features/customer/views/home/quotes/quotes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeNavigation extends ConsumerStatefulWidget {
-  const HomeNavigation({Key? key}) : super(key: key);
+class VendorHomeNavigation extends ConsumerStatefulWidget {
+  const VendorHomeNavigation({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _HomeNavigation();
+  ConsumerState<ConsumerStatefulWidget> createState() => _VendorHomeNavigation();
 }
 
-class _HomeNavigation extends ConsumerState<HomeNavigation> {
+class _VendorHomeNavigation extends ConsumerState<VendorHomeNavigation> {
   @override
   Widget build(BuildContext context) {
     final viewModel = ref.watch(homeViewModel);
@@ -47,42 +47,42 @@ class _HomeNavigation extends ConsumerState<HomeNavigation> {
             items: [
               BottomNavigationBarItem(
                 backgroundColor: Colors.red,
-                icon: Icon(Icons.home_max_outlined,
+                icon: Icon(Icons.grid_view,
                     color: index == 0
-                        ? AppColors.primary
+                        ? AppColors.secondary
                         : Theme.of(context)
                             .primaryTextTheme
                             .headlineMedium!
                             .color),
-                label: "Home",
+                label: "Dashboard",
               ),
               BottomNavigationBarItem(
                // backgroundColor: Colors.white,
-                icon: Icon(Icons.receipt_long_outlined,
+                icon: Icon(Icons.menu,
                     color: index == 1
-                        ? AppColors.primary
+                        ? AppColors.secondary
                         : Theme.of(context)
                             .primaryTextTheme
                             .headlineMedium!
                             .color),
-                label: "Quotes",
+                label: "Shop",
               ),
               BottomNavigationBarItem(
                 //backgroundColor: Colors.white,
                 icon: Icon(Icons.account_balance_wallet_outlined,
                     color: index == 2
-                        ? AppColors.primary
+                        ? AppColors.secondary
                         : Theme.of(context)
                             .primaryTextTheme
                             .headlineMedium!
                             .color),
-                label: "Payment",
+                label: "Wallet",
               ),
               BottomNavigationBarItem(
                 //backgroundColor: Colors.white,
                 icon: Icon(Icons.person_4_outlined,
                     color: index == 3
-                        ? AppColors.primary
+                        ? AppColors.secondary
                         : Theme.of(context)
                             .primaryTextTheme
                             .headlineMedium!

@@ -1,3 +1,4 @@
+import 'package:bubbles/features/vendor/views/home/navigation_page.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/utils/svgs.dart';
@@ -7,6 +8,9 @@ import 'package:bubbles/widgets/image_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+// ignore: depend_on_referenced_packages
+import 'package:get/get.dart';
 
 class SetupCompletionPage extends ConsumerWidget {
   const SetupCompletionPage({super.key});
@@ -69,7 +73,9 @@ class SetupCompletionPage extends ConsumerWidget {
               btnColor: AppColors.primary,
               title: "Home",
               isLoading: false,
-              onclick: () async {}),
+              onclick: () async {
+                Get.offAll(() => const VendorHomeNavigation());
+              }),
           SizedBox(
             height: 20.h,
           ),
