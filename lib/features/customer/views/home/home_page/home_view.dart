@@ -112,56 +112,67 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
         ),
         SizedBox(height: 30.sp),
-        Container(
-          height: 120,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            // ,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.grey,
-                spreadRadius: -7,
-                blurRadius: 10,
-                offset: Offset(-10, 1),
+        Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10, top: 10, bottom: 10),
+              child: Container(
+                height: 110,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.r),
+                  color: const Color(0xff1E8567),
+                ),
               ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const SvgImage(asset: "assets/svgs/Basket.svg"),
-                        const SizedBox(width: 10),
-                        Text(
-                          "Hurray! It’s a success!",
-                          style: styleTheme!.copyWith(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.sp,
-                          ),
-                        )
-                      ],
-                    ),
-                    const Icon(FontAwesomeIcons.xmark),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  "Thanks for joining bubbles, a laundry bag will be delivered to you on your first order.",
-                  style: styleTheme.copyWith(),
-                ),
-                const Spacer(),
-              ],
             ),
-          ),
+            Card(
+              elevation: 1,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  width: 1.w,
+                  color: AppColors.lightGrey.withOpacity(0.3),
+                ),
+                borderRadius: BorderRadius.circular(15.r),
+              ),
+              child: SizedBox(
+                height: 120,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 10),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              const SvgImage(asset: "assets/svgs/Basket.svg"),
+                              const SizedBox(width: 10),
+                              Text(
+                                "Hurray! It’s a success!",
+                                style: styleTheme!.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.sp,
+                                ),
+                              )
+                            ],
+                          ),
+                          const Icon(FontAwesomeIcons.xmark),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        "Thanks for joining bubbles, a laundry bag will be delivered to you on your first order.",
+                        style: styleTheme.copyWith(),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 25),
         Text(
