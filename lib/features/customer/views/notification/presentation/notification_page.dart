@@ -1,4 +1,5 @@
 import 'package:bubbles/core/application/strings.dart';
+import 'package:bubbles/features/customer/views/notification/presentation/widget/noti_widget.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -61,7 +62,71 @@ class NotificationPage extends StatelessWidget {
                     .primaryTextTheme
                     .headlineMedium!
                     .copyWith(fontWeight: FontWeight.bold, fontSize: 25),
-              )
+              ),
+              SizedBox(height: 20.h),
+              Wrap(
+                runSpacing: 15,
+                children: List.generate(
+                    2,
+                    (i) => NotificationWidget(
+                          notificationParams: (
+                            time: "12:05pm",
+                            des:
+                                "The dispatch rider has arrived to drop off your clothes",
+                            icons: i == 0
+                                ? "assets/svgs/bike_noti.svg"
+                                : "assets/svgs/noti.svg",
+                            title: "Dropoff"
+                          ),
+                        )),
+              ),
+              SizedBox(height: 20.h),
+              Text(
+                "Yesterday",
+                style: Theme.of(context)
+                    .primaryTextTheme
+                    .headlineMedium!
+                    .copyWith(fontWeight: FontWeight.bold, fontSize: 25),
+              ),
+              SizedBox(height: 20.h),
+              Wrap(
+                runSpacing: 15,
+                children: List.generate(
+                    2,
+                    (i) => NotificationWidget(
+                          notificationParams: (
+                            time: "12:05pm",
+                            des:
+                                "The dispatch rider has arrived to drop off your clothes",
+                            icons: i == 0
+                                ? "assets/svgs/bike_noti.svg"
+                                : "assets/svgs/noti.svg",
+                            title: "Pickup"
+                          ),
+                        )),
+              ),
+              SizedBox(height: 20.h),
+              Text(
+                "Older",
+                style: Theme.of(context)
+                    .primaryTextTheme
+                    .headlineMedium!
+                    .copyWith(fontWeight: FontWeight.bold, fontSize: 25),
+              ),
+              SizedBox(height: 20.h),
+              Wrap(
+                runSpacing: 15,
+                children: List.generate(
+                    1,
+                    (i) => const NotificationWidget(
+                          notificationParams: (
+                            time: "12:05pm",
+                            des: "Congrats on your first order! Laundry",
+                            icons: "assets/svgs/basket_noti.svg",
+                            title: "New laundry bag"
+                          ),
+                        )),
+              ),
             ],
           ),
         ),
