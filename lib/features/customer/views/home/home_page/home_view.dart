@@ -212,11 +212,13 @@ class _HomePageState extends ConsumerState<HomePage> {
           runSpacing: 20,
           children: List.generate(
             2,
-            (index) => const ShopeNearYou(shopNearYouParams: (
-              address: "47, Tarate street, Agege, Lagos",
-              name: "Blazing Glory Laundr",
-              rate: 4.5
-            )),
+            (index) => const ShopeNearYou(
+              shopNearYouParams: (
+                address: "47, Tarate street, Agege, Lagos",
+                name: "Blazing Glory Laundr",
+                rate: 4.5
+              ),
+            ),
           ),
         )
       ],
