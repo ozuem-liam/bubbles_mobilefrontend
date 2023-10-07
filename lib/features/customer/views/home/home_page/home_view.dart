@@ -1,8 +1,10 @@
 import 'package:bubbles/features/customer/views/home/home_page/domain/services.dart';
+import 'package:bubbles/features/customer/views/home/home_page/search/home_search.dart';
 import 'package:bubbles/features/customer/views/home/home_page/widget/service_widget.dart';
 import 'package:bubbles/features/customer/views/home/home_page/widget/shop_near_widget.dart';
 import 'package:bubbles/features/customer/views/notification/presentation/notification_page.dart';
 import 'package:bubbles/providers/home_navigation_provider.dart';
+import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/utils/user_db.dart';
 import 'package:bubbles/viewModels/home_vm.dart';
@@ -92,10 +94,22 @@ class _HomePageState extends ConsumerState<HomePage> {
               .copyWith(fontWeight: FontWeight.bold, fontSize: 20.sp),
         ),
         SizedBox(height: 30.sp),
-        CustomField(
-          headtext: "search",
-          pIcon: const Icon(Icons.search),
-          onTap: () {},
+        GestureDetector(
+          onTap: () => Get.to(() => const HomeSearch()),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 1.5.w,
+                color: AppColors.lightGrey.withOpacity(0.6),
+              ),
+              borderRadius: BorderRadius.circular(8.r),
+            ),
+            child: const CustomField(
+              headtext: "search",
+              pIcon: Icon(Icons.search),
+              allowTypeing: false,
+            ),
+          ),
         ),
         SizedBox(height: 30.sp),
         Container(

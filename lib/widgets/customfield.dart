@@ -41,6 +41,7 @@ class CustomField extends ConsumerWidget {
       this.focusedBorder,
       this.pinPutFocusNode,
       this.style,
+      this.allowTypeing,
       this.focusNode,
       this.pinBorderColor,
       this.pinPutFieldCount,
@@ -72,6 +73,7 @@ class CustomField extends ConsumerWidget {
   final String? headtext;
   final FocusNode? focusNode;
   final bool obscureText;
+  final bool? allowTypeing;
   final TextInputType? keyboardType;
   final TextFieldType? fieldType;
   final InputBorder? border;
@@ -137,6 +139,7 @@ class CustomField extends ConsumerWidget {
                       readOnly: readonly,
                       autofocus: false,
                       focusNode: focusNode,
+                      enabled: allowTypeing,
                       scrollPadding:
                           EdgeInsets.only(bottom: keyboardHeight + 20),
                       enableSuggestions: true,
