@@ -1,9 +1,12 @@
 import 'package:bubbles/features/customer/views/home/home_page/domain/services.dart';
 import 'package:bubbles/features/customer/views/home/home_page/widget/service_widget.dart';
+import 'package:bubbles/features/customer/views/home/home_page/widget/shop_near_widget.dart';
+import 'package:bubbles/features/customer/views/notification/presentation/notification_page.dart';
 import 'package:bubbles/providers/home_navigation_provider.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/utils/user_db.dart';
 import 'package:bubbles/viewModels/home_vm.dart';
+import 'package:bubbles/widgets/customfield.dart';
 import 'package:bubbles/widgets/image_widgets.dart';
 // import 'package:bubbles/features/customer/views/home/home_page/widget/installation_card_widget.dart';
 // import 'package:bubbles/features/customer/views/home/home_page/widget/next_payment_card_widget.dart';
@@ -14,7 +17,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const List<ServicesData> service = [
-  ServicesData(name: 'Watch', descrip: "wash | Fold", icon: ""),
+  ServicesData(name: 'Wash', descrip: "wash | Fold", icon: ""),
   ServicesData(name: 'Dry clean', descrip: "wash | Iron", icon: ""),
   ServicesData(name: 'Iron', descrip: "Iron | Fold", icon: ""),
   ServicesData(name: 'Self watch', descrip: "Use machine", icon: ""),
@@ -56,14 +59,20 @@ class _HomePageState extends ConsumerState<HomePage> {
                   .headlineMedium!
                   .copyWith(fontWeight: FontWeight.w500, fontSize: 16.sp),
             ),
-            Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(10),
+            GestureDetector(
+              onTap: () => Get.to(() => const NotificationPage()),
+              child: Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Center(
+                  child: SvgImage(asset: "assets/svgs/Notification.svg"),
+                ),
               ),
-            )
+            ),
           ],
         ),
         const SizedBox(height: 10),
@@ -74,8 +83,12 @@ class _HomePageState extends ConsumerState<HomePage> {
               .headlineMedium!
               .copyWith(fontWeight: FontWeight.bold, fontSize: 20.sp),
         ),
-        SizedBox(height: 10.sp),
-
+        SizedBox(height: 30.sp),
+        CustomField(
+          headtext: "search",
+          onTap: () {},
+        ),
+        SizedBox(height: 30.sp),
         Container(
           height: 120,
           width: double.infinity,
@@ -114,8 +127,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         )
                       ],
                     ),
-                    // ignore: deprecated_member_use
-                    const Icon(FontAwesomeIcons.times),
+                    const Icon(FontAwesomeIcons.xmark),
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -138,8 +150,8 @@ class _HomePageState extends ConsumerState<HomePage> {
         ),
         const SizedBox(height: 25),
         Wrap(
-          spacing: 15,
-          runSpacing: 15,
+          spacing: 10,
+          runSpacing: 10,
           children: List.generate(service.length, (i) {
             final data = service[i];
             return ServiceWidget(
@@ -159,18 +171,19 @@ class _HomePageState extends ConsumerState<HomePage> {
             fontSize: 18.sp,
           ),
         ),
-        // const Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     InstallationCardWidget(
-        //       hasItem: true,
-        //     ),
-        //     NextPaymentCardWidget(hasItem: true)
-        //   ],
-        // ),
-        // SizedBox(
-        //   height: 30.h,
-        // ),
+        const SizedBox(height: 25),
+        Wrap(
+          spacing: 20,
+          runSpacing: 20,
+          children: List.generate(
+            2,
+            (index) => const ShopeNearYou(shopNearYouParams: (
+              address: "47, Tarate street, Agege, Lagos",
+              name: "Blazing Glory Laundr",
+              rate: 4.5
+            )),
+          ),
+        )
       ],
     );
   }

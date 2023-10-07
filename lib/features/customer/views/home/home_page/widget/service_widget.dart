@@ -1,5 +1,4 @@
 import 'package:bubbles/style/appColors.dart';
-import 'package:bubbles/widgets/image_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -25,37 +24,36 @@ class ServiceWidget extends StatelessWidget {
           width: 170,
           child: Row(
             children: [
-              SvgImage(
-                asset: serviceParam.image,
-                height: 50.w,
-                width: 50.w,
+              // CircleAvatar(),
+              Container(
+                height: 80,
+                width: 80,
+                decoration: const BoxDecoration(
+                  color: Colors.red,
+                  shape: BoxShape.circle,
+                ),
               ),
-              const SizedBox(width: 10),
+
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(serviceParam.title,
-                      style:
-                          Theme.of(context).primaryTextTheme.headlineMedium!),
+                  Text(
+                    serviceParam.title,
+                    style: Theme.of(context)
+                        .primaryTextTheme
+                        .headlineMedium!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(height: 10),
                   Text(
                     serviceParam.discrip,
                     style: Theme.of(context)
                         .primaryTextTheme
                         .headlineMedium!
-                        .copyWith(fontSize: 14.sp),
+                        .copyWith(fontSize: 12.sp),
                   )
                 ],
               )
-              // SizedBox(height: 10.h),
-              // Text(
-              //   userType,
-              //   textAlign: TextAlign.start,
-              //   style: Theme.of(context)
-              //       .primaryTextTheme
-              //       .headlineMedium!
-              //       .copyWith(fontWeight: FontWeight.bold, fontSize: 12.sp),
-              // ),
             ],
           ),
         ),
