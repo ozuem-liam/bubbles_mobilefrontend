@@ -4,6 +4,7 @@ import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/widgets/customfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart' as getx;
 
 class HomeSearch extends StatefulWidget {
@@ -115,20 +116,78 @@ class _OverlayWidgetEnteryState extends State<OverlayWidgetEntery> {
         offset: Offset(0.0, widget.overlayParams.size.height + 5.0),
         child: Material(
           elevation: 4.0,
-          color: Colors.black,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
+          color: Colors.white,
+          child: Column(
+            // padding: EdgeInsets.zero,
             children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Recent search",
+                      style: Theme.of(context).primaryTextTheme.headlineMedium!,
+                    ),
+                    const Icon(
+                      FontAwesomeIcons.xmark,
+                      size: 20,
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
               ListTile(
                 onTap: () {
                   if (widget.overlayParams.entry != null) {
                     widget.overlayParams.entry?.remove();
                   }
                 },
-                title: const Text(
-                  "texting",
+                leading: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: const DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage("assets/png/Wash.png"),
+                      )),
                 ),
+                title: Text(
+                  "Ace Wash",
+                  style: Theme.of(context)
+                      .primaryTextTheme
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.bold, fontSize: 14.sp),
+                ),
+                subtitle: Text("47, Tarate street, Agege, Lagos",
+                    style: Theme.of(context).primaryTextTheme.headlineMedium!),
+              ),
+              ListTile(
+                leading: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: const DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage("assets/png/Wash.png"),
+                      )),
+                ),
+                onTap: () {
+                  if (widget.overlayParams.entry != null) {
+                    widget.overlayParams.entry?.remove();
+                  }
+                },
+                title: Text(
+                  "Ace Wash",
+                  style: Theme.of(context)
+                      .primaryTextTheme
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.bold, fontSize: 14.sp),
+                ),
+                subtitle: Text("47, Tarate street, Agege, Lagos",
+                    style: Theme.of(context).primaryTextTheme.headlineMedium!),
               ),
             ],
           ),
@@ -190,7 +249,6 @@ class _HomeTextFieldSearchState extends State<HomeTextFieldSearch> {
   }
 
   overlay() {
-    // final overlay = ;
     RenderBox renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;
     final offset = renderBox.localToGlobal(Offset.zero);
