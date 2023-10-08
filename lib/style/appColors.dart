@@ -25,6 +25,9 @@ class AppColors extends ChangeNotifier {
   static const warning = Color(0xFFEAD918);
   static const purple = Color(0xFFA43FB9);
   static const accentSucess = Color(0xff1E8567);
+  static const closeWashColor = Color(0xffFFE0E6);
+  static const closeWashText = Color(0xffB00020);
+  static const closeWashReview = Color(0xff008080);
 
   static const appGradientColor = LinearGradient(colors: [
     AppColors.primary,

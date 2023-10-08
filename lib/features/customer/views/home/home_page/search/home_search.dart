@@ -1,5 +1,6 @@
 import 'package:bubbles/core/application/strings.dart';
 import 'package:bubbles/features/customer/views/home/home_page/widget/shop_near_widget.dart';
+import 'package:bubbles/features/customer/views/home/watch/presentation/watch.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/widgets/customfield.dart';
 import 'package:flutter/material.dart';
@@ -142,6 +143,7 @@ class _OverlayWidgetEnteryState extends State<OverlayWidgetEntery> {
                   if (widget.overlayParams.entry != null) {
                     widget.overlayParams.entry?.remove();
                   }
+                  getx.Get.to(() => const WashPage());
                 },
                 leading: Container(
                   height: 60,

@@ -21,10 +21,11 @@ class ShopeNearYou extends StatelessWidget {
         width: double.infinity,
         child: Column(children: [
           Expanded(
-              child: Image.asset(
-            "assets/png/Wash.png",
-            fit: BoxFit.fill,
-          )),
+            child: Image.asset(
+              "assets/png/Wash.png",
+              fit: BoxFit.fill,
+            ),
+          ),
           Container(
             height: 90,
             decoration: const BoxDecoration(color: Colors.white),
@@ -65,7 +66,7 @@ class ShopeNearYou extends StatelessWidget {
                   children: [
                     const Icon(
                       Icons.location_on_outlined,
-                      color: Colors.black,
+                      color: Colors.black45,
                     ),
                     Text(
                       shopNearYouParams.address,
