@@ -141,7 +141,8 @@ class _OverlayWidgetEnteryState extends State<OverlayWidgetEntery> {
               ListTile(
                 onTap: () {
                   if (widget.overlayParams.entry != null) {
-                    widget.overlayParams.entry?.remove();
+                    widget.overlayParams.entry == null;
+                    widget.overlayParams.entry!.remove();
                   }
                   getx.Get.to(() => const WashPage());
                 },
@@ -178,7 +179,8 @@ class _OverlayWidgetEnteryState extends State<OverlayWidgetEntery> {
                 ),
                 onTap: () {
                   if (widget.overlayParams.entry != null) {
-                    widget.overlayParams.entry?.remove();
+                    widget.overlayParams.entry == null;
+                    widget.overlayParams.entry!.remove();
                   }
                 },
                 title: Text(
@@ -265,6 +267,6 @@ class _HomeTextFieldSearchState extends State<HomeTextFieldSearch> {
         ),
       ),
     );
-    if (overlayEntry != null) Overlay.of(context).insert(overlayEntry!);
+    Overlay.of(context).insert(overlayEntry!);
   }
 }
