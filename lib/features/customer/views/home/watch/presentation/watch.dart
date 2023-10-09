@@ -168,6 +168,7 @@ class _WashPageState extends State<WashPage> {
                               ),
                             ),
                           ),
+                          SizedBox(height: 20.h),
                           SizedBox(
                             child: [
                               const SelectedWash(),
