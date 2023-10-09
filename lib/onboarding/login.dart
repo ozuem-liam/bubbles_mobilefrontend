@@ -1,6 +1,7 @@
 import 'package:bubbles/features/customer/providers/customer_auth_providers.dart';
 import 'package:bubbles/features/customer/viewModels/customer_auth_vm.dart';
 import 'package:bubbles/features/customer/views/authentication/widgets/custom_top_widget.dart';
+import 'package:bubbles/features/customer/views/home/navigation_page.dart';
 import 'package:bubbles/features/vendor/views/authentication/OTP/email_otp_verification.dart';
 import 'package:bubbles/features/vendor/views/authentication/OTP/send_email_otp.dart';
 import 'package:bubbles/features/vendor/views/authentication/password/reset_password.dart';
@@ -213,14 +214,14 @@ class LoginPage extends ConsumerWidget {
                   isLoading: false,
                   onclick: () {
                     FocusScope.of(context).unfocus();
-                    final validate = authViewModel.validateAndSave(formKey);
-                    if (validate) {
-                      authViewModel.login(
-                          email: emailController.text.trim(),
-                          password: passwordController.text.trim());
-                    }
+                    // final validate = authViewModel.validateAndSave(formKey);
+                    // if (validate) {
+                    //   authViewModel.login(
+                    //       email: emailController.text.trim(),
+                    //       password: passwordController.text.trim());
+                    // }
 
-                    // Get.to(() => const HomeNavigation());
+                    Get.to(() => const HomeNavigation());
                   }),
               SizedBox(
                 height: 20.h,

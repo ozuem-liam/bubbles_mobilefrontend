@@ -5,7 +5,6 @@ import 'package:bubbles/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:bubbles/widgets/app_bar.dart';
 
 class NotificationPage extends ConsumerStatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -20,50 +19,50 @@ class _NotificationPageState extends ConsumerState<NotificationPage> {
   Widget build(BuildContext context) {
     var keyboardVisible = MediaQuery.of(context).viewInsets.bottom == 0;
     return Scaffold(
-       
         body: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: CustomPaint(
-                size: Size(customPaintSizeValue,
-                    (customPaintSizeValue * customPaintTop).toDouble()),
-                painter: TopRightRPSCustomPainter(),
-              ),
+      children: [
+        Align(
+          alignment: Alignment.topRight,
+          child: CustomPaint(
+            size: Size(
+              customPaintSizeValue,
+              (customPaintSizeValue * customPaintTop).toDouble(),
             ),
-            keyboardVisible
-                ? Align(
-                    alignment: Alignment.bottomLeft,
-                    child: CustomPaint(
-                      size: Size(
-                          customPaintSizeValue,
-                          (customPaintSizeValue * customPaintBottom)
-                              .toDouble()),
-                      painter: RPSCustomPainterNew(),
-                    ),
-                  )
-                : const SizedBox(),
-            Column(
-              children: [
-                const SizedBox(
-                  height: 60,
+            painter: TopRightRPSCustomPainter(),
+          ),
+        ),
+        keyboardVisible
+            ? Align(
+                alignment: Alignment.bottomLeft,
+                child: CustomPaint(
+                  size: Size(customPaintSizeValue,
+                      (customPaintSizeValue * customPaintBottom).toDouble()),
+                  painter: RPSCustomPainterNew(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: generalHorizontalPadding),
-                  child: customAppBar(
-                    // context: context,
-                    // title: 'Notifications',
-                    // isTitled: true,
+              )
+            : const SizedBox(),
+        Column(
+          children: [
+            const SizedBox(
+              height: 60,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: generalHorizontalPadding),
+              child: customAppBar(
+                  // context: context,
+                  // title: 'Notifications',
+                  // isTitled: true,
                   ),
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                noDataWidget()
-              ],
-            )
+            ),
+            SizedBox(
+              height: 30.h,
+            ),
+            noDataWidget()
           ],
-        ));
+        )
+      ],
+    ));
   }
 
   Widget noDataWidget() {

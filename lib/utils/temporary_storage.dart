@@ -45,7 +45,7 @@ class LocalStorageManager {
     return prefs.setInt(key, value);
   }
 
-    static Future eraseData({required String key}) async {
+  static Future eraseData({required String key}) async {
     var prefs = await _instance;
     return prefs.remove(key);
   }

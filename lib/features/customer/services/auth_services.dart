@@ -3,7 +3,7 @@ import 'package:bubbles/model/customer_notification_model.dart';
 import 'package:bubbles/model/customer_response_model.dart';
 import 'package:bubbles/model/file_upload_response_model.dart';
 import 'package:bubbles/utils/logger.dart';
-import 'package:bubbles/utils/strings.dart';
+import 'package:bubbles/core/application/strings.dart';
 import 'package:bubbles/utils/temporary_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

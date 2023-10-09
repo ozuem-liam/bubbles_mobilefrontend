@@ -22,13 +22,14 @@ class _HomeNavigation extends ConsumerState<HomeNavigation> {
       return Future.delayed(const Duration(seconds: 2));
     }
 
-   // final themeDataMode = ref.watch(themeDataProvider);
+    // final themeDataMode = ref.watch(themeDataProvider);
     var index = ref.watch(homeViewModel).selectedIndex;
     return WillPopScope(
       onWillPop: onBackPressed,
       child: Scaffold(
         backgroundColor: Theme.of(context).drawerTheme.backgroundColor,
-        body: _pages.elementAt(ref.watch(homeViewModel).selectedIndex),
+        body: _pages[ref.watch(homeViewModel).selectedIndex],
+        // _pages.elementAt(ref.watch(homeViewModel).selectedIndex),
         // drawer: const MyDrawerPage(),
         bottomNavigationBar: Theme(
           data: Theme.of(context),
@@ -57,7 +58,7 @@ class _HomeNavigation extends ConsumerState<HomeNavigation> {
                 label: "Home",
               ),
               BottomNavigationBarItem(
-               // backgroundColor: Colors.white,
+                // backgroundColor: Colors.white,
                 icon: Icon(Icons.receipt_long_outlined,
                     color: index == 1
                         ? AppColors.primary
