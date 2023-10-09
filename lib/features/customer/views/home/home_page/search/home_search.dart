@@ -1,4 +1,3 @@
-import 'package:bubbles/core/application/strings.dart';
 import 'package:bubbles/features/customer/views/home/home_page/widget/shop_near_widget.dart';
 import 'package:bubbles/features/customer/views/home/watch/presentation/watch.dart';
 import 'package:bubbles/utils/constvalues.dart';
@@ -141,8 +140,8 @@ class _OverlayWidgetEnteryState extends State<OverlayWidgetEntery> {
               ListTile(
                 onTap: () {
                   if (widget.overlayParams.entry != null) {
-                    widget.overlayParams.entry == null;
                     widget.overlayParams.entry!.remove();
+                    widget.overlayParams.entry == null;
                   }
                   getx.Get.to(() => const WashPage());
                 },
@@ -179,8 +178,8 @@ class _OverlayWidgetEnteryState extends State<OverlayWidgetEntery> {
                 ),
                 onTap: () {
                   if (widget.overlayParams.entry != null) {
-                    widget.overlayParams.entry == null;
                     widget.overlayParams.entry!.remove();
+                    widget.overlayParams.entry == null;
                   }
                 },
                 title: Text(

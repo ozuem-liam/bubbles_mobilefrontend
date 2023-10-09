@@ -10,11 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart' as getx;
-
 import 'package:bubbles/style/appColors.dart';
-
 import 'package:bubbles/widgets/image_widgets.dart';
-import 'package:get_storage/get_storage.dart';
 
 class WashPage extends StatefulWidget {
   const WashPage({super.key});
