@@ -40,6 +40,7 @@ class MyApp extends ConsumerWidget {
       } else {
         OverlayService.hideOverlay(context);
       }
+      
     });
     return ScreenUtilInit(
         designSize: const Size(360, 700),

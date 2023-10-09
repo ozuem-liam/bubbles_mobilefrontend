@@ -24,3 +24,14 @@ const bedIcon = 'assets/svgs/bed.svg';
 const footWearIcon = 'assets/svgs/foot_wear.svg';
 const outDoorGearIcon = 'assets/svgs/outdoor_gear.svg';
 const rugIcon = 'assets/svgs/rugs.svg';
+
+
+const pendingIcon = 'assets/svgs/pending.svg';
+
+const completedSetupIcon = 'assets/svgs/setup_complete.svg';
+
+const minusIcon = 'assets/svgs/minus.svg';
+
+const plusIcon = 'assets/svgs/plus.svg';
+
+const infoCircleIcon = 'assets/svgs/Info-circle.svg';

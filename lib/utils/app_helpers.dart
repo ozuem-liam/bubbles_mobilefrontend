@@ -3,12 +3,13 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:bubbles/style/appColors.dart';
+import 'package:bubbles/utils/images.dart';
+import 'package:bubbles/utils/logger.dart';
 import 'package:intl/intl.dart';
 
 class AppHelpers {
   static const jsonParsingError = "An Error Occured!";
 
-  
   static String greetingMessage() {
     final timeNow = DateTime.now().hour;
 
@@ -23,7 +24,28 @@ class AppHelpers {
     }
   }
 
- static String getCurrency() {
+  static String get11DigitNumber() {
+    Random random = Random();
+    String number = '';
+    for (int i = 0; i < 11; i++) {
+      number = number + random.nextInt(9).toString();
+    }
+    AppLogger.logg("11 digits $number");
+    return number;
+  }
+
+    static String getMachineTypeImage({required String machineType}) {
+    if (machineType == "Manual") {
+      return manualWashingMachineIcon;
+    }
+    if (machineType == "Automatic") {
+      return automaticWashingMachineIcon;
+    }
+  
+    return '';
+  }
+
+  static String getCurrency() {
     var format =
         NumberFormat.simpleCurrency(locale: Platform.localeName, name: 'NGN');
     return format.currencySymbol;
