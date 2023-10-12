@@ -1,6 +1,9 @@
+import 'package:bubbles/core/application/strings.dart';
+import 'package:bubbles/features/customer/views/home/watch/presentation/widget/selected_wash.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/widgets/customfield.dart';
+import 'package:bubbles/widgets/image_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -63,7 +66,44 @@ class AddItemWash extends StatelessWidget {
                     allowTypeing: false,
                   ),
                 ),
-              )
+              ),
+              Gap(15.h),
+              ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.gray.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(15.r),
+                        ),
+                        child: Theme(
+                          data: Theme.of(context)
+                              .copyWith(dividerColor: Colors.transparent),
+                          child: ExpansionTile(
+                            key: Key(index.toString()), //attention
+                            initiallyExpanded: index == 0,
+                            leading: const SvgImage(
+                              asset: MyStrings.washApealIcons,
+                              color: Colors.black,
+                            ),
+                            title: Text(
+                              MyStrings.washApeal,
+                              style: Theme.of(context)
+                                  .primaryTextTheme
+                                  .headlineMedium!,
+                            ),
+                            childrenPadding:
+                                const EdgeInsets.symmetric(horizontal: 10),
+                            children: List.generate(
+                                3,
+                                (index) => const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: CartWidget(),
+                                    )).toList(),
+                          ),
+                        ),
+                      ),
+                  separatorBuilder: (context, index) => const Gap(20),
+                  itemCount: 4)
             ],
           ),
         ),

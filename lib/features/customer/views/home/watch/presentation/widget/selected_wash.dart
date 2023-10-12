@@ -23,6 +23,8 @@ class SelectedWash extends StatelessWidget {
           child: Theme(
             data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
             child: ExpansionTile(
+              key: Key(0.toString()),
+              initiallyExpanded: 0 == 0,
               leading: const SvgImage(
                 asset: MyStrings.washApealIcons,
                 color: Colors.black,
