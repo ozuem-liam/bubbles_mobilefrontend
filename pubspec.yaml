@@ -53,8 +53,9 @@ dependencies:
   freezed_annotation: ^2.4.1
   flutter_svg: ^2.0.5
   fluttertoast: ^8.0.9
+  flutter_rating_bar: ^4.0.1
   font_awesome_flutter: ^10.5.0
-  get_it: null
+  get_it:
   get_storage: ^2.0.3
   gap:
   image_picker: ^1.0.0
@@ -78,6 +79,7 @@ dependencies:
   webview_flutter: ^4.0.1
   google_fonts: ^5.1.0
   dotted_border: ^2.0.0+3
+  
 
 dev_dependencies:
   flutter_test:

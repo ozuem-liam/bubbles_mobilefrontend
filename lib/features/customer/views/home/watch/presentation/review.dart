@@ -1,5 +1,6 @@
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart' as getx;
@@ -39,11 +40,110 @@ class WashReview extends StatelessWidget {
                     "Read reviews",
                     style: styleTheme.copyWith(
                         fontWeight: FontWeight.bold, fontSize: 23),
+                  ),
+                  Gap(20.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            "Ace Wash",
+                            style: Theme.of(context)
+                                .primaryTextTheme
+                                .headlineMedium!
+                                .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14.sp),
+                          ),
+                          const Gap(15),
+                          Text(
+                            "4.5",
+                            style: Theme.of(context)
+                                .primaryTextTheme
+                                .headlineMedium!
+                                .copyWith(
+                                    color: const Color(0xff525355),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14.sp),
+                          ),
+                          const Gap(5),
+                          const Icon(
+                            Icons.star,
+                            color: Colors.red,
+                            size: 20,
+                          )
+                        ],
+                      ),
+                      Text(
+                        "300 ratings",
+                        style:
+                            Theme.of(context).primaryTextTheme.headlineMedium!,
+                      )
+                    ],
+                  ),
+                  Gap(20.h),
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => const ReviewWidget(),
+                    separatorBuilder: (context, index) => const Gap(20),
+                    itemCount: 3,
                   )
                 ],
-              )
+              ),
+              Gap(25.h),
             ],
           )),
+    );
+  }
+}
+
+class ReviewWidget extends StatelessWidget {
+  const ReviewWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xff525355).withAlpha(60),
+        borderRadius: BorderRadius.circular(7),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Amanda",
+                style: Theme.of(context).primaryTextTheme.headlineMedium!,
+              ),
+              RatingBar.builder(
+                initialRating: 3,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => const Icon(
+                  Icons.star,
+                  color: Colors.red,
+                ),
+                onRatingUpdate: (rating) {},
+              ),
+            ],
+          ),
+          Text(
+            "This was my best laundry experience, thank you Ace wash!",
+            style: Theme.of(context).primaryTextTheme.headlineMedium!,
+          ),
+          Text(
+            "12/06/23",
+            style: Theme.of(context).primaryTextTheme.headlineMedium!,
+          )
+        ],
+      ),
     );
   }
 }
