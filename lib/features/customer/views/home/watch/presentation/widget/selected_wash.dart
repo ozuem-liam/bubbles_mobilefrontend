@@ -32,7 +32,7 @@ class SelectedWash extends StatelessWidget {
                 MyStrings.washApeal,
                 style: Theme.of(context).primaryTextTheme.headlineMedium!,
               ),
-              childrenPadding: EdgeInsets.symmetric(horizontal: 10),
+              childrenPadding: const EdgeInsets.symmetric(horizontal: 10),
               children: List.generate(
                   3,
                   (index) => const Padding(
@@ -109,7 +109,7 @@ class SelectedWash extends StatelessWidget {
             isLoading: false,
             onclick: () {
               FocusScope.of(context).unfocus();
-              // Get.to(() => const HomeNavigation());
+              getx.Get.to(() => const AddItemWash());
             }),
       ],
     );
