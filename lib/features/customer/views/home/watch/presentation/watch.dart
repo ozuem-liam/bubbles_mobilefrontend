@@ -9,6 +9,7 @@ import 'package:bubbles/utils/constvalues.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart' as getx;
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/widgets/image_widgets.dart';
@@ -45,14 +46,35 @@ class _WashPageState extends State<WashPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "Ace Wash",
-                                style: Theme.of(context)
-                                    .primaryTextTheme
-                                    .headlineMedium!
-                                    .copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14.sp),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Ace Wash",
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .headlineMedium!
+                                        .copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14.sp),
+                                  ),
+                                  const Gap(15),
+                                  Text(
+                                    "4.5",
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .headlineMedium!
+                                        .copyWith(
+                                            color: const Color(0xff525355),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14.sp),
+                                  ),
+                                  const Gap(5),
+                                  const Icon(
+                                    Icons.star,
+                                    color: Colors.red,
+                                    size: 20,
+                                  )
+                                ],
                               ),
                               Text(
                                 "Read reviews",
