@@ -28,6 +28,8 @@ class SelectedWash extends StatelessWidget {
               leading: const SvgImage(
                 asset: MyStrings.washApealIcons,
                 color: Colors.black,
+                height: 20,
+                width: 20,
               ),
               title: Text(
                 MyStrings.washApeal,

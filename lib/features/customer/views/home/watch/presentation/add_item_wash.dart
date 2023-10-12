@@ -69,6 +69,7 @@ class AddItemWash extends StatelessWidget {
               ),
               Gap(15.h),
               ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) => Container(
                         decoration: BoxDecoration(
@@ -80,10 +81,12 @@ class AddItemWash extends StatelessWidget {
                               .copyWith(dividerColor: Colors.transparent),
                           child: ExpansionTile(
                             key: Key(index.toString()), //attention
-                            initiallyExpanded: index == 0,
+                            initiallyExpanded: index == index,
                             leading: const SvgImage(
                               asset: MyStrings.washApealIcons,
                               color: Colors.black,
+                              height: 20,
+                              width: 20,
                             ),
                             title: Text(
                               MyStrings.washApeal,
@@ -95,9 +98,15 @@ class AddItemWash extends StatelessWidget {
                                 const EdgeInsets.symmetric(horizontal: 10),
                             children: List.generate(
                                 3,
-                                (index) => const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: CartWidget(),
+                                (index) => Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: SelectingAddItemWidget(
+                                        checkboxListTile:
+                                            CheckboxListTile.adaptive(
+                                          value: false,
+                                          onChanged: (v) {},
+                                        ),
+                                      ),
                                     )).toList(),
                           ),
                         ),
@@ -106,6 +115,70 @@ class AddItemWash extends StatelessWidget {
                   itemCount: 4)
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class SelectingAddItemWidget extends StatelessWidget {
+  final CheckboxListTile checkboxListTile;
+  const SelectingAddItemWidget({super.key, required this.checkboxListTile});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Container(
+        height: 90,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15.r),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Gap(20),
+            const ImageWidget(
+              asset: "assets/images/Shirt.png",
+            ),
+            const Gap(30),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  "Top",
+                  style: Theme.of(context)
+                      .primaryTextTheme
+                      .headlineMedium!
+                      .copyWith(color: Colors.black),
+                ),
+                Text(
+                  "N1,200",
+                  style: Theme.of(context)
+                      .primaryTextTheme
+                      .headlineMedium!
+                      .copyWith(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "N400 / Item",
+                  style: Theme.of(context)
+                      .primaryTextTheme
+                      .headlineMedium!
+                      .copyWith(color: Colors.black),
+                ),
+              ],
+            ),
+            Expanded(
+              child: SizedBox(
+                height: 40,
+                width: 40,
+                child: checkboxListTile,
+              ),
+            )
+          ],
         ),
       ),
     );
