@@ -1,5 +1,6 @@
 import 'package:bubbles/core/application/share.dart';
 import 'package:bubbles/features/customer/views/home/watch/domain/seleted_extension.dart';
+import 'package:bubbles/features/customer/views/home/watch/presentation/review.dart';
 import 'package:bubbles/features/customer/views/home/watch/presentation/widget/selected_dryclean.dart';
 import 'package:bubbles/features/customer/views/home/watch/presentation/widget/selected_iron.dart';
 import 'package:bubbles/features/customer/views/home/watch/presentation/widget/selected_selfwash.dart';
@@ -9,6 +10,7 @@ import 'package:bubbles/utils/constvalues.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart' as getx;
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/widgets/image_widgets.dart';
@@ -45,21 +47,47 @@ class _WashPageState extends State<WashPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "Ace Wash",
-                                style: Theme.of(context)
-                                    .primaryTextTheme
-                                    .headlineMedium!
-                                    .copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14.sp),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Ace Wash",
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .headlineMedium!
+                                        .copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14.sp),
+                                  ),
+                                  const Gap(15),
+                                  Text(
+                                    "4.5",
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .headlineMedium!
+                                        .copyWith(
+                                            color: const Color(0xff525355),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14.sp),
+                                  ),
+                                  const Gap(5),
+                                  const Icon(
+                                    Icons.star,
+                                    color: Colors.red,
+                                    size: 20,
+                                  )
+                                ],
                               ),
-                              Text(
-                                "Read reviews",
-                                style: Theme.of(context)
-                                    .primaryTextTheme
-                                    .headlineMedium!
-                                    .copyWith(color: AppColors.closeWashReview),
+                              GestureDetector(
+                                onTap: () =>
+                                    getx.Get.to(() => const WashReview()),
+                                child: Text(
+                                  "Read reviews",
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .headlineMedium!
+                                      .copyWith(
+                                          color: AppColors.closeWashReview),
+                                ),
                               ),
                             ],
                           ),
@@ -104,7 +132,7 @@ class _WashPageState extends State<WashPage> {
                             width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: AppColors.gray.withOpacity(0.4),
+                              color: AppColors.gray.withOpacity(0.3),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(6.0),

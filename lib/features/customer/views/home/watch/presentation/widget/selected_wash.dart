@@ -1,7 +1,6 @@
 import 'package:bubbles/core/application/strings.dart';
 import 'package:bubbles/features/customer/views/home/watch/presentation/add_item_wash.dart';
 import 'package:bubbles/style/appColors.dart';
-import 'package:bubbles/widgets/buttons.dart';
 import 'package:bubbles/widgets/custom_button.dart';
 import 'package:bubbles/widgets/image_widgets.dart';
 import 'package:flutter/material.dart';
@@ -18,21 +17,25 @@ class SelectedWash extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: AppColors.gray.withOpacity(0.5),
+            color: AppColors.gray.withOpacity(0.3),
             borderRadius: BorderRadius.circular(15.r),
           ),
           child: Theme(
             data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
             child: ExpansionTile(
+              key: Key(0.toString()),
+              initiallyExpanded: 0 == 0,
               leading: const SvgImage(
                 asset: MyStrings.washApealIcons,
                 color: Colors.black,
+                height: 20,
+                width: 20,
               ),
               title: Text(
                 MyStrings.washApeal,
                 style: Theme.of(context).primaryTextTheme.headlineMedium!,
               ),
-              childrenPadding: EdgeInsets.symmetric(horizontal: 10),
+              childrenPadding: const EdgeInsets.symmetric(horizontal: 10),
               children: List.generate(
                   3,
                   (index) => const Padding(
@@ -109,7 +112,7 @@ class SelectedWash extends StatelessWidget {
             isLoading: false,
             onclick: () {
               FocusScope.of(context).unfocus();
-              // Get.to(() => const HomeNavigation());
+              getx.Get.to(() => const AddItemWash());
             }),
       ],
     );
