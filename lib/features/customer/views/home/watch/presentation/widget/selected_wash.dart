@@ -1,7 +1,6 @@
 import 'package:bubbles/core/application/strings.dart';
 import 'package:bubbles/features/customer/views/home/watch/presentation/add_item_wash.dart';
 import 'package:bubbles/style/appColors.dart';
-import 'package:bubbles/widgets/buttons.dart';
 import 'package:bubbles/widgets/custom_button.dart';
 import 'package:bubbles/widgets/image_widgets.dart';
 import 'package:flutter/material.dart';
