@@ -1,5 +1,4 @@
 import 'package:bubbles/core/application/strings.dart';
-import 'package:bubbles/features/customer/views/home/watch/presentation/widget/selected_wash.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/widgets/customfield.dart';
