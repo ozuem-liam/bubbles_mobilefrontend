@@ -17,7 +17,7 @@ class SelectedWash extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: AppColors.gray.withOpacity(0.5),
+            color: AppColors.gray.withOpacity(0.3),
             borderRadius: BorderRadius.circular(15.r),
           ),
           child: Theme(

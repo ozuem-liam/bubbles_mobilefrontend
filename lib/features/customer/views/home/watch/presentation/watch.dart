@@ -1,5 +1,6 @@
 import 'package:bubbles/core/application/share.dart';
 import 'package:bubbles/features/customer/views/home/watch/domain/seleted_extension.dart';
+import 'package:bubbles/features/customer/views/home/watch/presentation/review.dart';
 import 'package:bubbles/features/customer/views/home/watch/presentation/widget/selected_dryclean.dart';
 import 'package:bubbles/features/customer/views/home/watch/presentation/widget/selected_iron.dart';
 import 'package:bubbles/features/customer/views/home/watch/presentation/widget/selected_selfwash.dart';
@@ -76,12 +77,17 @@ class _WashPageState extends State<WashPage> {
                                   )
                                 ],
                               ),
-                              Text(
-                                "Read reviews",
-                                style: Theme.of(context)
-                                    .primaryTextTheme
-                                    .headlineMedium!
-                                    .copyWith(color: AppColors.closeWashReview),
+                              GestureDetector(
+                                onTap: () =>
+                                    getx.Get.to(() => const WashReview()),
+                                child: Text(
+                                  "Read reviews",
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .headlineMedium!
+                                      .copyWith(
+                                          color: AppColors.closeWashReview),
+                                ),
                               ),
                             ],
                           ),
@@ -126,7 +132,7 @@ class _WashPageState extends State<WashPage> {
                             width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: AppColors.gray.withOpacity(0.4),
+                              color: AppColors.gray.withOpacity(0.3),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(6.0),
