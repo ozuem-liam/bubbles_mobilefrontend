@@ -119,7 +119,12 @@ class ReviewWidget extends StatelessWidget {
               children: [
                 Text(
                   "Amanda",
-                  style: Theme.of(context).primaryTextTheme.headlineMedium!,
+                  style: Theme.of(context)
+                      .primaryTextTheme
+                      .headlineMedium!
+                      .copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 RatingBar.builder(
                   itemSize: 20,
@@ -139,7 +144,10 @@ class ReviewWidget extends StatelessWidget {
             ),
             Text(
               "This was my best laundry experience, thank you Ace wash!",
-              style: Theme.of(context).primaryTextTheme.headlineMedium!,
+              style:
+                  Theme.of(context).primaryTextTheme.headlineMedium!.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
             ),
             Text(
               "12/06/23",
