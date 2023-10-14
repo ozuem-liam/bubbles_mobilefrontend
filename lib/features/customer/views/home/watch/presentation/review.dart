@@ -16,6 +16,7 @@ class WashReview extends StatelessWidget {
           minimum: EdgeInsets.all(generalHorizontalPadding.w),
           child: Column(
             children: [
+              const Gap(20),
               Row(
                 children: [
                   GestureDetector(
@@ -24,7 +25,7 @@ class WashReview extends StatelessWidget {
                       height: 50,
                       width: 50,
                       decoration: BoxDecoration(
-                        color: const Color(0xff525355).withAlpha(60),
+                        color: const Color(0xff525355).withAlpha(40),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Center(

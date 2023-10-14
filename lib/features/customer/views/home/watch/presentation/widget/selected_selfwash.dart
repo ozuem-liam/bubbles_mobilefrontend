@@ -15,14 +15,16 @@ class SelectedSelfWash extends StatefulWidget {
 
 class _SelectedSelfWashState extends State<SelectedSelfWash> {
   final selectedIndex = ValueNotifier<int?>(null);
+  final selectdTime = ValueNotifier<int?>(null);
 
   @override
   Widget build(BuildContext context) {
     final style = Theme.of(context).primaryTextTheme.headlineMedium!;
-    return ValueListenableBuilder(
-        valueListenable: selectedIndex,
-        builder: (context, value, _) {
+    return AnimatedBuilder(
+        animation: Listenable.merge([selectedIndex, selectdTime]),
+        builder: (context, _) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 height: 200,
@@ -42,11 +44,65 @@ class _SelectedSelfWashState extends State<SelectedSelfWash> {
                   itemCount: 5,
                 ),
               ),
+              Gap(10.h),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Available time",
+                    style: style,
+                  ),
+                  Gap(5.h),
+                  SizedBox(
+                    height: 50,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () => selectdTime.value = index,
+                        child: Container(
+                          width: selectdTime.value != index ? 80 : 100,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: selectdTime.value == index
+                                  ? const Color(0xff008080)
+                                  : Colors.grey.shade400,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              if (selectdTime.value == index)
+                                const Icon(Icons.check),
+                              const Gap(5),
+                              Text(
+                                "10:00 am",
+                                style: style.copyWith(
+                                    color: selectdTime.value != index
+                                        ? Colors.grey.shade400
+                                        : Colors.black),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      separatorBuilder: (context, index) => Gap(15.w),
+                      itemCount: 5,
+                    ),
+                  ),
+                  Gap(5.h),
+                  Text(
+                    "Select as many time slots as you need",
+                    style: style,
+                  )
+                ],
+              ),
+              Gap(20.h),
               ActionCustomButton(
                   title: "Checkout",
                   isLoading: false,
                   onclick: () {
-                    FocusScope.of(context).unfocus();
                     getx.Get.to(() => const CheckOut());
                   }),
             ],

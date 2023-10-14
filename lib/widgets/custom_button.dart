@@ -13,6 +13,7 @@ class ActionCustomButton extends StatelessWidget {
   final bool isLoading;
   final double? shadow;
   final bool? disabeled;
+  final TextStyle? style;
 
   const ActionCustomButton(
       {Key? key,
@@ -22,10 +23,10 @@ class ActionCustomButton extends StatelessWidget {
       this.titleColor,
       this.borderColor,
       this.loadingColor,
-       this.disabeled = false,
+      this.disabeled = false,
       this.isOutline,
       this.shadow,
-
+      this.style,
       this.isLoading = false})
       : super(key: key);
 
@@ -49,7 +50,7 @@ class ActionCustomButton extends StatelessWidget {
                   ? BorderSide(
                       width: 1.w, color: borderColor ?? AppColors.primary)
                   : BorderSide.none),
-            color: disabeled!
+          color: disabeled!
               ? btnColor?.withOpacity(0.2) ?? AppColors.primary.withOpacity(0.2)
               : btnColor ?? AppColors.primary,
           child: Center(
@@ -63,13 +64,14 @@ class ActionCustomButton extends StatelessWidget {
                   )
                 : Text(
                     title,
-                    style: Theme.of(context)
-                        .primaryTextTheme
-                        .headlineMedium
-                        ?.copyWith(
-                            color: titleColor ?? AppColors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13.sp),
+                    style: style ??
+                        Theme.of(context)
+                            .primaryTextTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                color: titleColor ?? AppColors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13.sp),
                   ),
           ),
         ),
