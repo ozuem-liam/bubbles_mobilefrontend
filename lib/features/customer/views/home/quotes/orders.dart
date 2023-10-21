@@ -2,6 +2,9 @@ import 'dart:io';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/widgets/buttons.dart';
+import 'package:bubbles/widgets/custom_button.dart';
+import 'package:bubbles/widgets/customfield.dart';
+import 'package:bubbles/widgets/image_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,6 +21,7 @@ class OrdersPage extends StatefulWidget {
 
 class _OrdersPageState extends State<OrdersPage> {
   final now = DateTime.now();
+  Duration duration = const Duration(hours: 1, minutes: 23);
   final firstDayOfMonth =
       DateTime(DateTime.now().year, DateTime.now().month, 1);
   final lastDayOfMonth =
@@ -52,6 +56,40 @@ class _OrdersPageState extends State<OrdersPage> {
     }
   }
 
+  Future<void> _selectTime(BuildContext context) async {
+    if (Platform.isAndroid) {
+      final Timepicked = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+          child: child!,
+        ),
+      );
+    } else {
+      showCupertinoModalPopup(
+        context: context,
+        builder: (_) => Container(
+          height: 220,
+          color: const Color.fromARGB(255, 255, 255, 255),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 180,
+                child: CupertinoTimerPicker(
+                    mode: CupertinoTimerPickerMode.hm,
+                    initialTimerDuration: duration,
+                    onTimerDurationChanged: (Duration newDuration) {
+                      setState(() => duration = newDuration);
+                    }),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final styleTheme = Theme.of(context).primaryTextTheme.headlineMedium!;
@@ -59,6 +97,7 @@ class _OrdersPageState extends State<OrdersPage> {
       body: SafeArea(
         minimum: EdgeInsets.symmetric(horizontal: generalHorizontalPadding.w),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 30.h,
@@ -145,23 +184,6 @@ class _OrdersPageState extends State<OrdersPage> {
                       ],
                     ),
                   );
-
-                  //  ListTile(
-                  //   title: Text(
-                  //     DateFormat('d').format(currentDate),
-                  //     style: TextStyle(
-                  //       backgroundColor: isCurrentDay ? Colors.blue : null,
-                  //       color: isCurrentDay ? Colors.black : Colors.black,
-                  //     ),
-                  //   ),
-                  //   subtitle: Text(
-                  //     DateFormat('E').format(currentDate),
-                  //     style: TextStyle(
-                  //       backgroundColor: isCurrentDay ? Colors.blue : null,
-                  //       color: isCurrentDay ? Colors.black : Colors.black,
-                  //     ),
-                  //   ),
-                  // );
                 },
               ),
             ),
@@ -180,10 +202,108 @@ class _OrdersPageState extends State<OrdersPage> {
                   iconColor: AppColors.accentSucess,
                   swapPosition: true,
                   itemSpace: 5,
-                  onTap: () {},
+                  onTap: () {
+                    _selectTime(context);
+                  },
                 )
               ],
-            )
+            ),
+            const Gap(20),
+            SizedBox(
+              height: 50,
+              child: ListView.separated(
+                separatorBuilder: (context, index) => const Gap(20),
+                scrollDirection: Axis.horizontal,
+                itemCount: 12,
+                itemBuilder: (context, index) {
+                  return Container(
+                    height: 50,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      // color: Colors.red,
+                      border: Border.all(
+                        color: AppColors.gray,
+                      ),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "$index : 00pm",
+                        style: styleTheme,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            const Gap(20),
+            Text(
+              "Delivery method",
+              style: styleTheme.copyWith(fontWeight: FontWeight.bold),
+            ),
+            const Gap(20),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.gray,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SvgImage(asset: "assets/svgs/deliver_human.svg"),
+                        const Gap(10),
+                        Text(
+                          "Dropoff & Pickup",
+                          style: styleTheme,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                const Gap(10),
+                Expanded(
+                  child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.gray,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SvgImage(asset: "assets/svgs/deliver_bike.svg"),
+                        const Gap(10),
+                        Text(
+                          "Dispatch",
+                          style: styleTheme,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const Gap(20),
+            const CustomField(
+              headtext: "address",
+              allowTypeing: true,
+            ),
+            const Gap(20),
+            ActionCustomButton(
+                title: "Checkout",
+                isLoading: false,
+                onclick: () {
+                  // FocusScope.of(context).unfocus();
+                  // getx.Get.to(() => const AddItemWash());
+                })
           ],
         ),
       ),
