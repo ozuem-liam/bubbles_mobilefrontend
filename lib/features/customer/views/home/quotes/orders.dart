@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/widgets/buttons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,17 +24,32 @@ class _OrdersPageState extends State<OrdersPage> {
       DateTime(DateTime.now().year, DateTime.now().month + 1, 0);
 
   Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: now,
-      firstDate: DateTime(2015, 8),
-      lastDate: DateTime(2101),
-    );
-    // if (picked != null && picked != selectedDate) {
-    //   setState(() {
-    //     selectedDate = picked;
-    //   });
-    // }
+    if (Platform.isAndroid) {
+      final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: now,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101),
+      );
+    } else {
+      showCupertinoModalPopup(
+        context: context,
+        builder: (_) => Container(
+          height: 220,
+          color: const Color.fromARGB(255, 255, 255, 255),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 180,
+                child: CupertinoDatePicker(
+                    initialDateTime: DateTime.now(),
+                    onDateTimeChanged: (val) {}),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
   }
 
   @override
