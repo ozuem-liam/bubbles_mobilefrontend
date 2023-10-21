@@ -3,7 +3,7 @@ import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/features/customer/views/home/home_page/home_view.dart';
 import 'package:bubbles/features/customer/views/home/payment/payment.dart';
 import 'package:bubbles/features/customer/views/home/profile/profile.dart';
-import 'package:bubbles/features/customer/views/home/quotes/quotes.dart';
+import 'package:bubbles/features/customer/views/home/quotes/orders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
