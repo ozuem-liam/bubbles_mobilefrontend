@@ -66,7 +66,7 @@ class _HomeNavigation extends ConsumerState<HomeNavigation> {
                             .primaryTextTheme
                             .headlineMedium!
                             .color),
-                label: "Quotes",
+                label: "Orders",
               ),
               BottomNavigationBarItem(
                 //backgroundColor: Colors.white,
@@ -77,7 +77,7 @@ class _HomeNavigation extends ConsumerState<HomeNavigation> {
                             .primaryTextTheme
                             .headlineMedium!
                             .color),
-                label: "Payment",
+                label: "Wallet",
               ),
               BottomNavigationBarItem(
                 //backgroundColor: Colors.white,
@@ -99,7 +99,7 @@ class _HomeNavigation extends ConsumerState<HomeNavigation> {
 
   static const List<Widget> _pages = <Widget>[
     HomePage(),
-    QuotesPage(),
+    OrdersPage(),
     PaymentPage(),
     ProfilePage()
   ];
