@@ -1,9 +1,5 @@
 import 'package:bubbles/providers/home_navigation_provider.dart';
 import 'package:bubbles/style/appColors.dart';
-import 'package:bubbles/features/customer/views/home/home_page/home_view.dart';
-import 'package:bubbles/features/customer/views/home/payment/payment.dart';
-import 'package:bubbles/features/customer/views/home/profile/profile.dart';
-import 'package:bubbles/features/customer/views/home/quotes/quotes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,7 +7,8 @@ class VendorHomeNavigation extends ConsumerStatefulWidget {
   const VendorHomeNavigation({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _VendorHomeNavigation();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _VendorHomeNavigation();
 }
 
 class _VendorHomeNavigation extends ConsumerState<VendorHomeNavigation> {
@@ -22,7 +19,7 @@ class _VendorHomeNavigation extends ConsumerState<VendorHomeNavigation> {
       return Future.delayed(const Duration(seconds: 2));
     }
 
-   // final themeDataMode = ref.watch(themeDataProvider);
+    // final themeDataMode = ref.watch(themeDataProvider);
     var index = ref.watch(homeViewModel).selectedIndex;
     return WillPopScope(
       onWillPop: onBackPressed,
@@ -57,7 +54,7 @@ class _VendorHomeNavigation extends ConsumerState<VendorHomeNavigation> {
                 label: "Dashboard",
               ),
               BottomNavigationBarItem(
-               // backgroundColor: Colors.white,
+                // backgroundColor: Colors.white,
                 icon: Icon(Icons.menu,
                     color: index == 1
                         ? AppColors.secondary
@@ -96,10 +93,10 @@ class _VendorHomeNavigation extends ConsumerState<VendorHomeNavigation> {
     );
   }
 
-  static  List<Widget> _pages = <Widget>[
+  static List<Widget> _pages = <Widget>[
     Container(),
     Container(),
-     Container(),
+    Container(),
     Container(),
   ];
 }
