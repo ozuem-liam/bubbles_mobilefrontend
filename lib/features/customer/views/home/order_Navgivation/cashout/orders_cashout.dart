@@ -253,11 +253,12 @@ class OrdersCashout extends StatelessWidget {
             ),
             const Spacer(),
             ActionCustomButton(
-                title: "Pay N2,600",
-                isLoading: false,
-                onclick: () {
-                  getx.Get.to(() => const PaymentSuccessfull());
-                }),
+              title: "Pay N2,600",
+              isLoading: false,
+              onclick: () {
+                getx.Get.to(() => const PaymentSuccessfull());
+              },
+            ),
           ],
         ),
       ),
