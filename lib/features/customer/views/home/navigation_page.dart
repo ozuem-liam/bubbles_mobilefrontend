@@ -3,7 +3,7 @@ import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/features/customer/views/home/home_page/home_view.dart';
 import 'package:bubbles/features/customer/views/home/payment/payment.dart';
 import 'package:bubbles/features/customer/views/home/profile/profile.dart';
-import 'package:bubbles/features/customer/views/home/quotes/orders.dart';
+import 'package:bubbles/features/customer/views/home/order_Navgivation/schedule_lundary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -99,7 +99,7 @@ class _HomeNavigation extends ConsumerState<HomeNavigation> {
 
   static const List<Widget> _pages = <Widget>[
     HomePage(),
-    OrdersPage(),
+    ScheduleOrdersPage(),
     PaymentPage(),
     ProfilePage()
   ];

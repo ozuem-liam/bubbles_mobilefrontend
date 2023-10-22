@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bubbles/features/customer/views/home/order_Navgivation/cashout/orders_cashout.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/widgets/buttons.dart';
@@ -11,15 +12,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:get/get.dart' as getx;
 
-class OrdersPage extends StatefulWidget {
-  const OrdersPage({super.key});
+class ScheduleOrdersPage extends StatefulWidget {
+  const ScheduleOrdersPage({super.key});
 
   @override
-  State<OrdersPage> createState() => _OrdersPageState();
+  State<ScheduleOrdersPage> createState() => _ScheduleOrdersPageState();
 }
 
-class _OrdersPageState extends State<OrdersPage> {
+class _ScheduleOrdersPageState extends State<ScheduleOrdersPage> {
   final now = DateTime.now();
   Duration duration = const Duration(hours: 1, minutes: 23);
   final firstDayOfMonth =
@@ -301,8 +303,7 @@ class _OrdersPageState extends State<OrdersPage> {
                 title: "Checkout",
                 isLoading: false,
                 onclick: () {
-                  // FocusScope.of(context).unfocus();
-                  // getx.Get.to(() => const AddItemWash());
+                  getx.Get.to(() => const OrdersCashout());
                 })
           ],
         ),
