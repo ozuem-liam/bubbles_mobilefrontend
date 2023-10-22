@@ -1,3 +1,4 @@
+import 'package:bubbles/features/customer/views/home/order_Navgivation/cashout/orders_page.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/widgets/custom_button.dart';
@@ -39,7 +40,7 @@ class PaymentSuccessfull extends StatelessWidget {
                 title: "Track Order",
                 isLoading: false,
                 onclick: () {
-                  getx.Get.to(() => const PaymentSuccessfull());
+                  getx.Get.to(() => const OrdersPage());
                 }),
             const Gap(20),
             ActionCustomButton(
