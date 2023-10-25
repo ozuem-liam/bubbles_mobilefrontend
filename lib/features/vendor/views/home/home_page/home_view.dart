@@ -1,23 +1,33 @@
 import 'package:bubbles/providers/home_navigation_provider.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
+import 'package:bubbles/utils/svgs.dart';
 import 'package:bubbles/utils/user_db.dart';
 import 'package:bubbles/viewModels/home_vm.dart';
 import 'package:bubbles/features/customer/views/home/home_page/widget/installation_card_widget.dart';
 import 'package:bubbles/features/customer/views/home/home_page/widget/next_payment_card_widget.dart';
+import 'package:bubbles/widgets/image_widgets.dart';
+import 'package:bubbles/widgets/menu_bar_widget.dart';
+import 'package:bubbles/widgets/single_text_line_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomePage extends ConsumerStatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+var approvedShopProvider = StateProvider.autoDispose<bool>((ref) => true);
+
+var filterItemProvider = StateProvider.autoDispose<String>((ref) => "Monthly");
+
+final filterList = ["Daily", "Weekly", "Monthly", "Yearly"];
+
+class VendorHomePage extends ConsumerStatefulWidget {
+  const VendorHomePage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _VendorHomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> {
+class _VendorHomePageState extends ConsumerState<VendorHomePage> {
   @override
   Widget build(BuildContext context) {
     final viewModel = ref.watch(homeViewModel);
@@ -26,6 +36,13 @@ class _HomePageState extends ConsumerState<HomePage> {
   }
 
   Widget mainComponent({required HomeViewModel viewModel}) {
+    bool stateValue = ref.watch(approvedShopProvider);
+    var toggleValue = ref.read(approvedShopProvider.notifier);
+
+    // Filter provider
+
+    String filterValue = ref.watch(filterItemProvider);
+    var toggleFilterValue = ref.read(filterItemProvider.notifier);
     return ListView(
       padding: EdgeInsets.symmetric(horizontal: generalHorizontalPadding.w),
       physics: const BouncingScrollPhysics(),
@@ -37,35 +54,181 @@ class _HomePageState extends ConsumerState<HomePage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Hi, ${UserDB.getUser()?.firstName.toString().capitalizeFirst}',
+            Text('Hi, Emmanuella',
                 textAlign: TextAlign.start,
                 style: Theme.of(context)
                     .primaryTextTheme
                     .headlineMedium!
                     .copyWith(fontWeight: FontWeight.w500, fontSize: 16.sp)),
-            CircleAvatar(
-              radius: 17.r,
-              backgroundColor: AppColors.gray4,
-             // backgroundImage: const AssetImage(augustusPic),
-            ),
+            Card(
+              color: AppColors.gray.withOpacity(0.2),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.r),
+              ),
+              child: InkWell(
+                onTap: () {},
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 9.h),
+                  child: const SvgImage(asset: notificationIcon),
+                ),
+              ),
+            )
           ],
         ),
         SizedBox(
           height: 30.h,
         ),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InstallationCardWidget(
-              hasItem: true,
+        switch (stateValue) {
+          false => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SingleTextLineWidget(
+                      text: "Statistics",
+                      size: 20.sp,
+                      weight: FontWeight.bold,
+                    ),
+                    const Spacer(),
+                    CustomPopMenuBarWidget(
+                      size: 80,
+                      icon: Card(
+                        margin: EdgeInsets.zero,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4.r),
+                            side: BorderSide(
+                                color: AppColors.gray.withOpacity(0.3))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SingleTextLineWidget(
+                                text: filterValue,
+                                size: 11.sp,
+                                weight: FontWeight.w400,
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              Icon(
+                                Icons.filter_list,
+                                size: 16.w,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      onSelected: (value) {
+                        switch (value) {
+                          case "Daily":
+                            () {
+                              toggleFilterValue.state = "Daily";
+                            };
+                            break;
+                          case "Weekly":
+                            () {
+                              toggleFilterValue.state = "Weekly";
+                            };
+                            break;
+                          case "Monthly":
+                            () {
+                              toggleFilterValue.state = "Monthly";
+                            };
+                            break;
+                          default:
+                            () {
+                              toggleFilterValue.state = "Yearly";
+                            };
+                        }
+                      },
+                      item: List.generate(
+                        filterList.length,
+                        (index) => PopupMenuItem<String>(
+                          value: filterList[index],
+                          child: InkWell(
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 20.w,
+                                ),
+                                Text(
+                                  filterList[index],
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .headlineSmall
+                                      ?.copyWith(fontSize: 13.sp),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+              ],
             ),
-            NextPaymentCardWidget(hasItem: true)
-          ],
-        ),
-        SizedBox(
-          height: 30.h,
-        ),
-        
+          true => Column(
+              children: [
+                Card(
+                  elevation: 3,
+                  margin: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.r)),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          dense: true,
+                          minLeadingWidth: 0.h,
+                          leading: const SvgImage(asset: checkBoxIcon),
+                          title: const SingleTextLineWidget(
+                              text: "Hurray! Your shop has been approved"),
+                          trailing: InkWell(
+                              onTap: () {
+                                toggleValue.state = !stateValue;
+                              },
+                              child: const Icon(Icons.close)),
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        SingleTextLineWidget(
+                          text:
+                              "Your shop is now discoverable on customers timelines",
+                          size: 12.sp,
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                SingleTextLineWidget(
+                  text:
+                      "No orders yet. Don’t worry you will get a customer soon!",
+                  size: 20.sp,
+                  weight: FontWeight.w600,
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                const SvgImage(asset: noOrderImage)
+              ],
+            )
+        }
       ],
     );
   }

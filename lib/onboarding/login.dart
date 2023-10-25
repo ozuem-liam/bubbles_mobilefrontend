@@ -4,7 +4,9 @@ import 'package:bubbles/features/customer/views/authentication/widgets/custom_to
 import 'package:bubbles/features/vendor/views/authentication/OTP/email_otp_verification.dart';
 import 'package:bubbles/features/vendor/views/authentication/OTP/send_email_otp.dart';
 import 'package:bubbles/features/vendor/views/authentication/password/reset_password.dart';
+import 'package:bubbles/features/vendor/views/home/navigation_page.dart';
 import 'package:bubbles/widgets/custom_appbar.dart';
+import 'package:bubbles/widgets/drop_down_field.dart';
 import 'package:flutter/services.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
@@ -23,6 +25,8 @@ import 'package:get/get.dart';
 
 var selectUserTypeProvider = StateProvider.autoDispose<String>((ref) => '');
 
+final userList = ["Customer", "Vendor"];
+
 class LoginPage extends ConsumerWidget {
   LoginPage({super.key});
   final formKey = GlobalKey<FormState>();
@@ -35,71 +39,6 @@ class LoginPage extends ConsumerWidget {
     var authViewModel = ref.watch(customerAuthViewModelProvider);
     String stateValue = ref.watch(selectUserTypeProvider);
     var toggleValue = ref.read(selectUserTypeProvider.notifier);
-
-    Widget userTypeFieldWidget(
-        {required BuildContext context,
-        required CustomerAuthViewModel authViewModel}) {
-      return PopupMenuButton<String>(
-        clipBehavior: Clip.hardEdge,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
-        position: PopupMenuPosition.under,
-        constraints: BoxConstraints(
-          minWidth: MediaQuery.sizeOf(context).width - 50.w,
-          maxWidth: MediaQuery.sizeOf(context).width - 50.w,
-        ),
-        child: Container(
-          height: 45.h,
-          width: MediaQuery.sizeOf(context).width,
-          decoration: BoxDecoration(
-              border: Border.all(color: AppColors.gray, width: 1),
-              borderRadius: BorderRadius.circular(10)),
-          child: Padding(
-            padding: EdgeInsets.only(top: 0, left: 17.w, right: 10.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  stateValue == '' ? 'Select your account type' : stateValue,
-                  style: stateValue == ''
-                      ? Theme.of(context)
-                          .primaryTextTheme
-                          .headlineMedium
-                          ?.copyWith(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
-                          )
-                      : Theme.of(context)
-                          .primaryTextTheme
-                          .headlineMedium!
-                          .copyWith(
-                              fontSize: 12.sp, fontWeight: FontWeight.w400),
-                ),
-                const Icon(
-                  Icons.arrow_drop_down,
-                  size: 20,
-                  color: AppColors.gray,
-                )
-              ],
-            ),
-          ),
-        ),
-        onSelected: (String result) {},
-        itemBuilder: (BuildContext context) => List.generate(
-          authViewModel.userType().length,
-          (index) => PopupMenuItem<String>(
-            value: authViewModel.userType()[index]['user'],
-            onTap: () {
-              toggleValue.state = authViewModel.userType()[index]['user'];
-            },
-            child: Text(
-              authViewModel.userType()[index]['user'],
-              style: Theme.of(context).primaryTextTheme.headlineMedium,
-            ),
-          ),
-        ),
-      );
-    }
 
     Widget loginForm(
         {required BuildContext context,
@@ -115,8 +54,23 @@ class LoginPage extends ConsumerWidget {
               SizedBox(
                 height: 50.h,
               ),
-              userTypeFieldWidget(
-                  context: context, authViewModel: authViewModel),
+              DropDownFeild(
+                value: stateValue,
+                valuePlaceHolder: "Select your account type",
+                item: List.generate(
+                  userList.length,
+                  (index) => PopupMenuItem<String>(
+                    value: stateValue,
+                    onTap: () {
+                      toggleValue.state = userList[index];
+                    },
+                    child: Text(
+                      userList[index],
+                      style: Theme.of(context).primaryTextTheme.headlineMedium,
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 20.h,
               ),
@@ -212,15 +166,9 @@ class LoginPage extends ConsumerWidget {
                   title: "LOGIN",
                   isLoading: false,
                   onclick: () {
-                    FocusScope.of(context).unfocus();
-                    final validate = authViewModel.validateAndSave(formKey);
-                    if (validate) {
-                      authViewModel.login(
-                          email: emailController.text.trim(),
-                          password: passwordController.text.trim());
-                    }
-
-                    // Get.to(() => const HomeNavigation());
+                    if (stateValue == 'Vendor') {
+                      Get.to(() => const VendorHomeNavigation());
+                    } else {}
                   }),
               SizedBox(
                 height: 20.h,
