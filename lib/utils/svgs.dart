@@ -64,3 +64,7 @@ const wallet1Icon = 'assets/svgs/Money_1.svg';
 const shop1Icon = 'assets/svgs/shop_1.svg';
 
 const user1Icon = 'assets/svgs/user_1.svg';
+
+const customerSVGIcon = 'assets/svgs/customer_icon.svg';
+
+const basketIcon = 'assets/svgs/Basket.svg';
