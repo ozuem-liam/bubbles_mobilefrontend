@@ -35,3 +35,32 @@ const minusIcon = 'assets/svgs/minus.svg';
 const plusIcon = 'assets/svgs/plus.svg';
 
 const infoCircleIcon = 'assets/svgs/Info-circle.svg';
+
+
+const checkBoxIcon = 'assets/svgs/Checkbox.svg';
+
+
+const noOrderImage = 'assets/svgs/no_orders.svg';
+
+const notificationIcon = 'assets/svgs/notification.svg';
+
+const dashboardIcon = 'assets/svgs/dashboard.svg';
+
+
+const walletIcon = 'assets/svgs/Money.svg';
+
+
+const shopIcon = 'assets/svgs/shop.svg';
+
+const userIcon = 'assets/svgs/User.svg';
+
+
+const dashboard1Icon = 'assets/svgs/dashboard_1.svg';
+
+
+const wallet1Icon = 'assets/svgs/Money_1.svg';
+
+
+const shop1Icon = 'assets/svgs/shop_1.svg';
+
+const user1Icon = 'assets/svgs/user_1.svg';

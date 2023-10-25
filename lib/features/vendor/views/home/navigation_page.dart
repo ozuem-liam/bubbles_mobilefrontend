@@ -1,9 +1,8 @@
+import 'package:bubbles/features/vendor/views/home/home_page/home_view.dart';
 import 'package:bubbles/providers/home_navigation_provider.dart';
 import 'package:bubbles/style/appColors.dart';
-import 'package:bubbles/features/customer/views/home/home_page/home_view.dart';
-import 'package:bubbles/features/customer/views/home/payment/payment.dart';
-import 'package:bubbles/features/customer/views/home/profile/profile.dart';
-import 'package:bubbles/features/customer/views/home/quotes/quotes.dart';
+import 'package:bubbles/utils/svgs.dart';
+import 'package:bubbles/widgets/image_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,7 +10,8 @@ class VendorHomeNavigation extends ConsumerStatefulWidget {
   const VendorHomeNavigation({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _VendorHomeNavigation();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _VendorHomeNavigation();
 }
 
 class _VendorHomeNavigation extends ConsumerState<VendorHomeNavigation> {
@@ -22,7 +22,7 @@ class _VendorHomeNavigation extends ConsumerState<VendorHomeNavigation> {
       return Future.delayed(const Duration(seconds: 2));
     }
 
-   // final themeDataMode = ref.watch(themeDataProvider);
+    // final themeDataMode = ref.watch(themeDataProvider);
     var index = ref.watch(homeViewModel).selectedIndex;
     return WillPopScope(
       onWillPop: onBackPressed,
@@ -41,52 +41,49 @@ class _VendorHomeNavigation extends ConsumerState<VendorHomeNavigation> {
             //     Colors.red,
 
             showSelectedLabels: true,
-            // selectedItemColor: AppColors.primary,
+            selectedItemColor: AppColors.secondary,
             currentIndex: ref.watch(homeViewModel).selectedIndex,
             onTap: viewModel.changeIndex,
             items: [
               BottomNavigationBarItem(
-                backgroundColor: Colors.red,
-                icon: Icon(Icons.grid_view,
-                    color: index == 0
-                        ? AppColors.secondary
-                        : Theme.of(context)
-                            .primaryTextTheme
-                            .headlineMedium!
-                            .color),
+                icon: index == 0
+                    ?const SvgImage(
+                        asset: dashboard1Icon,
+                      )
+                    : const SvgImage(
+                        asset: dashboardIcon,
+                      ),
                 label: "Dashboard",
               ),
               BottomNavigationBarItem(
-               // backgroundColor: Colors.white,
-                icon: Icon(Icons.menu,
-                    color: index == 1
-                        ? AppColors.secondary
-                        : Theme.of(context)
-                            .primaryTextTheme
-                            .headlineMedium!
-                            .color),
+                // backgroundColor: Colors.white,
+                 icon: index == 1
+                    ? const SvgImage(
+                        asset: shop1Icon,
+                      )
+                    :const SvgImage(
+                        asset: shopIcon,
+                      ),
                 label: "Shop",
               ),
               BottomNavigationBarItem(
-                //backgroundColor: Colors.white,
-                icon: Icon(Icons.account_balance_wallet_outlined,
-                    color: index == 2
-                        ? AppColors.secondary
-                        : Theme.of(context)
-                            .primaryTextTheme
-                            .headlineMedium!
-                            .color),
+                icon: index == 2
+                    ?const SvgImage(
+                        asset: wallet1Icon,
+                      )
+                    :const SvgImage(
+                        asset: walletIcon,
+                      ),
                 label: "Wallet",
               ),
               BottomNavigationBarItem(
-                //backgroundColor: Colors.white,
-                icon: Icon(Icons.person_4_outlined,
-                    color: index == 3
-                        ? AppColors.secondary
-                        : Theme.of(context)
-                            .primaryTextTheme
-                            .headlineMedium!
-                            .color),
+                icon: index == 3
+                    ?const SvgImage(
+                        asset: user1Icon,
+                      )
+                    :const SvgImage(
+                        asset: userIcon,
+                      ),
                 label: "Account",
               ),
             ],
@@ -96,10 +93,10 @@ class _VendorHomeNavigation extends ConsumerState<VendorHomeNavigation> {
     );
   }
 
-  static  List<Widget> _pages = <Widget>[
+  static List<Widget> _pages = <Widget>[
+    VendorHomePage(),
     Container(),
     Container(),
-     Container(),
     Container(),
   ];
 }
