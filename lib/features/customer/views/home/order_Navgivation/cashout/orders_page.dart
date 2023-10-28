@@ -12,6 +12,7 @@ class OrdersPage extends StatefulWidget {
 }
 
 class _OrdersPageState extends State<OrdersPage> {
+  int selected = 0;
   @override
   Widget build(BuildContext context) {
     final styleTheme = Theme.of(context).primaryTextTheme.headlineMedium!;
@@ -30,20 +31,57 @@ class _OrdersPageState extends State<OrdersPage> {
                 child: Row(
                   children: [
                     Expanded(
-                        child: Container(
-                      child: Center(
-                        child: Text(
-                          "Orders",
-                          style: styleTheme,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selected = 0;
+                          });
+                        },
+                        child: SizedBox(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: selected == 0
+                                    ? AppColors.white
+                                    : AppColors.gray,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "Orders",
+                                  style: styleTheme,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    )),
+                    ),
                     Expanded(
-                        child: Container(
-                      child: Center(
-                        child: Text(
-                          "History",
-                          style: styleTheme,
+                        child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selected = 1;
+                        });
+                      },
+                      child: SizedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: selected == 1
+                                  ? AppColors.white
+                                  : AppColors.gray,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "History",
+                                style: styleTheme,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ))
@@ -51,121 +89,129 @@ class _OrdersPageState extends State<OrdersPage> {
                 ),
               ),
               Gap(20.h),
-              Container(
-                height: 100,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color(0xff525355).withAlpha(60),
-                  ),
-                  borderRadius: BorderRadius.circular(15.r),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Shirt (2), Trouser (1), Socks (1)",
-                            style: styleTheme.copyWith(
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Container(
-                            height: 30,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              color: AppColors.gray.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Processing",
-                                style: styleTheme,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Delivery",
-                            style: styleTheme.copyWith(
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "N1,000",
-                            style: styleTheme.copyWith(
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const Gap(20),
-              Container(
-                height: 100,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color(0xff525355).withAlpha(60),
-                  ),
-                  borderRadius: BorderRadius.circular(15.r),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Shirt (2), Trouser (1), Socks (1)",
-                            style: styleTheme.copyWith(
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Container(
-                            height: 30,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              color: AppColors.gray.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Processing",
-                                style: styleTheme,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Delivery",
-                            style: styleTheme.copyWith(
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "N1,000",
-                            style: styleTheme.copyWith(
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              )
+              [const OrdersSelected(), Container()][selected],
             ],
           )),
+    );
+  }
+}
+
+class OrdersSelected extends StatelessWidget {
+  const OrdersSelected({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final styleTheme = Theme.of(context).primaryTextTheme.headlineMedium!;
+    return Column(
+      children: [
+        Container(
+          height: 100,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color(0xff525355).withAlpha(60),
+            ),
+            borderRadius: BorderRadius.circular(15.r),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Shirt (2), Trouser (1), Socks (1)",
+                      style: styleTheme.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      height: 30,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: AppColors.gray.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Processing",
+                          style: styleTheme,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Delivery",
+                      style: styleTheme.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "N1,000",
+                      style: styleTheme.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Gap(20),
+        Container(
+          height: 100,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color(0xff525355).withAlpha(60),
+            ),
+            borderRadius: BorderRadius.circular(15.r),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Shirt (2), Trouser (1), Socks (1)",
+                      style: styleTheme.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      height: 30,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: AppColors.gray.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Processing",
+                          style: styleTheme,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Delivery",
+                      style: styleTheme.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "N1,000",
+                      style: styleTheme.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 }
