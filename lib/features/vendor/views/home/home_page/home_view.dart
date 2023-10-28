@@ -1,15 +1,11 @@
 import 'package:bubbles/features/vendor/views/home/home_page/widget/recent_activity_card_widget.dart';
 import 'package:bubbles/features/vendor/views/home/home_page/widget/statistics_card_widget.dart';
+import 'package:bubbles/features/vendor/views/home/notification/notifications_page.dart';
 import 'package:bubbles/providers/home_navigation_provider.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
-import 'package:bubbles/utils/images.dart';
-import 'package:bubbles/utils/logger.dart';
 import 'package:bubbles/utils/svgs.dart';
-import 'package:bubbles/utils/user_db.dart';
 import 'package:bubbles/viewModels/home_vm.dart';
-import 'package:bubbles/features/customer/views/home/home_page/widget/installation_card_widget.dart';
-import 'package:bubbles/features/customer/views/home/home_page/widget/next_payment_card_widget.dart';
 import 'package:bubbles/widgets/image_widgets.dart';
 import 'package:bubbles/widgets/menu_bar_widget.dart';
 import 'package:bubbles/widgets/single_text_line_widget.dart';
@@ -62,7 +58,9 @@ class _VendorHomePageState extends ConsumerState<VendorHomePage> {
                       borderRadius: BorderRadius.circular(10.r),
                     ),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => VendorNotificationPage());
+                      },
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 8.w, vertical: 9.h),
@@ -258,6 +256,9 @@ class _VendorHomePageState extends ConsumerState<VendorHomePage> {
               )
             ],
           true => [
+              SizedBox(
+                height: 20.h,
+              ),
               Card(
                 elevation: 3,
                 margin: EdgeInsets.zero,
