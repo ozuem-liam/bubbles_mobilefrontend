@@ -2,9 +2,11 @@ import 'package:bubbles/features/customer/providers/customer_auth_providers.dart
 import 'package:bubbles/features/customer/views/authentication/OTP/email_otp_verification.dart';
 import 'package:bubbles/features/customer/views/authentication/password/reset_password.dart';
 import 'package:bubbles/features/customer/views/authentication/widgets/custom_top_widget.dart';
+import 'package:bubbles/features/vendor/views/authentication/login.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/widgets/buttons.dart';
 import 'package:bubbles/widgets/custom_appbar.dart';
+import 'package:bubbles/widgets/drop_down_field.dart';
 import 'package:flutter/services.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/widgets/custom_button.dart';
@@ -44,6 +46,8 @@ class SendEmailOTP extends ConsumerWidget {
 
   Widget inputEmail({required BuildContext context, required WidgetRef ref}) {
     var authViewModel = ref.watch(customerAuthViewModelProvider);
+    String stateValue = ref.watch(selectUserTypeProvider);
+    var toggleValue = ref.read(selectUserTypeProvider.notifier);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: generalHorizontalPadding.w),
       child: Form(
@@ -53,6 +57,26 @@ class SendEmailOTP extends ConsumerWidget {
           children: [
             SizedBox(
               height: 50.h,
+            ),
+            DropDownFeild(
+              value: stateValue,
+              valuePlaceHolder: "Select your account type",
+              item: List.generate(
+                userList.length,
+                (index) => PopupMenuItem<String>(
+                  value: stateValue,
+                  onTap: () {
+                    toggleValue.state = userList[index];
+                  },
+                  child: Text(
+                    userList[index],
+                    style: Theme.of(context).primaryTextTheme.headlineMedium,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20.h,
             ),
             CustomField(
               headtext: 'Email',
@@ -69,10 +93,19 @@ class SendEmailOTP extends ConsumerWidget {
                 title: "Continue",
                 isLoading: false,
                 onclick: () async {
-                  FocusScope.of(context).unfocus();
-                  Get.to(() => EmailOTPVerification(onTap: () {
-                        Get.to(() => ResetPasswordPage());
-                      }));
+                   if (stateValue == 'Vendor') {
+                      
+                      final validate = authViewModel.validateAndSave(formKey);
+                      if (validate) {
+                        
+                      }
+                    } else {
+                      
+                    }
+                  // FocusScope.of(context).unfocus();
+                  // Get.to(() => EmailOTPVerification(onTap: () {
+                  //       Get.to(() => ResetPasswordPage());
+                  //     }));
                   // final validate = authViewModel.validateAndSave(formKey);
                   // if (validate) {
                   //   authViewModel.initiateResetPasswords(

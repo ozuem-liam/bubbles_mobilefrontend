@@ -13,7 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/features/customer/views/authentication/OTP/email_otp_verification.dart';
-import 'package:bubbles/features/customer/views/authentication/OTP/send_email_otp.dart';
+import 'package:bubbles/onboarding/forgot_password.dart';
 import 'package:bubbles/features/customer/views/authentication/password/reset_password.dart';
 import 'package:bubbles/onboarding/select_user_type.dart';
 import 'package:bubbles/widgets/buttons.dart';
@@ -111,57 +111,28 @@ class LoginPage extends ConsumerWidget {
               SizedBox(
                 height: 10.h,
               ),
-              stateValue == 'Vendor'
-                  ? Center(
-                      child: WordsButton(
-                          firstTextSize: 12.sp,
-                          secondTextSize: 12.sp,
-                          secondTextColor: AppColors.secondary,
-                          fontWeight2: FontWeight.bold,
-                          //underline: TextDecoration.underline,
-                          textHeight: 2,
-                          onTap: () {
-                            Get.to(() => VendorSendEmailOTP(
-                                  onTap: () {
-                                    Get.to(() => VendorEmailOTPVerification(
-                                        email: "",
-                                        onTap: () {
-                                          Get.to(
-                                              () => VendorResetPasswordPage());
-                                        }));
-                                  },
-                                  title: "Forgot password",
-                                  subTitle:
-                                      "Don’t worry, we’ll help you reset it.",
-                                ));
-                          },
-                          firstText: "Forgot password?",
-                          secondText: "Reset Here"),
-                    )
-                  : Center(
-                      child: WordsButton(
-                          firstTextSize: 12.sp,
-                          secondTextSize: 12.sp,
-                          secondTextColor: AppColors.secondary,
-                          fontWeight2: FontWeight.bold,
-                          //underline: TextDecoration.underline,
-                          textHeight: 2,
-                          onTap: () {
-                            Get.to(() => SendEmailOTP(
-                                  onTap: () {
-                                    Get.to(
-                                        () => EmailOTPVerification(onTap: () {
-                                              Get.to(() => ResetPasswordPage());
-                                            }));
-                                  },
-                                  title: "Forgot password",
-                                  subTitle:
-                                      "Don’t worry, we’ll help you reset it.",
-                                ));
-                          },
-                          firstText: "Forgot password?",
-                          secondText: "Reset Here"),
-                    ),
+              Center(
+                child: WordsButton(
+                    firstTextSize: 12.sp,
+                    secondTextSize: 12.sp,
+                    secondTextColor: AppColors.secondary,
+                    fontWeight2: FontWeight.bold,
+                    //underline: TextDecoration.underline,
+                    textHeight: 2,
+                    onTap: () {
+                      Get.to(() => SendEmailOTP(
+                            onTap: () {
+                              Get.to(() => EmailOTPVerification(onTap: () {
+                                    Get.to(() => ResetPasswordPage());
+                                  }));
+                            },
+                            title: "Forgot password",
+                            subTitle: "Don’t worry, we’ll help you reset it.",
+                          ));
+                    },
+                    firstText: "Forgot password?",
+                    secondText: "Reset Here"),
+              ),
               SizedBox(
                 height: 20.h,
               ),
