@@ -15,7 +15,9 @@ import 'package:bubbles/widgets/customfield.dart';
 
 class VendorEmailOTPVerification extends ConsumerWidget {
   final VoidCallback onTap;
-  VendorEmailOTPVerification({required this.onTap, super.key});
+  final String email;
+  VendorEmailOTPVerification(
+      {required this.onTap, required this.email, super.key});
   final formKey = GlobalKey<FormState>();
   final otpController = TextEditingController();
   @override
@@ -66,11 +68,11 @@ class VendorEmailOTPVerification extends ConsumerWidget {
                 title: "Verify email",
                 onclick: () async {
                   FocusScope.of(context).unfocus();
-                 
+
                   final validate = authViewModel.validateAndSave(formKey);
                   if (validate) {
                     authViewModel.verifyEmailOTP(
-                        otp: otpController.text.trim(), nextAction: onTap);
+                        otp: otpController.text.trim(), nextAction: onTap, email: email);
                   }
                 }),
             SizedBox(
@@ -85,7 +87,8 @@ class VendorEmailOTPVerification extends ConsumerWidget {
                   // underline: TextDecoration.underline,
                   textHeight: 2,
                   onTap: () async {
-                    authViewModel.resendVerifyEmailOTP(nextAction: () {});
+                    authViewModel.resendVerifyEmailOTP(
+                        nextAction: () {}, email: email);
                   },
                   firstText: "Did not receive Code?",
                   secondText: "Resend"),

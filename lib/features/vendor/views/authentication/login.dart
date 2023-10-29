@@ -123,8 +123,9 @@ class LoginPage extends ConsumerWidget {
                           onTap: () {
                             Get.to(() => VendorSendEmailOTP(
                                   onTap: () {
-                                    Get.to(() =>
-                                        VendorEmailOTPVerification(onTap: () {
+                                    Get.to(() => VendorEmailOTPVerification(
+                                        email: "",
+                                        onTap: () {
                                           Get.to(
                                               () => VendorResetPasswordPage());
                                         }));

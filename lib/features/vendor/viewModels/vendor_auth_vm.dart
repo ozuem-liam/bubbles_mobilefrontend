@@ -1,5 +1,6 @@
 import 'package:bubbles/features/vendor/providers/vendor_auth_providers.dart';
 import 'package:bubbles/features/vendor/views/authentication/OTP/email_otp_verification.dart';
+import 'package:bubbles/features/vendor/views/authentication/login.dart';
 import 'package:bubbles/features/vendor/views/navigation_page.dart';
 import 'package:bubbles/features/vendor/views/setup_shop/setup_shop.dart';
 import 'package:bubbles/utils/notify_me.dart';
@@ -86,6 +87,8 @@ class VendorAuthViewModel extends BaseViewModel {
   // }
 
 // LOGIN VENDOR USER
+  var otpMessage =
+      'Email not verified! Please use the otp code sent to your email to verify your account!';
   Future login({required String email, required String password}) async {
     setBusy(true);
     final res = await ref
@@ -96,9 +99,30 @@ class VendorAuthViewModel extends BaseViewModel {
     });
 
     if (res.code == 200) {
-      await UserDB.addProfile(res.data!);
-      NotifyMe.showAlert(res.message!);
-      Get.to(() => const VendorHomeNavigation());
+      if (res.message == otpMessage) {
+        NotifyMe.showAlert(res.message!);
+        Get.to(() => VendorEmailOTPVerification(
+            email: email,
+            onTap: () {
+              Get.to(() => ConfirmationPage(
+                    title: "Verification successful",
+                    description: "Your email has been successfully verified",
+                    btnTitle: "Continue",
+                    onTap: () {
+                      Get.to(() => LoginPage());
+                    },
+                  ));
+              //Get.to(() => ResetPasswordPage());
+            }));
+      } else {
+        await UserDB.addProfile(res.data!);
+        NotifyMe.showAlert(res.message!);
+        Get.to(() => const VendorHomeNavigation());
+        Get.to(() => switch (res.data?.isProfileComplete) {
+              false => SetupShotPage(),
+              _ => VendorHomeNavigation()
+            });
+      }
     } else {
       NotifyMe.showAlert(res.message!);
     }
@@ -131,7 +155,9 @@ class VendorAuthViewModel extends BaseViewModel {
     if (res.code == 200) {
       await UserDB.addProfile(res.data!);
       NotifyMe.showAlert(res.message!);
-      Get.to(() => VendorEmailOTPVerification(onTap: () {
+      Get.to(() => VendorEmailOTPVerification(
+          email: email,
+          onTap: () {
             Get.to(() => ConfirmationPage(
                   title: "Verification successful",
                   description: "Your email has been successfully verified",
@@ -150,11 +176,11 @@ class VendorAuthViewModel extends BaseViewModel {
 
 // VERIFY VENDOR EMAIL OTP
   Future verifyEmailOTP(
-      {required dynamic otp, required Function nextAction}) async {
+      {required dynamic otp, required Function nextAction, required String email}) async {
     var userData = UserDB.getUser();
     setBusy(true);
     final res = await ref.read(vendorAuthServiceProvider).verifyEmailOTP(
-        token: userData?.token, email: userData?.email, otp: otp);
+        token: userData?.token, email: email, otp: otp);
 
     if (res['code'] == 200) {
       NotifyMe.showAlert(res['message']!);
@@ -166,18 +192,19 @@ class VendorAuthViewModel extends BaseViewModel {
   }
 
   // VERIFY VENDOR EMAIL OTP
-  Future resendVerifyEmailOTP({required Function nextAction}) async {
-    var userData = UserDB.getUser();
+  Future resendVerifyEmailOTP(
+      {required Function nextAction, required String email}) async {
     setBusy(true);
     final res = await ref.read(vendorAuthServiceProvider).resendVerifyEmailOTP(
-          email: userData?.email,
+          email: email,
         );
 
-    if (res['code'] == 200) {
-      NotifyMe.showAlert(res['message']!);
+    if (res.code == 200) {
+       await UserDB.addProfile(res.data!);
+      NotifyMe.showAlert(res.message!);
       nextAction();
     } else {
-      NotifyMe.showAlert(res['message']!);
+      NotifyMe.showAlert(res.message!);
     }
     setBusy(false);
   }

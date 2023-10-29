@@ -98,7 +98,7 @@ class VendorAuthService extends ApiManager {
   }
 
   //resend verify email otp
-  Future resendVerifyEmailOTP({
+  Future<VendorUserData> resendVerifyEmailOTP({
     required dynamic email,
   }) async {
     final body = {"email": email, "user_type": "vendor"};
@@ -106,7 +106,11 @@ class VendorAuthService extends ApiManager {
     final response = await postHttp(resendVerifyEmailOTPRoute, body);
     var data = response.data;
 
-    return data;
+    if (response.statusCode == 200) {
+      return VendorUserData.fromJson(response.data);
+    } else {
+      return VendorUserData(message: data['message'].toString());
+    }
   }
 
   //Initiate reset password
