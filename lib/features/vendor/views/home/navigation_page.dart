@@ -1,4 +1,5 @@
 import 'package:bubbles/features/vendor/views/home/home_page/home_view.dart';
+import 'package:bubbles/features/vendor/views/home/shop/main_shop_page.dart';
 import 'package:bubbles/providers/home_navigation_provider.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/svgs.dart';
@@ -95,7 +96,7 @@ class _VendorHomeNavigation extends ConsumerState<VendorHomeNavigation> {
 
   static List<Widget> _pages = <Widget>[
     VendorHomePage(),
-    Container(),
+    MainShopPage(),
     Container(),
     Container(),
   ];

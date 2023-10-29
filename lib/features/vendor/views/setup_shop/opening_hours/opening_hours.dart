@@ -47,7 +47,11 @@ class OpeningHoursPage extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(2.0),
                   ),
                 ),
-                const SingleTextLineWidget(text: "Select all"),
+                SingleTextLineWidget(
+                    text: switch (viewModel.selectAll) {
+                  true => "Deselect all",
+                  false => "Select all"
+                }),
               ],
             ),
             Column(
@@ -69,11 +73,11 @@ class OpeningHoursPage extends ConsumerWidget {
                                     return PopupMenuItem<String>(
                                       value: data.openingTime,
                                       onTap: () {
-                                        viewModel.updateOpeningTime(id: data.id, time: hours);
-
+                                        viewModel.updateOpeningTime(
+                                            id: data.id, time: hours);
                                       },
                                       child: Text(
-                                       "$hours:00 am",
+                                        "$hours:00 am",
                                         style: Theme.of(context)
                                             .primaryTextTheme
                                             .headlineMedium,
@@ -95,8 +99,8 @@ class OpeningHoursPage extends ConsumerWidget {
                                     return PopupMenuItem<String>(
                                       value: data.closingTime,
                                       onTap: () {
-                                         viewModel.updateClosingTime(id: data.id, time: hours);
-                                       
+                                        viewModel.updateClosingTime(
+                                            id: data.id, time: hours);
                                       },
                                       child: Text(
                                         "$hours:00 pm",

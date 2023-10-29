@@ -31,7 +31,7 @@ class _VendorNotificationPageState
             const CustomTopWidget(
                 title: "Notification", subtitle: "", isBack: true),
             Padding(
-              padding: EdgeInsets.only(top: customTopBarPadding.h - 20),
+              padding: EdgeInsets.only(top: customTopBarPadding.h -10),
               child: mainComponent(),
             ),
           ],
@@ -41,6 +41,7 @@ class _VendorNotificationPageState
   Widget mainComponent() {
     return ListView(
       padding: EdgeInsets.symmetric(horizontal: generalHorizontalPadding.w),
+      shrinkWrap: true,
       children: [
         SizedBox(
           height: 20.h,

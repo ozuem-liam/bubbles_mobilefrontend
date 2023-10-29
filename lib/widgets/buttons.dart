@@ -318,41 +318,79 @@ class IconTextButton extends StatelessWidget {
 class SwitchTextButton extends ConsumerWidget {
   final String title;
   final Color? titleColor;
+  final Color? activeColor;
   final bool value;
   final VoidCallback onTap;
+  final bool swapPosition;
   const SwitchTextButton(
       {required this.title,
       this.titleColor,
+      this.activeColor,
       required this.value,
       required this.onTap,
+      this.swapPosition = false,
       super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: Theme.of(context).primaryTextTheme.headlineMedium?.copyWith(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.bold,
-                color: titleColor ??
-                    Theme.of(context).primaryTextTheme.headlineMedium?.color),
-          ),
-          Transform.scale(
-            scale: 0.7,
-            child: CupertinoSwitch(
-              activeColor: AppColors.primary,
-              value: value,
-              onChanged: (val) => onTap(),
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
+        child: switch (swapPosition) {
+          false => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context)
+                      .primaryTextTheme
+                      .headlineMedium
+                      ?.copyWith(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.bold,
+                          color: titleColor ??
+                              Theme.of(context)
+                                  .primaryTextTheme
+                                  .headlineMedium
+                                  ?.color),
+                ),
+                Transform.scale(
+                  scale: 0.7,
+                  child: CupertinoSwitch(
+                    activeColor: activeColor?? AppColors.primary,
+                    value: value,
+                    onChanged: (val) => onTap(),
+                  ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
-    );
+          true => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Transform.scale(
+                  scale: 0.7,
+                  child: CupertinoSwitch(
+                    activeColor: activeColor?? AppColors.primary,
+                    value: value,
+                    onChanged: (val) => onTap(),
+                  ),
+                ),
+                Text(
+                  title,
+                  style: Theme.of(context)
+                      .primaryTextTheme
+                      .headlineMedium
+                      ?.copyWith(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.bold,
+                          color: titleColor ??
+                              Theme.of(context)
+                                  .primaryTextTheme
+                                  .headlineMedium
+                                  ?.color),
+                ),
+              ],
+            ),
+        });
   }
 }
 

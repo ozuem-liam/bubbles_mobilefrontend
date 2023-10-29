@@ -68,3 +68,5 @@ const user1Icon = 'assets/svgs/user_1.svg';
 const customerSVGIcon = 'assets/svgs/customer_icon.svg';
 
 const basketIcon = 'assets/svgs/Basket.svg';
+
+const starIcon = 'assets/svgs/star.svg';
