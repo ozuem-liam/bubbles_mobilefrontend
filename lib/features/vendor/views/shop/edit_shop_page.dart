@@ -1,5 +1,6 @@
 import 'package:bubbles/features/customer/views/authentication/widgets/custom_top_widget.dart';
 import 'package:bubbles/features/vendor/views/shop/business_details.dart';
+import 'package:bubbles/features/vendor/views/shop/edit_laundry_items.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/utils/svgs.dart';
@@ -49,7 +50,9 @@ class EditShopPage extends ConsumerWidget {
         SizedBox(
           height: 15.h,
         ),
-        actionCard(title: "Laundry items", icon: laundryItemcon, onTap: () {}),
+        actionCard(title: "Laundry items", icon: laundryItemcon, onTap: () {
+            Get.to(()=> EditLaundryItems());
+        }),
         SizedBox(
           height: 15.h,
         ),
