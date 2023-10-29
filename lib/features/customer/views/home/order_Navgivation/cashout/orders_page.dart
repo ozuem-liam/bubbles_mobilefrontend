@@ -27,7 +27,7 @@ class _OrdersPageState extends State<OrdersPage> {
               Container(
                 height: 45,
                 decoration: BoxDecoration(
-                  color: AppColors.gray,
+                  color: AppColors.gray.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
@@ -46,7 +46,7 @@ class _OrdersPageState extends State<OrdersPage> {
                               decoration: BoxDecoration(
                                 color: selected == 0
                                     ? AppColors.white
-                                    : AppColors.gray,
+                                    : Colors.transparent,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Center(
@@ -74,7 +74,7 @@ class _OrdersPageState extends State<OrdersPage> {
                             decoration: BoxDecoration(
                               color: selected == 1
                                   ? AppColors.white
-                                  : AppColors.gray,
+                                  : Colors.transparent,
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: Center(
