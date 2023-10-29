@@ -122,7 +122,7 @@ class HorizontalTopWidget extends ConsumerWidget {
       decoration: BoxDecoration(
           color: bgColor ?? Theme.of(context).scaffoldBackgroundColor),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: generalHorizontalPadding.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

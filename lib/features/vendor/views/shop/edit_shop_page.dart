@@ -1,4 +1,5 @@
 import 'package:bubbles/features/customer/views/authentication/widgets/custom_top_widget.dart';
+import 'package:bubbles/features/vendor/views/shop/business_details.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/utils/svgs.dart';
@@ -8,6 +9,9 @@ import 'package:bubbles/widgets/single_text_line_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+// ignore: depend_on_referenced_packages
+import 'package:get/get.dart';
 
 class EditShopPage extends ConsumerWidget {
   const EditShopPage({super.key});
@@ -39,7 +43,9 @@ class EditShopPage extends ConsumerWidget {
           height: 10.h,
         ),
         actionCard(
-            title: "Business details", icon: businessDetailsIcon, onTap: () {}),
+            title: "Business details", icon: businessDetailsIcon, onTap: () {
+              Get.to(()=> BusinessDetailsPage());
+            }),
         SizedBox(
           height: 15.h,
         ),
@@ -52,6 +58,8 @@ class EditShopPage extends ConsumerWidget {
     );
   }
 
+  
+  
   Widget actionCard(
       {required String title, required String icon, required Function onTap}) {
     return Card(

@@ -1,4 +1,4 @@
-import 'package:bubbles/features/vendor/views/home/shop/edit_shop_page.dart';
+import 'package:bubbles/features/vendor/views/shop/edit_shop_page.dart';
 import 'package:bubbles/features/vendor/views/orders/all_orders_page.dart';
 import 'package:bubbles/features/vendor/views/orders/completed_orders.dart';
 import 'package:bubbles/features/vendor/views/orders/opened_orders.dart';
