@@ -250,6 +250,7 @@ class IconTextButton extends StatelessWidget {
   final Color? textColor;
   final Color? iconColor;
   final double? borderRadiuss;
+  final FontWeight? weight;
   final double? itemSpace;
 
   const IconTextButton(
@@ -263,6 +264,7 @@ class IconTextButton extends StatelessWidget {
       this.textColor,
       this.textSize,
       this.borderRadiuss,
+      this.weight,
       this.itemSpace,
       this.swapPosition = false})
       : super(key: key);
@@ -286,7 +288,7 @@ class IconTextButton extends StatelessWidget {
                   title,
                   style: TextStyle(
                       fontSize: textSize ?? 12,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: weight?? FontWeight.w600,
                       color: textColor ?? AppColors.black),
                 ),
               ],
@@ -298,7 +300,7 @@ class IconTextButton extends StatelessWidget {
                   title,
                   style: TextStyle(
                       fontSize: textSize ?? 12,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: weight?? FontWeight.w600,
                       color: textColor ?? AppColors.black),
                 ),
                 SizedBox(

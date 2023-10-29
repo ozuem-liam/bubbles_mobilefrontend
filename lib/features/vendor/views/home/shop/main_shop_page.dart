@@ -164,11 +164,12 @@ class MainShopPage extends ConsumerWidget {
                           child: IconTextButton(
                             title: "Edit",
                             icon: Icons.edit,
+                            weight: FontWeight.w400,
                             onTap: () {},
                             swapPosition: true,
                             itemSpace: 7.w,
                             iconSize: 14.w,
-                            textSize: 15.w,
+                            textSize: 13.w,
                             showBorder: true,
                             borderRadiuss: 10.r,
                             textColor: AppColors.primary,

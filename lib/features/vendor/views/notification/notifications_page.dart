@@ -1,5 +1,5 @@
 import 'package:bubbles/features/customer/views/authentication/widgets/custom_top_widget.dart';
-import 'package:bubbles/features/vendor/views/home/notification/notification_card_widget.dart';
+import 'package:bubbles/features/vendor/views/notification/notification_card_widget.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/style/appCustomPaints.dart';
 import 'package:bubbles/utils/constvalues.dart';

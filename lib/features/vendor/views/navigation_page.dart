@@ -1,4 +1,4 @@
-import 'package:bubbles/features/vendor/views/home/home_page/home_view.dart';
+import 'package:bubbles/features/vendor/views/home/home_view.dart';
 import 'package:bubbles/features/vendor/views/home/shop/main_shop_page.dart';
 import 'package:bubbles/providers/home_navigation_provider.dart';
 import 'package:bubbles/style/appColors.dart';

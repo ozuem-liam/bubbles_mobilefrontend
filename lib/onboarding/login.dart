@@ -4,7 +4,7 @@ import 'package:bubbles/features/customer/views/authentication/widgets/custom_to
 import 'package:bubbles/features/vendor/views/authentication/OTP/email_otp_verification.dart';
 import 'package:bubbles/features/vendor/views/authentication/OTP/send_email_otp.dart';
 import 'package:bubbles/features/vendor/views/authentication/password/reset_password.dart';
-import 'package:bubbles/features/vendor/views/home/navigation_page.dart';
+import 'package:bubbles/features/vendor/views/navigation_page.dart';
 import 'package:bubbles/widgets/custom_appbar.dart';
 import 'package:bubbles/widgets/drop_down_field.dart';
 import 'package:flutter/services.dart';

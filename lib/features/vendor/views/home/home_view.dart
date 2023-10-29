@@ -1,6 +1,6 @@
-import 'package:bubbles/features/vendor/views/home/home_page/widget/recent_activity_card_widget.dart';
-import 'package:bubbles/features/vendor/views/home/home_page/widget/statistics_card_widget.dart';
-import 'package:bubbles/features/vendor/views/home/notification/notifications_page.dart';
+import 'package:bubbles/features/vendor/views/home/widget/recent_activity_card_widget.dart';
+import 'package:bubbles/features/vendor/views/home/widget/statistics_card_widget.dart';
+import 'package:bubbles/features/vendor/views/notification/notifications_page.dart';
 import 'package:bubbles/providers/home_navigation_provider.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
