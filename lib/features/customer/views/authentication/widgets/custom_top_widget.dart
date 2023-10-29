@@ -47,7 +47,6 @@ class CustomTopWidget extends ConsumerWidget {
                   visible: isBack == false ? false : true,
                   child: InkWell(
                       onTap: () {
-                        
                         if (isNavigation == true) {
                           Get.back();
                         } else {
@@ -97,6 +96,74 @@ class CustomTopWidget extends ConsumerWidget {
             ),
             SizedBox(
               height: 16.h,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HorizontalTopWidget extends ConsumerWidget {
+  final String title;
+  final Color? bgColor;
+  final Color? textColor;
+  final Color? iconColor;
+  const HorizontalTopWidget(
+      {required this.title,
+      this.bgColor,
+      this.textColor,
+      this.iconColor,
+      super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      decoration: BoxDecoration(
+          color: bgColor ?? Theme.of(context).scaffoldBackgroundColor),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: generalHorizontalPadding.w),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 40.h,
+              child: InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Card(
+                    color: Theme.of(context).canvasColor.withOpacity(0.1),
+                    shape: RoundedRectangleBorder(
+                        // side: BorderSide(width: 0.5.w),
+                        borderRadius: BorderRadius.circular(10.r)),
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0.w),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: Theme.of(context)
+                            .iconTheme
+                            .color!
+                            .withOpacity(0.7),
+                        size: 17.sp,
+                        // color: iconColor ?? AppColors.white,
+                      ),
+                    ),
+                  )),
+            ),
+            SizedBox(
+              width: 10.h,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10.h),
+              child: Text(
+                title,
+                style:
+                    Theme.of(context).primaryTextTheme.headlineMedium!.copyWith(
+                        // color: textColor ?? AppColors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.sp),
+              ),
             ),
           ],
         ),

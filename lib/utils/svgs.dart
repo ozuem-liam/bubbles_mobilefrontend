@@ -70,3 +70,26 @@ const customerSVGIcon = 'assets/svgs/customer_icon.svg';
 const basketIcon = 'assets/svgs/Basket.svg';
 
 const starIcon = 'assets/svgs/star.svg';
+
+
+
+const callIcon = 'assets/svgs/call.svg';
+
+
+const cameraIcon = 'assets/svgs/Camera.svg';
+
+const cityIcon = 'assets/svgs/city.svg';
+
+const clockIcon = 'assets/svgs/clock.svg';
+
+const faxMoreIcon = 'assets/svgs/fax_more.svg';
+
+const locationIcon = 'assets/svgs/Location.svg';
+
+const businessDetailsIcon = 'assets/svgs/business_details.svg';
+
+const noOrderSVG = 'assets/svgs/no_order.svg';
+
+const stateIcon = 'assets/svgs/state.svg';
+
+const laundryItemcon = 'assets/svgs/laundry_items.svg';

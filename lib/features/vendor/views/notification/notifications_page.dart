@@ -28,10 +28,10 @@ class _VendorNotificationPageState
         appBar: customAppBar(),
         body: Stack(
           children: [
-            const CustomTopWidget(
-                title: "Notification", subtitle: "", isBack: true),
+            const HorizontalTopWidget(
+                title: "Notification",),
             Padding(
-              padding: EdgeInsets.only(top: customTopBarPadding.h -10),
+              padding: EdgeInsets.only(top: customTopBarPadding.h -30),
               child: mainComponent(),
             ),
           ],
@@ -44,7 +44,7 @@ class _VendorNotificationPageState
       shrinkWrap: true,
       children: [
         SizedBox(
-          height: 20.h,
+          height: 10.h,
         ),
         SingleTextLineWidget(
           text: "Today",
@@ -64,4 +64,8 @@ class _VendorNotificationPageState
       ],
     );
   }
+
+
+
+
 }

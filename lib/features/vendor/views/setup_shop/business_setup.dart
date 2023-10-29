@@ -1,12 +1,9 @@
 import 'package:bubbles/features/vendor/providers/shop_service_providers.dart';
-import 'package:bubbles/features/vendor/viewModels/shop_service_vm.dart';
-import 'package:bubbles/features/vendor/views/setup_shop/setup_shop.dart';
 import 'package:bubbles/features/vendor/views/setup_shop/widgets/multi_card_option_widget.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/utils/logger.dart';
 import 'package:bubbles/utils/svgs.dart';
-import 'package:bubbles/widgets/custom_appbar.dart';
 import 'package:bubbles/widgets/custom_button.dart';
 import 'package:bubbles/widgets/customfield.dart';
 import 'package:bubbles/widgets/image_widgets.dart';
@@ -56,13 +53,12 @@ class BusinessSetupPage extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(5.r)),
                   color: AppColors.secondary.withOpacity(0.1),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.camera_alt_outlined,
-                      size: 14.w,
-                      color: AppColors.secondary,
-                    ),
-                  ),
+                      padding: const EdgeInsets.all(8.0),
+                      child: SvgImage(
+                        asset: cameraIcon,
+                        width: 20.w,
+                        height: 20.w,
+                      )),
                 ),
                 title: Text(
                   "Upload your laundry shop picture",
@@ -93,9 +89,13 @@ class BusinessSetupPage extends ConsumerWidget {
             height: 20.h,
           ),
           CustomField(
-            pIcon: Icon(
-              Icons.corporate_fare_outlined,
-              size: 16.w,
+            pIcon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgImage(
+                asset: businessDetailsIcon,
+                width: 10.w,
+                height: 10.w,
+              ),
             ),
             headtext: "Business name",
             validate: true,
@@ -105,9 +105,13 @@ class BusinessSetupPage extends ConsumerWidget {
             height: 20.h,
           ),
           CustomField(
-            pIcon: Icon(
-              Icons.location_on,
-              size: 16.w,
+            pIcon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgImage(
+                asset: locationIcon,
+                width: 10.w,
+                height: 10.w,
+              ),
             ),
             headtext: "Business street address",
             validate: true,
@@ -148,9 +152,13 @@ class BusinessSetupPage extends ConsumerWidget {
             height: 20.h,
           ),
           CustomField(
-            pIcon: Icon(
-              Icons.confirmation_num_outlined,
-              size: 16.w,
+            pIcon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgImage(
+                asset: faxMoreIcon,
+                width: 10.w,
+                height: 10.w,
+              ),
             ),
             headtext: "CAC number (optional)",
             //controller: referralController,
