@@ -13,7 +13,7 @@ class ApiManager {
   //final baseURL = '';
 
   // Production Environment
-  final baseURL = 'https://production.getrenewabletek.com/api/v1';
+  final baseURL = 'https://bubbles-xi.vercel.app';
 
   final Ref read;
 
