@@ -39,6 +39,7 @@ class MainShopPage extends ConsumerWidget {
     var changeCatState = ref.read(categoryItemProvider.notifier);
     return Scaffold(
       body: ListView(
+        physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: generalHorizontalPadding.w),
         shrinkWrap: true,
         children: [

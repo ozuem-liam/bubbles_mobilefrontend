@@ -1,4 +1,4 @@
-import 'package:bubbles/features/vendor/views/home/widget/recent_activity_card_widget.dart';
+import 'package:bubbles/features/vendor/views/orders/widgets/order_activity_card_widget.dart';
 import 'package:bubbles/features/vendor/views/home/widget/statistics_card_widget.dart';
 import 'package:bubbles/features/vendor/views/notification/notifications_page.dart';
 import 'package:bubbles/providers/home_navigation_provider.dart';
@@ -246,11 +246,14 @@ class _VendorHomePageState extends ConsumerState<VendorHomePage> {
               SizedBox(
                 height: 20.h,
               ),
-              RecentActivityCardWidget(
+              OrderActivityCardWidget(
+                 onTap: (){},
                 title: "Iron Order",
                 icon: ironIcon,
                 date: "Today 12:05pm",
                 amount: "N2,600",
+                tagText: "New order",
+                hasTag: true,
                 accept: () {},
                 decline: () {},
               )
