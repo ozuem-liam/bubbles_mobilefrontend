@@ -5,7 +5,7 @@ import 'package:bubbles/widgets/custom_appbar.dart';
 import 'package:flutter/services.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/widgets/confirmation_screen.dart';
-import 'package:bubbles/onboarding/login.dart';
+import 'package:bubbles/features/vendor/views/authentication/login.dart';
 import 'package:bubbles/widgets/custom_button.dart';
 import 'package:bubbles/widgets/customfield.dart';
 import 'package:flutter/material.dart';

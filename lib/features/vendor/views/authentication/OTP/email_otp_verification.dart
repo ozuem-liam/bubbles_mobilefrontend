@@ -1,4 +1,5 @@
 import 'package:bubbles/features/customer/providers/customer_auth_providers.dart';
+import 'package:bubbles/features/vendor/providers/vendor_auth_providers.dart';
 import 'package:bubbles/utils/temporary_storage.dart';
 import 'package:bubbles/features/customer/views/authentication/widgets/custom_top_widget.dart';
 import 'package:bubbles/widgets/custom_appbar.dart';
@@ -39,7 +40,7 @@ class VendorEmailOTPVerification extends ConsumerWidget {
 
   Widget emailVerification(
       {required BuildContext context, required WidgetRef ref}) {
-    var authViewModel = ref.watch(customerAuthViewModelProvider);
+    var authViewModel = ref.watch(vendorAuthViewModelProvider);
 
     return Form(
       key: formKey,
@@ -61,33 +62,30 @@ class VendorEmailOTPVerification extends ConsumerWidget {
             SizedBox(
               height: 20.h,
             ),
-           
             ActionCustomButton(
                 title: "Verify email",
                 onclick: () async {
                   FocusScope.of(context).unfocus();
-                  onTap();
-                  // final validate = authViewModel.validateAndSave(formKey);
-                  // if (validate) {
-                  //   authViewModel.verifyResetOTP(
-                  //       token: otpController.text.trim(), nextAction: onTap);
-                  // }
+                 
+                  final validate = authViewModel.validateAndSave(formKey);
+                  if (validate) {
+                    authViewModel.verifyEmailOTP(
+                        otp: otpController.text.trim(), nextAction: onTap);
+                  }
                 }),
             SizedBox(
               height: 20.h,
             ),
-             Center(
+            Center(
               child: WordsButton(
                   firstTextSize: 12.sp,
                   secondTextSize: 12.sp,
                   secondTextColor: AppColors.secondary,
                   fontWeight2: FontWeight.bold,
-                 // underline: TextDecoration.underline,
+                  // underline: TextDecoration.underline,
                   textHeight: 2,
                   onTap: () async {
-                    authViewModel.initiateResetPasswords(
-                        email: LocalStorageManager.getString(key: "email"),
-                        nextAction: () {});
+                    authViewModel.resendVerifyEmailOTP(nextAction: () {});
                   },
                   firstText: "Did not receive Code?",
                   secondText: "Resend"),

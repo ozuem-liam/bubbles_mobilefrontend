@@ -1,6 +1,8 @@
 import 'package:bubbles/features/customer/providers/customer_auth_providers.dart';
 import 'package:bubbles/features/customer/viewModels/customer_auth_vm.dart';
 import 'package:bubbles/features/customer/views/authentication/widgets/custom_top_widget.dart';
+import 'package:bubbles/features/vendor/providers/vendor_auth_providers.dart';
+import 'package:bubbles/features/vendor/viewModels/vendor_auth_vm.dart';
 import 'package:bubbles/features/vendor/views/authentication/OTP/email_otp_verification.dart';
 import 'package:bubbles/features/vendor/views/authentication/OTP/send_email_otp.dart';
 import 'package:bubbles/features/vendor/views/authentication/password/reset_password.dart';
@@ -36,13 +38,13 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var authViewModel = ref.watch(customerAuthViewModelProvider);
+    var authViewModel = ref.watch(vendorAuthViewModelProvider);
     String stateValue = ref.watch(selectUserTypeProvider);
     var toggleValue = ref.read(selectUserTypeProvider.notifier);
 
     Widget loginForm(
         {required BuildContext context,
-        required CustomerAuthViewModel authViewModel}) {
+        required VendorAuthViewModel authViewModel}) {
       return Form(
         key: formKey,
         child: Padding(
@@ -165,9 +167,16 @@ class LoginPage extends ConsumerWidget {
               ActionCustomButton(
                   title: "LOGIN",
                   isLoading: false,
-                  onclick: () {
+                  onclick: () async {
                     if (stateValue == 'Vendor') {
-                      Get.to(() => const VendorHomeNavigation());
+                      // Get.to(() => const VendorHomeNavigation());
+                      final validate = authViewModel.validateAndSave(formKey);
+                      if (validate) {
+                        authViewModel.login(
+                            email: emailController.text.trim().toString(),
+                            password:
+                                passwordController.text.trim().toString());
+                      }
                     } else {}
                   }),
               SizedBox(

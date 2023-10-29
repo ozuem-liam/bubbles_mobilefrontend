@@ -48,7 +48,7 @@ class _VendorHomeNavigation extends ConsumerState<VendorHomeNavigation> {
             items: [
               BottomNavigationBarItem(
                 icon: index == 0
-                    ?const SvgImage(
+                    ? const SvgImage(
                         asset: dashboard1Icon,
                       )
                     : const SvgImage(
@@ -58,31 +58,31 @@ class _VendorHomeNavigation extends ConsumerState<VendorHomeNavigation> {
               ),
               BottomNavigationBarItem(
                 // backgroundColor: Colors.white,
-                 icon: index == 1
+                icon: index == 1
                     ? const SvgImage(
                         asset: shop1Icon,
                       )
-                    :const SvgImage(
+                    : const SvgImage(
                         asset: shopIcon,
                       ),
                 label: "Shop",
               ),
               BottomNavigationBarItem(
                 icon: index == 2
-                    ?const SvgImage(
+                    ? const SvgImage(
                         asset: wallet1Icon,
                       )
-                    :const SvgImage(
+                    : const SvgImage(
                         asset: walletIcon,
                       ),
                 label: "Wallet",
               ),
               BottomNavigationBarItem(
                 icon: index == 3
-                    ?const SvgImage(
+                    ? const SvgImage(
                         asset: user1Icon,
                       )
-                    :const SvgImage(
+                    : const SvgImage(
                         asset: userIcon,
                       ),
                 label: "Account",

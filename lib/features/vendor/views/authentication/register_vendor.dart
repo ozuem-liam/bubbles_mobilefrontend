@@ -1,5 +1,6 @@
 import 'package:bubbles/features/customer/providers/customer_auth_providers.dart';
 import 'package:bubbles/features/customer/views/authentication/OTP/email_otp_verification.dart';
+import 'package:bubbles/features/vendor/providers/vendor_auth_providers.dart';
 import 'package:bubbles/features/vendor/views/authentication/OTP/email_otp_verification.dart';
 import 'package:bubbles/features/vendor/views/setup_shop/setup_shop.dart';
 import 'package:bubbles/widgets/buttons.dart';
@@ -11,23 +12,23 @@ import 'package:bubbles/style/appColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:bubbles/onboarding/login.dart';
+import 'package:bubbles/features/vendor/views/authentication/login.dart';
 import 'package:get/get.dart';
 
 class ResgisterVendor extends ConsumerWidget {
   ResgisterVendor({super.key});
   final formKey = GlobalKey<FormState>();
-  final fullNameController = TextEditingController();
+  final firstNameController = TextEditingController();
   final passwordController = TextEditingController();
-  final userNameController = TextEditingController();
+  final lastNameController = TextEditingController();
 
-  final referralController = TextEditingController();
+  final addressController = TextEditingController();
   final phoneController = TextEditingController();
   final emailController = TextEditingController();
   // final phoneController = TextEditingController();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var viewModel = ref.watch(customerAuthViewModelProvider);
+    var viewModel = ref.watch(vendorAuthViewModelProvider);
     return Form(
       key: formKey,
       child: Column(
@@ -39,10 +40,13 @@ class ResgisterVendor extends ConsumerWidget {
             children: [
               Expanded(
                 child: CustomField(
-                  pIcon: Icon(Icons.person, size: 13.w,),
-                  headtext: "Name",
+                  pIcon: Icon(
+                    Icons.person,
+                    size: 13.w,
+                  ),
+                  headtext: "First name",
                   validate: true,
-                  controller: fullNameController,
+                  controller: firstNameController,
                 ),
               ),
               SizedBox(
@@ -50,10 +54,13 @@ class ResgisterVendor extends ConsumerWidget {
               ),
               Expanded(
                 child: CustomField(
-                   pIcon: Icon(Icons.person, size: 13.w,),
-                  headtext: "Surname",
+                  pIcon: Icon(
+                    Icons.person,
+                    size: 13.w,
+                  ),
+                  headtext: "last name",
                   validate: true,
-                  controller: userNameController,
+                  controller: lastNameController,
                   textInputFormatters: [
                     FilteringTextInputFormatter.deny(RegExp('[ ]')),
                   ],
@@ -65,7 +72,10 @@ class ResgisterVendor extends ConsumerWidget {
             height: 20.h,
           ),
           CustomField(
-             pIcon: Icon(Icons.email, size: 13.w,),
+            pIcon: Icon(
+              Icons.email,
+              size: 13.w,
+            ),
             headtext: "Email",
             validate: true,
             controller: emailController,
@@ -77,7 +87,10 @@ class ResgisterVendor extends ConsumerWidget {
             height: 20.h,
           ),
           CustomField(
-             pIcon: Icon(Icons.phone, size: 13.w,),
+            pIcon: Icon(
+              Icons.phone,
+              size: 13.w,
+            ),
             headtext: "Phone Number",
             hint: '+234-123456789',
             validate: true,
@@ -85,7 +98,7 @@ class ResgisterVendor extends ConsumerWidget {
             textInputFormatters: [
               FilteringTextInputFormatter.deny(RegExp('[ ]')),
               FilteringTextInputFormatter.digitsOnly,
-              FilteringTextInputFormatter.deny(RegExp('^0+')),
+              // FilteringTextInputFormatter.deny(RegExp('^0+')),
               LengthLimitingTextInputFormatter(11)
             ],
           ),
@@ -93,15 +106,21 @@ class ResgisterVendor extends ConsumerWidget {
             height: 20.h,
           ),
           CustomField(
-             pIcon: Icon(Icons.location_on, size: 13.w,),
+            pIcon: Icon(
+              Icons.location_on,
+              size: 13.w,
+            ),
             headtext: "Address",
-            controller: referralController,
+            controller: addressController,
           ),
           SizedBox(
             height: 20.h,
           ),
           CustomField(
-             pIcon: Icon(Icons.security, size: 13.w,),
+            pIcon: Icon(
+              Icons.security,
+              size: 13.w,
+            ),
             headtext: "Password",
             hint: '***********',
             validate: true,
@@ -146,18 +165,16 @@ class ResgisterVendor extends ConsumerWidget {
               title: "Signup",
               isLoading: false,
               onclick: () async {
-                Get.to(() => VendorEmailOTPVerification(onTap: () {
-                      Get.to(() => ConfirmationPage(
-                            title: "Verification successful",
-                            description:
-                                "Your email has been successfully verified",
-                                btnTitle: "Setup shop",
-                            onTap: () {
-                              Get.to(() => const SetupShotPage());
-                            },
-                          ));
-                      //Get.to(() => ResetPasswordPage());
-                    }));
+                final validate = viewModel.validateAndSave(formKey);
+                if (validate) {
+                  viewModel.registerVendor(
+                      email: emailController.text.trim().toString(),
+                      password: passwordController.text.trim().toString(),
+                      firstName: firstNameController.text.trim(),
+                      lastName: lastNameController.text.trim(),
+                      phone: phoneController.text.trim(),
+                      address: addressController.text.trim());
+                }
               }),
           SizedBox(
             height: 15.h,
@@ -175,7 +192,7 @@ class ResgisterVendor extends ConsumerWidget {
                 firstText: "Have an existing account?",
                 secondText: "Login"),
           ),
-           SizedBox(
+          SizedBox(
             height: 40.h,
           ),
         ],

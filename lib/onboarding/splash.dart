@@ -1,3 +1,4 @@
+import 'package:bubbles/features/vendor/views/navigation_page.dart';
 import 'package:bubbles/utils/svgs.dart';
 import 'package:bubbles/utils/user_db.dart';
 import 'package:bubbles/features/customer/views/home/navigation_page.dart';
@@ -34,7 +35,7 @@ class _SplashViewState extends ConsumerState<SplashView>
       ..addStatusListener((AnimationStatus status) {
         if (status == AnimationStatus.completed) {
           Get.off(() =>
-              user == null ? const StepperScreen() : const HomeNavigation());
+              user == null ? const StepperScreen() :user.userType == "vendor"? const VendorHomeNavigation(): HomeNavigation());
         }
       }));
 
