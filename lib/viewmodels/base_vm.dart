@@ -1,4 +1,3 @@
-
 import 'package:bubbles/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,5 +36,4 @@ class BaseViewModel extends ChangeNotifier {
     }
     return false;
   }
-
 }

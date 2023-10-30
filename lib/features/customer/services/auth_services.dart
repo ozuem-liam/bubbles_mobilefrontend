@@ -25,7 +25,7 @@ class UserAuthService extends ApiManager {
   UserAuthService(this.reader) : super(reader);
 
   //Login with email and password
-  Future<CustomerLoginResponseModel> loginCustomer(
+  Future<VendorUserData> loginCustomer(
     String email,
     String password,
   ) async {
@@ -39,9 +39,9 @@ class UserAuthService extends ApiManager {
     var data = response.data;
 
     if (response.statusCode == 200) {
-      return CustomerLoginResponseModel.fromJson(response.data);
+      return VendorUserData.fromJson(response.data);
     } else {
-      return CustomerLoginResponseModel(message: data['message'].toString());
+      return VendorUserData(message: data['message'].toString());
     }
   }
 
@@ -117,7 +117,7 @@ class UserAuthService extends ApiManager {
     return data;
   }
 
-  Future<CustomerLoginResponseModel> getCustomerDashboard() async {
+  Future<VendorUserData> getCustomerDashboard() async {
     final response = await getHttp(
         customerDashboardRoute +
             LocalStorageManager.getString(key: MyStrings.userId),
@@ -126,9 +126,9 @@ class UserAuthService extends ApiManager {
     var data = response.data;
 
     if (response.statusCode == 200) {
-      return CustomerLoginResponseModel.fromJson(response.data);
+      return VendorUserData.fromJson(response.data);
     } else {
-      return CustomerLoginResponseModel(message: data['message'].toString());
+      return VendorUserData(message: data['message'].toString());
     }
   }
 

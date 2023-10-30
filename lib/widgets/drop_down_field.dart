@@ -42,7 +42,7 @@ class DropDownFeild extends ConsumerWidget {
                                 .primaryTextTheme
                                 .headlineMedium
                                 ?.copyWith(
-                                    fontSize: 10.sp,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.w400,
                                     color: Theme.of(context)
                                         .primaryTextTheme
@@ -86,7 +86,7 @@ class DropDownFeild extends ConsumerWidget {
                           .primaryTextTheme
                           .headlineMedium!
                           .copyWith(
-                              fontSize: 10.sp, fontWeight: FontWeight.w400),
+                              fontSize: 12.sp, fontWeight: FontWeight.w400),
                 ),
                  Icon(
                   Icons.arrow_drop_down,

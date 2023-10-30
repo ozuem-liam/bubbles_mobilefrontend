@@ -1,4 +1,8 @@
 import 'package:bubbles/features/vendor/providers/vendor_auth_providers.dart';
+import 'package:bubbles/features/vendor/views/authentication/OTP/email_otp_verification.dart';
+import 'package:bubbles/onboarding/login.dart';
+import 'package:bubbles/features/vendor/views/navigation_page.dart';
+import 'package:bubbles/features/vendor/views/setup_shop/setup_shop.dart';
 import 'package:bubbles/utils/notify_me.dart';
 import 'package:bubbles/utils/svgs.dart';
 import 'package:bubbles/utils/temporary_storage.dart';
@@ -6,6 +10,7 @@ import 'package:bubbles/utils/user_db.dart';
 import 'package:bubbles/viewmodels/base_vm.dart';
 import 'package:bubbles/features/customer/views/home/navigation_page.dart';
 import 'package:bubbles/onboarding/stepper_screen.dart';
+import 'package:bubbles/widgets/confirmation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // ignore: depend_on_referenced_packages
@@ -34,8 +39,6 @@ class VendorAuthViewModel extends BaseViewModel {
   final lastNameController = TextEditingController();
   final phoneController = TextEditingController();
   final imageurlController = TextEditingController();
-
-
 
   String deviceId = '';
   final imagePicker = ImagePicker();
@@ -83,16 +86,123 @@ class VendorAuthViewModel extends BaseViewModel {
   //   notifyListeners();
   // }
 
+// LOGIN VENDOR USER
+  var otpMessage =
+      'Email not verified! Please use the otp code sent to your email to verify your account!';
   Future login({required String email, required String password}) async {
     setBusy(true);
     final res = await ref
         .read(vendorAuthServiceProvider)
-        .loginCustomer(email, password);
+        .loginVendor(email, password)
+        .catchError((onError) {
+      setBusy(false);
+    });
+
+    if (res.code == 200) {
+      if (res.message == otpMessage) {
+        NotifyMe.showAlert(res.message!);
+        Get.to(() => VendorEmailOTPVerification(
+            email: email,
+            onTap: () {
+              Get.to(() => ConfirmationPage(
+                    title: "Verification successful",
+                    description: "Your email has been successfully verified",
+                    btnTitle: "Continue",
+                    onTap: () {
+                      Get.to(() => LoginPage());
+                    },
+                  ));
+              //Get.to(() => ResetPasswordPage());
+            }));
+      } else {
+        await UserDB.addProfile(res.data!);
+        NotifyMe.showAlert(res.message!);
+        Get.to(() => const VendorHomeNavigation());
+        Get.to(() => switch (res.data?.isProfileComplete) {
+              false => SetupShopPage(),
+              _ => VendorHomeNavigation()
+            });
+      }
+    } else {
+      NotifyMe.showAlert(res.message!);
+    }
+    setBusy(false);
+  }
+
+  // REGISTER VENDOR USER
+  Future registerVendor({
+    required String email,
+    required String password,
+    required String firstName,
+    required String lastName,
+    required String phone,
+    required String address,
+  }) async {
+    setBusy(true);
+    final res = await ref
+        .read(vendorAuthServiceProvider)
+        .registerVendor(
+            email: email,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            phone: phone,
+            address: address)
+        .catchError((onError) {
+      setBusy(false);
+    });
 
     if (res.code == 200) {
       await UserDB.addProfile(res.data!);
       NotifyMe.showAlert(res.message!);
-      Get.to(() => const HomeNavigation());
+      Get.to(() => VendorEmailOTPVerification(
+          email: email,
+          onTap: () {
+            Get.to(() => ConfirmationPage(
+                  title: "Verification successful",
+                  description: "Your email has been successfully verified",
+                  btnTitle: "Setup shop",
+                  onTap: () {
+                    Get.to(() => const SetupShopPage());
+                  },
+                ));
+            //Get.to(() => ResetPasswordPage());
+          }));
+    } else {
+      NotifyMe.showAlert(res.message!);
+    }
+    setBusy(false);
+  }
+
+// VERIFY VENDOR EMAIL OTP
+  Future verifyEmailOTP(
+      {required dynamic otp, required Function nextAction, required String email}) async {
+    var userData = UserDB.getUser();
+    setBusy(true);
+    final res = await ref.read(vendorAuthServiceProvider).verifyEmailOTP(
+        token: userData?.token, email: email, otp: otp);
+
+    if (res['code'] == 200) {
+      NotifyMe.showAlert(res['message']!);
+      nextAction();
+    } else {
+      NotifyMe.showAlert(res['message']!);
+    }
+    setBusy(false);
+  }
+
+  // VERIFY VENDOR EMAIL OTP
+  Future resendVerifyEmailOTP(
+      {required Function nextAction, required String email}) async {
+    setBusy(true);
+    final res = await ref.read(vendorAuthServiceProvider).resendVerifyEmailOTP(
+          email: email,
+        );
+
+    if (res.code == 200) {
+       await UserDB.addProfile(res.data!);
+      NotifyMe.showAlert(res.message!);
+      nextAction();
     } else {
       NotifyMe.showAlert(res.message!);
     }
@@ -109,9 +219,8 @@ class VendorAuthViewModel extends BaseViewModel {
       {required String email, required Function nextAction}) async {
     LocalStorageManager.setString(key: 'email', value: email);
     setBusy(true);
-    final res = await ref
-        .read(vendorAuthServiceProvider)
-        .initiateResetPassword(email);
+    final res =
+        await ref.read(vendorAuthServiceProvider).initiateResetPassword(email);
 
     if (res['code'] == 200) {
       NotifyMe.showAlert(res['message']!);
@@ -125,9 +234,8 @@ class VendorAuthViewModel extends BaseViewModel {
   Future verifyResetOTP(
       {required dynamic token, required Function nextAction}) async {
     setBusy(true);
-    final res = await ref
-        .read(vendorAuthServiceProvider)
-        .verifyResetOTP(token: token);
+    final res =
+        await ref.read(vendorAuthServiceProvider).verifyResetOTP(token: token);
 
     if (res['code'] == 200) {
       NotifyMe.showAlert(res['message']!);
@@ -161,7 +269,7 @@ class VendorAuthViewModel extends BaseViewModel {
         .updateProfileImage(imageUrl: imageurlController.text);
 
     if (res['code'] == 200) {
-      UserDB.getUser()!.profileImage = imageurlController.text;
+      //UserDB.getUser()!.profileImage = imageurlController.text;
       notifyListeners();
 
       NotifyMe.showAlert(res['message']!);
@@ -222,7 +330,7 @@ class VendorAuthViewModel extends BaseViewModel {
   // bubbles PROFILE INFORMATION
 
   setProfileDetaisl() {
-    imageurlController.text = UserDB.getUser()!.profileImage!;
+    // imageurlController.text = UserDB.getUser()!.profileImage!;
     firtNameController.text =
         UserDB.getUser()!.firstName!.toString().capitalizeFirst!;
     lastNameController.text =

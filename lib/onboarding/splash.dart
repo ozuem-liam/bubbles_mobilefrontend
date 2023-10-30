@@ -1,3 +1,5 @@
+import 'package:bubbles/features/vendor/views/navigation_page.dart';
+import 'package:bubbles/features/vendor/views/setup_shop/setup_shop.dart';
 import 'package:bubbles/utils/svgs.dart';
 import 'package:bubbles/utils/user_db.dart';
 import 'package:bubbles/features/customer/views/home/navigation_page.dart';
@@ -33,8 +35,22 @@ class _SplashViewState extends ConsumerState<SplashView>
         curve: const Interval(0.0, 1.0, curve: Curves.easeOut))
       ..addStatusListener((AnimationStatus status) {
         if (status == AnimationStatus.completed) {
-          Get.off(() =>
-              user == null ? const StepperScreen() : const HomeNavigation());
+          // Get.off(() => user == null
+          //     ? const StepperScreen()
+          //     : user.userType == "vendor"
+          //         ? const VendorHomeNavigation()
+          //         : HomeNavigation());
+
+          Get.to(() => switch (user) {
+                null => const StepperScreen(),
+                _ => switch (user.userType) {
+                    "vendor" => switch (user.isProfileComplete) {
+                        false => SetupShopPage(),
+                        _ => VendorHomeNavigation()
+                      },
+                    _ => HomeNavigation()
+                  }
+              });
         }
       }));
 

@@ -169,6 +169,8 @@ class LaundryItemsPage extends ConsumerWidget {
               height: 20.h,
             ),
           ]),
+    
+    
     );
   }
 }

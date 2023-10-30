@@ -1,5 +1,6 @@
 import 'package:bubbles/features/customer/providers/customer_auth_providers.dart';
 import 'package:bubbles/features/customer/views/authentication/OTP/email_otp_verification.dart';
+import 'package:bubbles/utils/notify_me.dart';
 import 'package:bubbles/widgets/buttons.dart';
 import 'package:bubbles/widgets/confirmation_screen.dart';
 import 'package:bubbles/widgets/custom_button.dart';
@@ -19,7 +20,7 @@ class ResgisterCustomer extends ConsumerWidget {
   final passwordController = TextEditingController();
   final userNameController = TextEditingController();
 
-  final referralController = TextEditingController();
+  final address = TextEditingController();
   final phoneController = TextEditingController();
   final emailController = TextEditingController();
   // final phoneController = TextEditingController();
@@ -88,7 +89,7 @@ class ResgisterCustomer extends ConsumerWidget {
           ),
           CustomField(
             headtext: "Address",
-            controller: referralController,
+            controller: address,
           ),
           SizedBox(
             height: 20.h,
@@ -138,17 +139,37 @@ class ResgisterCustomer extends ConsumerWidget {
               title: "Signup",
               isLoading: false,
               onclick: () async {
-                Get.to(() => EmailOTPVerification(onTap: () {
-                      Get.to(() => ConfirmationPage(
-                            title: "Verification successful",
-                            description:
-                                "Your email has been successfully verified",
-                            onTap: () {
-                              Get.to(() => LoginPage());
-                            },
-                          ));
-                      //Get.to(() => ResetPasswordPage());
-                    }));
+                if (formKey.currentState!.validate()) {
+                  final click = await viewModel.registerCustomer(
+                    firstName: fullNameController.text,
+                    lastName: userNameController.text,
+                    email: emailController.text,
+                    pass: passwordController.text,
+                    phone: phoneController.text,
+                    addres: address.text,
+                    userType: "customer",
+                  );
+                  click.fold(
+                    (l) => NotifyMe.showAlert(l),
+                    (r) => Get.to(
+                      () => EmailOTPVerification(
+                        onTap: () {
+                          Get.to(
+                            () => ConfirmationPage(
+                              title: "Verification successful",
+                              description:
+                                  "Your email has been successfully verified",
+                              onTap: () {
+                                Get.to(() => LoginPage());
+                              },
+                            ),
+                          );
+                          //Get.to(() => ResetPasswordPage());
+                        },
+                      ),
+                    ),
+                  );
+                }
               }),
           SizedBox(
             height: 15.h,
@@ -166,7 +187,7 @@ class ResgisterCustomer extends ConsumerWidget {
                 firstText: "Have an existing account?",
                 secondText: "Login"),
           ),
-           SizedBox(
+          SizedBox(
             height: 40.h,
           ),
         ],

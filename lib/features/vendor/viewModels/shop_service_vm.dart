@@ -1,13 +1,34 @@
+import 'package:bubbles/features/vendor/model/shop_service_response_model.dart';
+import 'package:bubbles/features/vendor/providers/shop_service_providers.dart';
+import 'package:bubbles/features/vendor/services/shop_services.dart';
+import 'package:bubbles/utils/notify_me.dart';
 import 'package:bubbles/utils/svgs.dart';
 import 'package:bubbles/viewmodels/base_vm.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+
+// ignore: depend_on_referenced_packages
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:dio/dio.dart' as dio;
+// ignore: depend_on_referenced_packages
+import 'package:http_parser/http_parser.dart';
 
 class ShopServiceVM extends BaseViewModel {
   final Ref ref;
-  ShopServiceVM(this.ref) : super(ref);
+
+  VendorShopService? vendorShopService;
+  ShopServiceVM(this.ref) : super(ref) {
+    vendorShopService = ref.read(shopAuthServiceProvider);
+
+    getShopServices();
+  }
 
   int setUpIndex = 0;
   List<String> serviceList = [];
+  final imagePicker = ImagePicker();
+
+  List<ServiceData>? servicesList = [];
 
   List<String> laundryTypeList = [];
 
@@ -73,14 +94,56 @@ class ShopServiceVM extends BaseViewModel {
     }
   }
 
-  // void addService(String service) {
-  //   state = [...state, service];
-  // }
+  // GET ALL SERVICES
 
-  // void removeService(String service) {
-  //   state = [
-  //     for (final item in state)
-  //       if (item != service) item
-  //   ];
-  // }
+  bool fetchServices = false;
+
+  Future getShopServices() async {
+    fetchServices = true;
+    notifyListeners();
+
+    var res = await vendorShopService?.getServices();
+
+    if (res?.code == 200 || res?.code == 201) {
+      servicesList = [];
+      servicesList = res?.data?.services;
+      fetchServices = false;
+      notifyListeners();
+    }
+    fetchServices = false;
+    notifyListeners();
+  }
+
+  bool isUploading = false;
+  String businessImageUrl = '';
+  uploadbubblesPicture() async {
+    isUploading = true;
+    notifyListeners();
+    try {
+      XFile? pickedImage =
+          await imagePicker.pickImage(source: ImageSource.gallery);
+      if (pickedImage == null) {
+        isUploading = false;
+        notifyListeners();
+      } else {
+        String fileName = pickedImage.path.split('/').last;
+        final res = await vendorShopService!.uploadFiles(
+            file: await dio.MultipartFile.fromFile(pickedImage.path,
+                filename: fileName, contentType: MediaType('image', 'jpg')));
+
+        if (res.code == 200) {
+          NotifyMe.showAlert(res.message!);
+          businessImageUrl = res.data!.fileUrl!;
+          //imageurlController.text = res.data!.fileUrl!;
+          isUploading = false;
+
+          notifyListeners();
+        } else {
+          isUploading = false;
+          notifyListeners();
+          NotifyMe.showAlert(res.message!);
+        }
+      }
+    } catch (_) {}
+  }
 }

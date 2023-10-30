@@ -1,16 +1,15 @@
-import 'package:bubbles/features/customer/providers/customer_auth_providers.dart';
-import 'package:bubbles/features/customer/viewModels/customer_auth_vm.dart';
 import 'package:bubbles/features/customer/views/authentication/widgets/custom_top_widget.dart';
 import 'package:bubbles/features/customer/views/home/navigation_page.dart';
-import 'package:bubbles/features/vendor/views/authentication/OTP/email_otp_verification.dart';
-import 'package:bubbles/features/vendor/views/authentication/OTP/send_email_otp.dart';
-import 'package:bubbles/features/vendor/views/authentication/password/reset_password.dart';
+import 'package:bubbles/features/vendor/providers/vendor_auth_providers.dart';
+import 'package:bubbles/features/vendor/viewModels/vendor_auth_vm.dart';
+import 'package:bubbles/utils/notify_me.dart';
 import 'package:bubbles/widgets/custom_appbar.dart';
+import 'package:bubbles/widgets/drop_down_field.dart';
 import 'package:flutter/services.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/features/customer/views/authentication/OTP/email_otp_verification.dart';
-import 'package:bubbles/features/customer/views/authentication/OTP/send_email_otp.dart';
+import 'package:bubbles/onboarding/forgot_password.dart';
 import 'package:bubbles/features/customer/views/authentication/password/reset_password.dart';
 import 'package:bubbles/onboarding/select_user_type.dart';
 import 'package:bubbles/widgets/buttons.dart';
@@ -24,6 +23,8 @@ import 'package:get/get.dart';
 
 var selectUserTypeProvider = StateProvider.autoDispose<String>((ref) => '');
 
+final userList = ["Customer", "Vendor"];
+
 class LoginPage extends ConsumerWidget {
   LoginPage({super.key});
   final formKey = GlobalKey<FormState>();
@@ -33,78 +34,13 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var authViewModel = ref.watch(customerAuthViewModelProvider);
+    var authViewModel = ref.watch(vendorAuthViewModelProvider);
     String stateValue = ref.watch(selectUserTypeProvider);
     var toggleValue = ref.read(selectUserTypeProvider.notifier);
 
-    Widget userTypeFieldWidget(
-        {required BuildContext context,
-        required CustomerAuthViewModel authViewModel}) {
-      return PopupMenuButton<String>(
-        clipBehavior: Clip.hardEdge,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
-        position: PopupMenuPosition.under,
-        constraints: BoxConstraints(
-          minWidth: MediaQuery.sizeOf(context).width - 50.w,
-          maxWidth: MediaQuery.sizeOf(context).width - 50.w,
-        ),
-        child: Container(
-          height: 45.h,
-          width: MediaQuery.sizeOf(context).width,
-          decoration: BoxDecoration(
-              border: Border.all(color: AppColors.gray, width: 1),
-              borderRadius: BorderRadius.circular(10)),
-          child: Padding(
-            padding: EdgeInsets.only(top: 0, left: 17.w, right: 10.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  stateValue == '' ? 'Select your account type' : stateValue,
-                  style: stateValue == ''
-                      ? Theme.of(context)
-                          .primaryTextTheme
-                          .headlineMedium
-                          ?.copyWith(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
-                          )
-                      : Theme.of(context)
-                          .primaryTextTheme
-                          .headlineMedium!
-                          .copyWith(
-                              fontSize: 12.sp, fontWeight: FontWeight.w400),
-                ),
-                const Icon(
-                  Icons.arrow_drop_down,
-                  size: 20,
-                  color: AppColors.gray,
-                )
-              ],
-            ),
-          ),
-        ),
-        onSelected: (String result) {},
-        itemBuilder: (BuildContext context) => List.generate(
-          authViewModel.userType().length,
-          (index) => PopupMenuItem<String>(
-            value: authViewModel.userType()[index]['user'],
-            onTap: () {
-              toggleValue.state = authViewModel.userType()[index]['user'];
-            },
-            child: Text(
-              authViewModel.userType()[index]['user'],
-              style: Theme.of(context).primaryTextTheme.headlineMedium,
-            ),
-          ),
-        ),
-      );
-    }
-
     Widget loginForm(
         {required BuildContext context,
-        required CustomerAuthViewModel authViewModel}) {
+        required VendorAuthViewModel authViewModel}) {
       return Form(
         key: formKey,
         child: Padding(
@@ -116,8 +52,23 @@ class LoginPage extends ConsumerWidget {
               SizedBox(
                 height: 50.h,
               ),
-              userTypeFieldWidget(
-                  context: context, authViewModel: authViewModel),
+              DropDownFeild(
+                value: stateValue,
+                valuePlaceHolder: "Select your account type",
+                item: List.generate(
+                  userList.length,
+                  (index) => PopupMenuItem<String>(
+                    value: stateValue,
+                    onTap: () {
+                      toggleValue.state = userList[index];
+                    },
+                    child: Text(
+                      userList[index],
+                      style: Theme.of(context).primaryTextTheme.headlineMedium,
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 20.h,
               ),
@@ -156,72 +107,53 @@ class LoginPage extends ConsumerWidget {
               SizedBox(
                 height: 10.h,
               ),
-              stateValue == 'Vendor'
-                  ? Center(
-                      child: WordsButton(
-                          firstTextSize: 12.sp,
-                          secondTextSize: 12.sp,
-                          secondTextColor: AppColors.secondary,
-                          fontWeight2: FontWeight.bold,
-                          //underline: TextDecoration.underline,
-                          textHeight: 2,
-                          onTap: () {
-                            Get.to(() => VendorSendEmailOTP(
-                                  onTap: () {
-                                    Get.to(() =>
-                                        VendorEmailOTPVerification(onTap: () {
-                                          Get.to(
-                                              () => VendorResetPasswordPage());
-                                        }));
-                                  },
-                                  title: "Forgot password",
-                                  subTitle:
-                                      "Don’t worry, we’ll help you reset it.",
-                                ));
-                          },
-                          firstText: "Forgot password?",
-                          secondText: "Reset Here"),
-                    )
-                  : Center(
-                      child: WordsButton(
-                          firstTextSize: 12.sp,
-                          secondTextSize: 12.sp,
-                          secondTextColor: AppColors.secondary,
-                          fontWeight2: FontWeight.bold,
-                          //underline: TextDecoration.underline,
-                          textHeight: 2,
-                          onTap: () {
-                            Get.to(() => SendEmailOTP(
-                                  onTap: () {
-                                    Get.to(
-                                        () => EmailOTPVerification(onTap: () {
-                                              Get.to(() => ResetPasswordPage());
-                                            }));
-                                  },
-                                  title: "Forgot password",
-                                  subTitle:
-                                      "Don’t worry, we’ll help you reset it.",
-                                ));
-                          },
-                          firstText: "Forgot password?",
-                          secondText: "Reset Here"),
-                    ),
+              Center(
+                child: WordsButton(
+                    firstTextSize: 12.sp,
+                    secondTextSize: 12.sp,
+                    secondTextColor: AppColors.secondary,
+                    fontWeight2: FontWeight.bold,
+                    //underline: TextDecoration.underline,
+                    textHeight: 2,
+                    onTap: () {
+                      Get.to(() => SendEmailOTP(
+                            onTap: () {
+                              Get.to(() => EmailOTPVerification(onTap: () {
+                                    Get.to(() => ResetPasswordPage());
+                                  }));
+                            },
+                            title: "Forgot password",
+                            subTitle: "Don’t worry, we’ll help you reset it.",
+                          ));
+                    },
+                    firstText: "Forgot password?",
+                    secondText: "Reset Here"),
+              ),
               SizedBox(
                 height: 20.h,
               ),
               ActionCustomButton(
                   title: "LOGIN",
                   isLoading: false,
-                  onclick: () {
-                    FocusScope.of(context).unfocus();
-                    // final validate = authViewModel.validateAndSave(formKey);
-                    // if (validate) {
-                    //   authViewModel.login(
-                    //       email: emailController.text.trim(),
-                    //       password: passwordController.text.trim());
-                    // }
-
-                    Get.to(() => const HomeNavigation());
+                  onclick: () async {
+                    switch (stateValue) {
+                      case "Vendor":
+                        final validate = authViewModel.validateAndSave(formKey);
+                        if (validate) {
+                          authViewModel.login(
+                              email: emailController.text.trim().toString(),
+                              password:
+                                  passwordController.text.trim().toString());
+                        }
+                        break;
+                      case "Customer":
+                        final validate = authViewModel.validateAndSave(formKey);
+                        if (validate) {}
+                      default:
+                        NotifyMe.showScaffoldAlert(
+                            context: context,
+                            message: "Select your account type to proceed");
+                    }
                   }),
               SizedBox(
                 height: 20.h,

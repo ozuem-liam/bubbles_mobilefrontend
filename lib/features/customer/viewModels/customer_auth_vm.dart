@@ -1,5 +1,9 @@
 // import 'package:bubbles/providers/auth_providrs/auth_providers.dart';
+import 'package:bubbles/core/application/api_route.dart';
+import 'package:bubbles/enums/api_status.dart';
 import 'package:bubbles/features/customer/providers/customer_auth_providers.dart';
+import 'package:bubbles/features/customer/viewModels/model/reg_customer_model.dart';
+import 'package:bubbles/http/api_manager.dart';
 import 'package:bubbles/utils/notify_me.dart';
 import 'package:bubbles/utils/svgs.dart';
 import 'package:bubbles/utils/temporary_storage.dart';
@@ -7,6 +11,7 @@ import 'package:bubbles/utils/user_db.dart';
 import 'package:bubbles/viewmodels/base_vm.dart';
 import 'package:bubbles/features/customer/views/home/navigation_page.dart';
 import 'package:bubbles/onboarding/stepper_screen.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // ignore: depend_on_referenced_packages
@@ -19,8 +24,9 @@ import 'package:http_parser/http_parser.dart';
 class CustomerAuthViewModel extends BaseViewModel {
   @override
   final Ref ref;
+  ApiManager apiManager;
 
-  CustomerAuthViewModel(this.ref) : super(ref) {
+  CustomerAuthViewModel(this.ref, this.apiManager) : super(ref) {
     // getDeviceId();
   }
   final emailController = TextEditingController();
@@ -35,8 +41,6 @@ class CustomerAuthViewModel extends BaseViewModel {
   final lastNameController = TextEditingController();
   final phoneController = TextEditingController();
   final imageurlController = TextEditingController();
-
-
 
   String deviceId = '';
   final imagePicker = ImagePicker();
@@ -71,6 +75,45 @@ class CustomerAuthViewModel extends BaseViewModel {
       {"user": "Customer", "image": customerIcon},
       {"user": "Vendor", "image": vendorIcon}
     ];
+  }
+
+  Future<Either<String, bool>> registerCustomer({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String pass,
+    required String phone,
+    required String addres,
+    required String userType,
+  }) async {
+    final bodyReg = {
+      "first_name": firstName,
+      "last_name": lastName,
+      "email": email,
+      "password": pass,
+      "phone": phone,
+      "address": addres,
+      "user_type": userType,
+    };
+    try {
+      setBusy(true);
+      final resp =
+          await apiManager.postHttp(ApiRoute.customerRegister, bodyReg);
+      if (resp.statusCode == StatusCode.success.name) {
+        final data = resp.data as Map<String, dynamic>;
+        CustomerRegData.fromJson(data);
+        setBusy(false);
+        return right(true);
+      } else {
+        final data = resp.data as Map<String, dynamic>;
+        setBusy(false);
+        return left(data["message"]);
+      }
+    } catch (e) {
+      debugPrint("===> $e");
+      setBusy(false);
+      return left("Server Error");
+    }
   }
 
   // int selectedUserType = -1;
@@ -162,7 +205,7 @@ class CustomerAuthViewModel extends BaseViewModel {
         .updateProfileImage(imageUrl: imageurlController.text);
 
     if (res['code'] == 200) {
-      UserDB.getUser()!.profileImage = imageurlController.text;
+    //  UserDB.getUser()!.profileImage = imageurlController.text;
       notifyListeners();
 
       NotifyMe.showAlert(res['message']!);
@@ -223,7 +266,7 @@ class CustomerAuthViewModel extends BaseViewModel {
   // bubbles PROFILE INFORMATION
 
   setProfileDetaisl() {
-    imageurlController.text = UserDB.getUser()!.profileImage!;
+  //  imageurlController.text = UserDB.getUser()!.profileImage!;
     firtNameController.text =
         UserDB.getUser()!.firstName!.toString().capitalizeFirst!;
     lastNameController.text =
