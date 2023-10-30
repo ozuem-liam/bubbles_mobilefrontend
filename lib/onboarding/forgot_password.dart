@@ -2,8 +2,9 @@ import 'package:bubbles/features/customer/providers/customer_auth_providers.dart
 import 'package:bubbles/features/customer/views/authentication/OTP/email_otp_verification.dart';
 import 'package:bubbles/features/customer/views/authentication/password/reset_password.dart';
 import 'package:bubbles/features/customer/views/authentication/widgets/custom_top_widget.dart';
-import 'package:bubbles/features/vendor/views/authentication/login.dart';
+import 'package:bubbles/onboarding/login.dart';
 import 'package:bubbles/style/appColors.dart';
+import 'package:bubbles/utils/notify_me.dart';
 import 'package:bubbles/widgets/buttons.dart';
 import 'package:bubbles/widgets/custom_appbar.dart';
 import 'package:bubbles/widgets/drop_down_field.dart';
@@ -93,15 +94,20 @@ class SendEmailOTP extends ConsumerWidget {
                 title: "Continue",
                 isLoading: false,
                 onclick: () async {
-                   if (stateValue == 'Vendor') {
-                      
+                  switch (stateValue) {
+                    case "Vendor":
                       final validate = authViewModel.validateAndSave(formKey);
-                      if (validate) {
-                        
-                      }
-                    } else {
-                      
-                    }
+                      if (validate) {}
+                      break;
+                    case "Customer":
+                      final validate = authViewModel.validateAndSave(formKey);
+                      if (validate) {}
+                    default:
+                      NotifyMe.showScaffoldAlert(
+                          context: context,
+                          message: "Select your account type to proceed");
+                  }
+                 
                   // FocusScope.of(context).unfocus();
                   // Get.to(() => EmailOTPVerification(onTap: () {
                   //       Get.to(() => ResetPasswordPage());

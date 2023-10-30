@@ -214,7 +214,7 @@ class ItemOrderCount extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Row(
       children: [
-        ImageWidget(asset: icon),
+        ImageWidget(asset: icon, width: 12.w,height: 12.w,),
         SingleTextLineWidget(
           text: count,
           size: 11.sp,

@@ -1,6 +1,6 @@
 import 'package:bubbles/features/vendor/providers/vendor_auth_providers.dart';
 import 'package:bubbles/features/vendor/views/authentication/OTP/email_otp_verification.dart';
-import 'package:bubbles/features/vendor/views/authentication/login.dart';
+import 'package:bubbles/onboarding/login.dart';
 import 'package:bubbles/features/vendor/views/navigation_page.dart';
 import 'package:bubbles/features/vendor/views/setup_shop/setup_shop.dart';
 import 'package:bubbles/utils/notify_me.dart';
