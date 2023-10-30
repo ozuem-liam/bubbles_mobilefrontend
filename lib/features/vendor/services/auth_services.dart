@@ -10,22 +10,26 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class VendorAuthService extends ApiManager {
   final Ref reader;
 
-  final loginRoute = '/customer/login';
+  final loginRoute = '/vendor/login';
 
-  final intiateResetPasswordRoute = '/customer/initiate-password-reset';
-  final verifyResetOTPRoute = '/customer/verify-reset-otp';
-  final resetPasswordRoute = '/customer/reset-password';
-  final changePasswordRoute = '/customer/change-password/';
-  final customerDashboardRoute = '/customer/dashboard/';
-  final customerNotificationRoute = '/notification/customer/';
+  final registerRoute = '/vendor/register';
+  final verifyEmailOTPRoute = '/vendor/verify-otp';
+  final resendVerifyEmailOTPRoute = '/vendor/send-verification-code';
+
+  final intiateResetPasswordRoute = '/vendor/initiate-password-reset';
+  final verifyResetOTPRoute = '/vendor/verify-reset-otp';
+  final resetPasswordRoute = '/vendor/reset-password';
+  final changePasswordRoute = '/vendor/change-password/';
+  final customerDashboardRoute = '/vendor/dashboard/';
+  final customerNotificationRoute = '/notification/vendor/';
   final getOneSiteRoute = '/siting/get-siting/';
-  final updateProfileImageRoute = '/customer/update/';
+  final updateProfileImageRoute = '/vendor/update/';
   final uploadFileRoute = '/upload';
 
   VendorAuthService(this.reader) : super(reader);
 
   //Login with email and password
-  Future<CustomerLoginResponseModel> loginCustomer(
+  Future<VendorUserData> loginVendor(
     String email,
     String password,
   ) async {
@@ -39,9 +43,73 @@ class VendorAuthService extends ApiManager {
     var data = response.data;
 
     if (response.statusCode == 200) {
-      return CustomerLoginResponseModel.fromJson(response.data);
+      return VendorUserData.fromJson(response.data);
     } else {
-      return CustomerLoginResponseModel(message: data['message'].toString());
+      return VendorUserData(message: data['message'].toString());
+    }
+  }
+
+  //Register vendor
+  Future<VendorUserData> registerVendor({
+    required String email,
+    required String password,
+    required String firstName,
+    required String lastName,
+    required String phone,
+    required String address,
+  }) async {
+    final signInBody = {
+      "first_name": firstName,
+      "last_name": lastName,
+      "email": email,
+      "password": password,
+      "phone": phone,
+      "address": address,
+      "user_type": "vendor"
+    };
+
+    final response = await postHttp(registerRoute, signInBody);
+
+    var data = response.data;
+
+    if (response.statusCode == 200) {
+      return VendorUserData.fromJson(response.data);
+    } else {
+      return VendorUserData(message: data['message'].toString());
+    }
+  }
+
+  //verify email otp
+  Future verifyEmailOTP({
+    required dynamic email,
+    required dynamic otp,
+    required dynamic token,
+  }) async {
+    final body = {
+      "email": email,
+      "otp": otp,
+      "token": token,
+    };
+
+    final response = await postHttp(verifyEmailOTPRoute, body);
+    var data = response.data;
+
+    return data;
+  }
+
+  //resend verify email otp
+  Future<VendorUserData> resendVerifyEmailOTP({
+    required dynamic email,
+  }) async {
+    final body = {"email": email, "user_type": "vendor"};
+
+    final response = await postHttp(resendVerifyEmailOTPRoute, body);
+    var data = response.data;
+
+    if (response.statusCode == 200) {
+      return VendorUserData.fromJson(response.data);
+    } else {
+      return VendorUserData(message: data['message'].toString());
     }
   }
 
@@ -117,7 +185,7 @@ class VendorAuthService extends ApiManager {
     return data;
   }
 
-  Future<CustomerLoginResponseModel> getCustomerDashboard() async {
+  Future<VendorUserData> getCustomerDashboard() async {
     final response = await getHttp(
         customerDashboardRoute +
             LocalStorageManager.getString(key: MyStrings.userId),
@@ -126,9 +194,9 @@ class VendorAuthService extends ApiManager {
     var data = response.data;
 
     if (response.statusCode == 200) {
-      return CustomerLoginResponseModel.fromJson(response.data);
+      return VendorUserData.fromJson(response.data);
     } else {
-      return CustomerLoginResponseModel(message: data['message'].toString());
+      return VendorUserData(message: data['message'].toString());
     }
   }
 

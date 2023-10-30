@@ -205,7 +205,7 @@ class CustomerAuthViewModel extends BaseViewModel {
         .updateProfileImage(imageUrl: imageurlController.text);
 
     if (res['code'] == 200) {
-      UserDB.getUser()!.profileImage = imageurlController.text;
+    //  UserDB.getUser()!.profileImage = imageurlController.text;
       notifyListeners();
 
       NotifyMe.showAlert(res['message']!);
@@ -266,7 +266,7 @@ class CustomerAuthViewModel extends BaseViewModel {
   // bubbles PROFILE INFORMATION
 
   setProfileDetaisl() {
-    imageurlController.text = UserDB.getUser()!.profileImage!;
+  //  imageurlController.text = UserDB.getUser()!.profileImage!;
     firtNameController.text =
         UserDB.getUser()!.firstName!.toString().capitalizeFirst!;
     lastNameController.text =

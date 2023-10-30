@@ -1,4 +1,4 @@
-import 'package:bubbles/features/vendor/views/home/navigation_page.dart';
+import 'package:bubbles/features/vendor/views/navigation_page.dart';
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/utils/svgs.dart';

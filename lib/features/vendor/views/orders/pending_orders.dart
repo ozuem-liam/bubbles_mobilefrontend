@@ -1,0 +1,81 @@
+import 'package:bubbles/features/vendor/views/orders/widgets/order_activity_card_widget.dart';
+import 'package:bubbles/style/appColors.dart';
+import 'package:bubbles/utils/svgs.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class PendingOrders extends ConsumerWidget {
+  const PendingOrders({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 20.h,
+        ),
+        OrderActivityCardWidget(
+          onTap: () {},
+          title: "Iron Order",
+          icon: ironIcon,
+          date: "Today 12:05pm",
+          amount: "N2,600",
+          tagText: "New order",
+          hasTag: true,
+          hasActionTags: true,
+          accept: () {},
+          decline: () {},
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
+        OrderActivityCardWidget(
+          onTap: () {},
+          title: "Iron Order",
+          icon: ironIcon,
+          date: "Today 12:05pm",
+          amount: "N2,600",
+          tagText: "New order",
+          hasTag: true,
+          hasActionTags: true,
+          accept: () {},
+          decline: () {},
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
+        OrderActivityCardWidget(
+          onTap: () {},
+          title: "Iron Order",
+          icon: ironIcon,
+          date: "Today 12:05pm",
+          amount: "N2,600",
+          tagText: "New order",
+          hasTag: true,
+          hasActionTags: true,
+          accept: () {},
+          decline: () {},
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
+        OrderActivityCardWidget(
+          onTap: () {},
+          title: "Iron Order",
+          icon: ironIcon,
+          date: "Today 12:05pm",
+          amount: "N2,600",
+          tagText: "New order",
+          hasTag: true,
+          hasActionTags: true,
+          accept: () {},
+          decline: () {},
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
+      ],
+    );
+  }
+}

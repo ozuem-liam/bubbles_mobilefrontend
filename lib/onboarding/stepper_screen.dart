@@ -1,7 +1,7 @@
 import 'package:bubbles/style/appColors.dart';
 import 'package:bubbles/utils/constvalues.dart';
 import 'package:bubbles/utils/svgs.dart';
-import 'package:bubbles/onboarding/login.dart';
+import 'package:bubbles/features/vendor/views/authentication/login.dart';
 import 'package:bubbles/onboarding/select_user_type.dart';
 import 'package:bubbles/widgets/app_logo_widget.dart';
 import 'package:bubbles/widgets/custom_appbar.dart';
