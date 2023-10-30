@@ -45,7 +45,7 @@ class _SplashViewState extends ConsumerState<SplashView>
                 null => const StepperScreen(),
                 _ => switch (user.userType) {
                     "vendor" => switch (user.isProfileComplete) {
-                        false => SetupShotPage(),
+                        false => SetupShopPage(),
                         _ => VendorHomeNavigation()
                       },
                     _ => HomeNavigation()

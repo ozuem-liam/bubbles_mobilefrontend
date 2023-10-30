@@ -19,7 +19,8 @@ class BusinessSetupPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<String> serviceList = ref.watch(shopViewModelProvider).serviceList;
+    var shopViewModel = ref.watch(shopViewModelProvider);
+    List<String> serviceList = shopViewModel.serviceList;
 
     var shopService = ref.read(shopViewModelProvider.notifier);
 
@@ -52,16 +53,42 @@ class BusinessSetupPage extends ConsumerWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.r)),
                   color: AppColors.secondary.withOpacity(0.1),
-                  child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SvgImage(
-                        asset: cameraIcon,
-                        width: 20.w,
-                        height: 20.w,
-                      )),
+                  child: InkWell(
+                      onTap: () async {
+                        await shopViewModel.uploadbubblesPicture();
+                      },
+                      child: switch (shopViewModel.isUploading) {
+                        false => shopViewModel.businessImageUrl == ''
+                            ? Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SvgImage(
+                                  asset: cameraIcon,
+                                  width: 20.w,
+                                  height: 20.w,
+                                ))
+                            : Container(
+                                height: 40.w,
+                                width: 40.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6.r),
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            shopViewModel.businessImageUrl),
+                                        fit: BoxFit.cover)),
+                              ),
+                        true => SizedBox(
+                            width: 20.w,
+                            height: 20.w,
+                            child: CircularProgressIndicator(
+                              color: AppColors.secondary.withOpacity(0.8),
+                            ),
+                          )
+                      }),
                 ),
                 title: Text(
-                  "Upload your laundry shop picture",
+                  shopViewModel.businessImageUrl == ''
+                      ? "Upload your laundry shop picture"
+                      : "Select another image",
                   textAlign: TextAlign.start,
                   style: Theme.of(context)
                       .primaryTextTheme

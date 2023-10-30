@@ -13,8 +13,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // ignore: depend_on_referenced_packages
 import 'package:get/get.dart';
 
-class SetupShotPage extends ConsumerWidget {
-  const SetupShotPage({super.key});
+class SetupShopPage extends ConsumerWidget {
+  const SetupShopPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

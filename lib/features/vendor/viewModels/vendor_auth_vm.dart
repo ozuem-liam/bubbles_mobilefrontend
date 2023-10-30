@@ -119,7 +119,7 @@ class VendorAuthViewModel extends BaseViewModel {
         NotifyMe.showAlert(res.message!);
         Get.to(() => const VendorHomeNavigation());
         Get.to(() => switch (res.data?.isProfileComplete) {
-              false => SetupShotPage(),
+              false => SetupShopPage(),
               _ => VendorHomeNavigation()
             });
       }
@@ -163,7 +163,7 @@ class VendorAuthViewModel extends BaseViewModel {
                   description: "Your email has been successfully verified",
                   btnTitle: "Setup shop",
                   onTap: () {
-                    Get.to(() => const SetupShotPage());
+                    Get.to(() => const SetupShopPage());
                   },
                 ));
             //Get.to(() => ResetPasswordPage());
